@@ -6,12 +6,12 @@
     initPage();
 </script>
 
-<div>
+<nav>
     <ul>
         <li on:click={() => updatePage('')} on:keydown={() => updatePage('')}>Projects</li>
         <li on:click={() => updatePage('about')} on:keydown={() => updatePage('about')}>About</li>
     </ul>
-</div>
+</nav>
 {#if $page === 'about'}
     <About />
 {:else if $page === 'project'}
@@ -21,8 +21,20 @@
 {/if}
 
 <style>
-    div {
-        color: white;
-        background-color: black;
+    nav {
+        color: black;
+        background-color: #ffbf00;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    li {
+        font-size: 1.5em;
+        padding: 1em;
     }
 </style>
