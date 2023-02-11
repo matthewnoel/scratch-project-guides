@@ -12,7 +12,7 @@ when green flag clicked
 
 Now let's make the program **do** something.
 
-```scratchblocks    
+```scratchblocks[*]
 when green flag clicked
 say [Hello World!]
 ```
