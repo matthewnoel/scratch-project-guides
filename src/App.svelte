@@ -1,22 +1,15 @@
 <script>
-    import scratchblocks from 'scratchblocks';
-    const script = `
+    import ScratchBlock from './components/ScratchBlock.svelte';
+
+    const text = `
         when green flag clicked
-        move (4) steps
+        move (16) steps
     `;
-    const doc = scratchblocks.parse(script, {
-        languages: ['en'],
-    });
-    const view = scratchblocks.newView(doc, {
-        style: 'scratch3',
-        scale: 0.675,
-    });
-    const svg = view.render();
 </script>
 
 <h1>App</h1>
 <h2>Guide</h2>
-{@html svg.outerHTML}
+<ScratchBlock {text} />
 
 <style>
     h2 {
