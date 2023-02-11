@@ -1,14 +1,29 @@
 <script>
-    import ProjectConfig from "./components/ProjectConfig.svelte";
-    import config from "./projects/hello-world";
+    import About from "./pages/About.svelte";
+    import Index from "./pages/Index.svelte";
+    import Project from "./pages/Project.svelte";
+    import { page, initPage, updatePage } from "./router";
+    import config from "./projects/hello-world"; // TODO: parse './projects/hello-world.md' instead
+    initPage();
 </script>
 
-<h1>App</h1>
-<h2>Guide</h2>
-<ProjectConfig {config} />
+<div>
+    <ul>
+        <li on:click={() => updatePage('')} on:keydown={() => updatePage('')}>Projects</li>
+        <li on:click={() => updatePage('about')} on:keydown={() => updatePage('about')}>About</li>
+    </ul>
+</div>
+{#if $page === 'about'}
+    <About />
+{:else if $page === 'project'}
+    <Project {config} />
+{:else}
+    <Index />
+{/if}
 
 <style>
-    h2 {
-        color: red;
+    div {
+        color: white;
+        background-color: black;
     }
 </style>
