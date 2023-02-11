@@ -1,23 +1,11 @@
 <script>
-    import ScratchBlockSteps from "./components/ScratchBlockSteps.svelte";
-
-    const blocks = [`
-        when green flag clicked
-        move (16) steps
-    `,
-    `
-        when green flag clicked
-        move (32) steps
-    `,
-    `
-        when green flag clicked
-        move (64) steps
-    `];
+    import ProjectConfig from "./components/ProjectConfig.svelte";
+    import config from "./projects/hello-world";
 </script>
 
 <h1>App</h1>
 <h2>Guide</h2>
-<ScratchBlockSteps {blocks} />
+<ProjectConfig {config} />
 
 <style>
     h2 {
