@@ -1,7 +1,8 @@
 <script>
     import ScratchBlock from "./ScratchBlock.svelte";
     export let blocks = [];
-    let index = 0;
+    export let start = 0;
+    let index = start;
     $: text = blocks[index] ?? '';
     const tryUpdateBlock = (offset) => {
         if (blocks[index + offset] == null) {
