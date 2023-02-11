@@ -3,7 +3,6 @@
     import Index from "./pages/Index.svelte";
     import Project from "./pages/Project.svelte";
     import { page, initPage, updatePage } from "./router";
-    import config from "./projects/hello-world"; // TODO: parse './projects/hello-world.md' instead
     initPage();
 </script>
 
@@ -16,7 +15,7 @@
 {#if $page === 'about'}
     <About />
 {:else if $page === 'project'}
-    <Project {config} />
+    <Project />
 {:else}
     <Index />
 {/if}
