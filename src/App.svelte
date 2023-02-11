@@ -1,15 +1,23 @@
 <script>
-    import ScratchBlock from './components/ScratchBlock.svelte';
+    import ScratchBlockSteps from "./components/ScratchBlockSteps.svelte";
 
-    const text = `
+    const blocks = [`
         when green flag clicked
         move (16) steps
-    `;
+    `,
+    `
+        when green flag clicked
+        move (32) steps
+    `,
+    `
+        when green flag clicked
+        move (64) steps
+    `];
 </script>
 
 <h1>App</h1>
 <h2>Guide</h2>
-<ScratchBlock {text} />
+<ScratchBlockSteps {blocks} />
 
 <style>
     h2 {
