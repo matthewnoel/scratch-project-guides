@@ -2,21 +2,23 @@
 
 Scratch programs start when the green flag is clicked
 
-[scratchblocks]
-when green flag clicked
-[/scratchblocks]
+* List
+* Item
+* After
+* List
+* Item
 
-Add the `say` block to complete the program
+Here's an instruction
 
-[steplist]
+```
+console.log("this is not scratch)
+```
 
-[scratchblocks]
-when green flag clicked
-[/scratchblocks]
+Another instruction comes here
 
-[scratchblocks]
+```scratchblocks
 when green flag clicked
 say [Hello World!]
-[/scratchblocks]
+```
 
-[/steplist]
+The **bold** end!
