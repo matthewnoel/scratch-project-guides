@@ -2,7 +2,11 @@
 
 Guides for making classic games in [Scratch 3.0](https://scratch.mit.edu/) to be used by teachers and learners.
 
-## Installation
+## Viewing Plans
+
+The guides in this repository can be viewed on [this site](https://matthewnoel.github.io/scratch-lesson-plans/).
+
+## Contributing
 
 ### Global Dependencies
 
