@@ -2,8 +2,9 @@
     import About from "./pages/About.svelte";
     import Index from "./pages/Index.svelte";
     import Project from "./pages/Project.svelte";
-    import { page, updatePage } from "./router";
+    import { page, initPage, updatePage } from "./router";
     import config from "./projects/hello-world";
+    initPage();
 </script>
 
 <div>
@@ -12,7 +13,6 @@
         <li on:click={() => updatePage('about')} on:keydown={() => updatePage('about')}>About</li>
     </ul>
 </div>
-<p>Page {$page}.</p>
 {#if $page === 'about'}
     <About />
 {:else if $page === 'project'}
