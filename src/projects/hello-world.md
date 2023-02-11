@@ -1,24 +1,25 @@
 # Hello World
 
-Scratch programs start when the green flag is clicked
+## A classic first program
 
-* List
-* Item
-* After
-* List
-* Item
+In this program you will make a `sprite` say hello!
 
-Here's an instruction
-
-```
-console.log("this is not scratch)
-```
-
-Another instruction comes here
+Scratch programs start when the `green flag` is clicked.
 
 ```scratchblocks
+when green flag clicked
+```
+
+Now let's make the program **do** something.
+
+```scratchblocks    
 when green flag clicked
 say [Hello World!]
 ```
 
-The **bold** end!
+Great! We have:
+
+* Added code to a sprite
+* Made a sprite say a greeting
+
+What **fun**!
