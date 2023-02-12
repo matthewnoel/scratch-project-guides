@@ -7,7 +7,7 @@
 </script>
 
 <nav>
-    <span>Open Scratch Lesson Plans</span>
+    <span><i>Open Scratch Lesson Plans</i></span>
     <ul>
         <li><a on:click|preventDefault={() => updatePage('')} on:keydown={() => updatePage('')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
         <li><a on:click|preventDefault={() => updatePage('about')} on:keydown={() => updatePage('about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>

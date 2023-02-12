@@ -3,4 +3,6 @@
     import source from '../projects/hello-world.md';
 </script>
 
-<CustomMarkdown {source} />
+<div class="l0">
+    <CustomMarkdown {source} />
+</div>
