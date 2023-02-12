@@ -4,6 +4,12 @@
     import Project from "./pages/Project.svelte";
     import { page, initPage, updatePage } from "./router";
     initPage();
+    const handleInternalHeaderLink = (event, page) => {
+        if (event?.code !== 'Enter' && event?.code != null) {
+            return;
+        }
+        updatePage(page);
+    };
 </script>
 
 <nav>
@@ -11,8 +17,8 @@
         <h6>Open Scratch Lesson Plans 📓</h6>
     </div>
     <ul>
-        <li><a on:click|preventDefault={() => updatePage('')} on:keydown={() => updatePage('')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
-        <li><a on:click|preventDefault={() => updatePage('about')} on:keydown={() => updatePage('about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>
+        <li><a on:click|preventDefault={() => handleInternalHeaderLink(null, '')} on:keydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
+        <li><a on:click|preventDefault={() => handleInternalHeaderLink(null, 'about')} on:keydown={(e) => handleInternalHeaderLink(e, 'about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>
         <li><a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-lesson-plans">GitHub</a></li>
     </ul>
 </nav>

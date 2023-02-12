@@ -28,7 +28,7 @@
         background-color: white;
         border: 1px solid rgba(0, 0, 0, 0.25);
         border-radius: 0.4em;
-        padding: 0.25em;
+        padding: 0.25em 0.5em;
     }
 
     @media (max-width: 500px) {
@@ -37,9 +37,14 @@
         }
     }
 
-    a {
+    a, a:visited {
+        color: black;
         font-size: 0.9rem;
         vertical-align: middle;
+    }
+
+    a:hover, a:focus {
+        color: #ffbf00;
     }
 
     span {
