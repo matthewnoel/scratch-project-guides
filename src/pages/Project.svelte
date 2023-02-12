@@ -1,7 +1,30 @@
 <script>
-    import ProjectConfig from "../components/ProjectConfig.svelte";
     import GitLinks from "../components/GitLinks.svelte";
+    import CustomMarkdown from '../components/CustomMarkdown.svelte';
+    import HelloWorld from '../projects/hello-world.md';
+    import Pong from '../projects/pong.md';
+    import TicTacToe from '../projects/tic-tac-toe.md'
+    import { projectName } from "../router";
+    $: source = () => {
+        switch ($projectName) {
+            case 'hello-world':
+                return HelloWorld;
+            case 'pong':
+                return Pong;
+            case 'tic-tac-toe':
+                return TicTacToe;
+            default:
+                return '';
+        }
+    }
 </script>
 
-<ProjectConfig />
+<div class="l0">
+    {#if source() === ''}
+        <h1>Oh no!</h1>
+        <p>This project does not exist.</p>
+    {:else}
+        <CustomMarkdown source={source()} />
+    {/if}
+</div>
 <GitLinks page={"blob/main/src/pages/Project.svelte"} />
