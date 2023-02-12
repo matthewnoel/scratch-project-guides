@@ -1,4 +1,4 @@
-# Hello World
+# Hello World 👋
 
 ## A classic first program
 
