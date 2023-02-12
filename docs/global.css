@@ -43,18 +43,23 @@ h6 {
 	font-size: 2rem;
 }
 
+p {
+	margin: 0.5em 0px;
+}
+
 code {
 	font-family: 'Courier New', Courier, monospace;
 	background-color: rgb(245, 245, 255);
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	border-radius: 0.5em;
 	padding: 0.25em 0.5em;
+	white-space: nowrap;
 }
 
 .l0 {
 	background-color: white;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	border-radius: 0.8em;
-	margin: 0.5em;
+	margin: 1em;
 	padding: 1em;
 }

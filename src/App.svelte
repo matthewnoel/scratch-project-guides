@@ -7,7 +7,7 @@
 </script>
 
 <nav>
-    <span><i>Open Scratch Lesson Plans</i></span>
+    <h6>Open Scratch Lesson Plans 📓</h6>
     <ul>
         <li><a on:click|preventDefault={() => updatePage('')} on:keydown={() => updatePage('')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
         <li><a on:click|preventDefault={() => updatePage('about')} on:keydown={() => updatePage('about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>
@@ -26,13 +26,14 @@
 
 <style>
     main {
-        max-width: 500px;
+        max-width: 600px;
         margin: auto;
     }
 
     nav {
         color: black;
         background-color: #ffbf00;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -46,12 +47,18 @@
         flex-direction: row;
     }
 
-    li, span {
+    li, h6 {
         padding: 1em;
     }
 
-    li:hover, li:focus {
+    a, a:visited {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover, a:focus {
+        color: white;
         cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.25);
+        text-decoration: underline;
     }
 </style>
