@@ -37,14 +37,9 @@
         }
     }
 
-    a, a:visited {
-        color: black;
+    a {
         font-size: 0.9rem;
         vertical-align: middle;
-    }
-
-    a:hover, a:focus {
-        color: #ffbf00;
     }
 
     span {
