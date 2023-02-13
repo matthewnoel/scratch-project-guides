@@ -63,3 +63,11 @@ code {
 	margin: 1em 0px;
 	padding: 1em;
 }
+
+a, a:visited {
+	color: black;
+}
+
+a:hover, a:focus {
+	color: #ffbf00;
+}

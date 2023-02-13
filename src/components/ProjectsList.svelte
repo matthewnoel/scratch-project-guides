@@ -1,5 +1,12 @@
 <script>
     import { updatePage } from "../router";
+
+    const handleInternalProjectLink = (event, page, name) => {
+        if (event?.code !== 'Enter' && event?.code != null) {
+            return;
+        }
+        updatePage(page, name);
+    };
 </script>
 
 <h1>All Projects</h1>
@@ -7,16 +14,16 @@
     <h3>Getting Started</h3>
     <ul>
         <li>
-            <span on:click={() => updatePage('project', 'hello-world')} on:keydown={() => updatePage('project', 'hello-world')}>Hello World 👋</span>
+            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'hello-world')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'hello-world')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=hello-world">Hello World 👋</a>
         </li>
     </ul>
     <h3>Classic Games</h3>
     <ul>
         <li>
-            <span on:click={() => updatePage('project', 'pong')} on:keydown={() => updatePage('project', 'pong')}>Pong 🏓</span>
+            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'pong')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'pong')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=pong">Pong 🏓</a>
         </li>
         <li>
-            <span on:click={() => updatePage('project', 'tic-tac-toe')} on:keydown={() => updatePage('project', 'tic-tac-toe')}>Tic-Tac-Toe #️⃣</span>
+            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'tic-tac-toe')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'tic-tac-toe')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=tic-tac-toe">Tic-Tac-Toe #️⃣</a>
         </li>
     </ul>
 </div>
@@ -24,5 +31,9 @@
 <style>
     h1 {
         text-decoration: underline;
+    }
+
+    a {
+        text-decoration: none;
     }
 </style>
