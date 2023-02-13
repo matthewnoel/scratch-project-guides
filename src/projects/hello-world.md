@@ -2,24 +2,15 @@
 
 ## A classic first program
 
-In this program you will make a `sprite` say hello!
+In this program you will make a `sprite` say a greeting.
 
-Scratch programs start when the `green flag` is clicked.
+Add the green flag `event` block to your sprite's code.
 
-```scratchblocks
-when green flag clicked
-```
-
-Now let's make the program **do** something.
+Then add a block from the `looks` category to make the sprite say "Hello World!".
 
 ```scratchblocks[*]
 when green flag clicked
 say [Hello World!]
 ```
 
-Great! We have:
-
-* Added code to a sprite
-* Made a sprite say a greeting
-
-What **fun**!
+Great job!
