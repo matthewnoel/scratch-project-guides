@@ -36,6 +36,7 @@
     main {
         max-width: 600px;
         margin: auto;
+        padding: 0px 0.25em;
     }
 
     nav {
