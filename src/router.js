@@ -6,6 +6,7 @@ const projectNames = [
     'hello-world',
     'pong',
     'tic-tac-toe',
+    'math-quiz',
 ]
 
 export const initPage = () => {
