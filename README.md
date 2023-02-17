@@ -31,3 +31,7 @@ Build production bundle
 ```
 npm run build
 ```
+
+### Useful Links
+
+[Scratchblocks Syntax Guide](https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax)

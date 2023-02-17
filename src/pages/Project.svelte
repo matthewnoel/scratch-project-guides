@@ -4,6 +4,7 @@
     import HelloWorld from '../projects/hello-world.md';
     import Pong from '../projects/pong.md';
     import TicTacToe from '../projects/tic-tac-toe.md'
+    import MathQuiz from '../projects/math-quiz.md';
     import { projectName } from "../router";
     $: source = () => {
         switch ($projectName) {
@@ -13,6 +14,8 @@
                 return Pong;
             case 'tic-tac-toe':
                 return TicTacToe;
+            case 'math-quiz':
+                return MathQuiz;
             default:
                 return '';
         }
