@@ -51,8 +51,8 @@ code {
 	font-family: 'Courier New', Courier, monospace;
 	background-color: rgb(245, 245, 255);
 	border: 1px solid rgba(0, 0, 0, 0.25);
-	border-radius: 0.5em;
-	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
+	padding: 0.125em 0.25em;
 	white-space: nowrap;
 }
 
