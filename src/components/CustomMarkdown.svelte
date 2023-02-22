@@ -89,7 +89,6 @@
             data: currentMarkdown,
         });
     }
-    sections.forEach((a) => console.log(a))
 </script>
 
 {#each sections as {type, data}, i}
