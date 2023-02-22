@@ -14,7 +14,7 @@
 
 <nav>
     <div>
-        <h6>Open Scratch Lesson Plans 📓</h6>
+        <h6><a on:click|preventDefault={() => handleInternalHeaderLink(null, '')} on:keydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">Open Scratch Guides </a>📓</h6>
     </div>
     <ul>
         <li><a on:click|preventDefault={() => handleInternalHeaderLink(null, '')} on:keydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
@@ -37,6 +37,7 @@
         max-width: 600px;
         margin: auto;
         padding: 0px 0.25em;
+        margin-bottom: 1em;
     }
 
     nav {
