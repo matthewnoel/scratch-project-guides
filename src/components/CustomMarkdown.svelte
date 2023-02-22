@@ -1,40 +1,105 @@
 <script>
     import Markdown from "./Markdown.svelte";
     import ScratchBlock from "./ScratchBlock.svelte";
-    import ScratchBlockSteps from "./ScratchBlockSteps.svelte";
+    import ScratchProject from "./ScratchProject.svelte";
     export let source = '';
-    const code = '```'
-    const sections = source.split(code);
 
-    const isSectionScratchBlock = (section) => {
-        return section.startsWith('scratchblocks');
+    const getScratchProjectId = (line) => {
+        if (line.startsWith('https://scratch.mit.edu/projects/')) {
+            const digits = line.replace(/\D/g, '');
+            if (digits.length > 0) {
+                return digits;
+            }
+        }
+        return null;
     };
-    const getStepRange = (section) => {
-        const str = section.slice(0, section.indexOf('\n'));
-        const token = str.slice(str.indexOf('[') + 1, str.indexOf(']'));
-        return (token === '*') ? 0 : parseInt(token, 10);
+    const isScratchProjectLink = (line) => {
+        return getScratchProjectId(line) !== null;
     };
-    const hasSteps = (section) => {
-        const range = getStepRange(section);
-        return !isNaN(parseInt(range, 10));
+    const isScratchBlockEnd = (line, current) => {
+        return current.length > 0 && line.startsWith('```');
     };
-    const transformScratchBlockSection = (section) => {
-        return section.slice(section.indexOf('\n'));
+    const resetCurrentScratchBlock = (currentMarkdown, currentScratchBlock) => {
+        let newMarkdown = currentMarkdown;
+        if (currentScratchBlock.length > 0) {
+            if (currentMarkdown.length > 0) {
+                newMarkdown = `${currentMarkdown}\n${currentScratchBlock}`;
+            } else {
+                newMarkdown += currentScratchBlock;
+            }
+        }
+        return [newMarkdown, ''];
     };
-    const transformStepSection = (section) => {
-        // TODO: how does this handle nests with 'end'?
-        return section.slice(section.indexOf('\n')).split('\n').filter(x => x.length !== 0).map((element, index, array) => array.slice(0, index + 1).join('\n'));
+    const isScratchBlockStart = (line) => {
+        return line.startsWith('```scratchblocks');
     };
+
+    let currentMarkdown = '';
+    let currentScratchBlock = '';
+    const sections = [];
+    const lines = source.split('\n');
+    for (const line of lines) {
+        if (isScratchProjectLink(line)) {
+            [currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(currentMarkdown, currentScratchBlock);
+            if (currentScratchBlock.length > 0) {
+                if (currentMarkdown.length > 0) {
+                    currentMarkdown += `\n${currentScratchBlock}`;
+                } else {
+                    currentMarkdown += currentScratchBlock;
+                }
+                currentScratchBlock = '';
+            }
+            if (currentMarkdown.length > 0) {
+                sections.push({
+                    type: 'MARKDOWN',
+                    data: currentMarkdown,
+                });
+                currentMarkdown = '';
+            }
+            sections.push({
+                type: 'SCRATCH_PROJECT',
+                data: getScratchProjectId(line),
+            });
+        } else if (isScratchBlockStart(line)) {
+            [currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(currentMarkdown, currentScratchBlock);
+            if (currentMarkdown.length > 0) {
+                sections.push({
+                    type: 'MARKDOWN',
+                    data: currentMarkdown,
+                });
+                currentMarkdown = '';
+            }
+            currentScratchBlock += `\n`;
+        } else if (isScratchBlockEnd(line, currentScratchBlock)) {
+            sections.push({
+                type: 'SCRATCHBLOCK',
+                data: currentScratchBlock,
+            });
+            currentScratchBlock = '';
+        } else if (currentScratchBlock.length > 0) {
+            currentScratchBlock += `\n${line}`;
+        } else {
+            currentMarkdown += `${line}\n`;
+        }
+    }
+    [currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(currentMarkdown, currentScratchBlock);
+    if (currentMarkdown.length > 0) {
+        sections.push({
+            type: 'MARKDOWN',
+            data: currentMarkdown,
+        });
+    }
+    sections.forEach((a) => console.log(a))
 </script>
 
-{#each sections as section}
-    {#if isSectionScratchBlock(section)}
-        {#if hasSteps(section)}
-            <ScratchBlockSteps blocks={transformStepSection(section)} start={getStepRange(section)} />
-        {:else}
-            <ScratchBlock text={transformScratchBlockSection(section)} />
-        {/if}
+{#each sections as {type, data}, i}
+    {#if type === 'MARKDOWN'}
+       <Markdown source={data} />
+    {:else if type === 'SCRATCHBLOCK'}
+        <ScratchBlock text={data} />
+    {:else if type === 'SCRATCH_PROJECT'}
+        <ScratchProject id={data} />
     {:else}
-        <Markdown source={section} />
+        <p>Unknown section type {type}</p>
     {/if}
 {/each}

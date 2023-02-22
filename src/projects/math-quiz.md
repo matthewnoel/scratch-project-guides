@@ -2,7 +2,9 @@
 
 ## Make an addition quiz tool
 
-[Play In Scratch](https://scratch.mit.edu/projects/805521735/)
+This is the game we will be making today:
+
+https://scratch.mit.edu/projects/805521735/
 
 In this project we will create a game where the player is quizzed on their addition facts.
 
