@@ -5,6 +5,7 @@
     import Pong from '../projects/pong.md';
     import TicTacToe from '../projects/tic-tac-toe.md'
     import MathQuiz from '../projects/math-quiz.md';
+    import FibonacciSequence from '../projects/fibonacci-sequence.md';
     import { projectName } from "../router";
     $: source = () => {
         switch ($projectName) {
@@ -16,6 +17,8 @@
                 return TicTacToe;
             case 'math-quiz':
                 return MathQuiz;
+            case 'fibonacci-sequence':
+                return FibonacciSequence;
             default:
                 return '';
         }

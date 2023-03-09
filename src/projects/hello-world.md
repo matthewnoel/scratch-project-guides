@@ -2,8 +2,6 @@
 
 ## A classic first program
 
-This is a demo of the program we will make:
-
 https://scratch.mit.edu/projects/807782232/
 
 Scratch programs start when the green flag is clicked. Place this block from the `Events` category to start your program.

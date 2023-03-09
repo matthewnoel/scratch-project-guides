@@ -22,6 +22,9 @@
         <li>
             <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'math-quiz')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'math-quiz')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=math-quiz">Math Quiz 🧮</a>
         </li>
+        <li>
+            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'fibonacci-sequence')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'fibonacci-sequence')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=fibonacci-sequence">Fibonacci Sequence 🐚</a>
+        </li>
     </ul>
     <h3>Games</h3>
     <ul>

@@ -7,6 +7,7 @@ const projectNames = [
     'pong',
     'tic-tac-toe',
     'math-quiz',
+    'fibonacci-sequence',
 ]
 
 export const initPage = () => {
