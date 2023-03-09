@@ -2,12 +2,16 @@
     export let id;
 </script>
 
+<h4>Demo The Project 👇</h4>
 <div>
-    <iframe title="Prjoect Demo" src={`https://scratch.mit.edu/projects/${id}/embed`} allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    <iframe title="Project Demo" src={`https://scratch.mit.edu/projects/${id}/embed`} allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
     <a href={`https://scratch.mit.edu/projects/${id}`} target="_blank" rel="noreferrer">View on scratch.mit.edu </a>
 </div>
 
 <style>
+    h4 {
+        text-align: center;
+    }
     div {
         width: fit-content;
         margin: auto;
