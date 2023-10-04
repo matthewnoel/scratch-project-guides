@@ -68,8 +68,27 @@ Let's add a section in the `forever` block of our `Ball` sprite to point in the 
 forever
     move (5) steps
     if on edge, bounce
+    set [BallY v] to (y position)
     if <<touching (Player v)?> or <touching (Bot v)?>> then
         point in direction ((direction) * (-1))
     end
 end
 ```
+
+Notice that nothing happens when a player misses the ball. Next we'll create two goal sprites called `Player Goal` and `Bot Goal` to help us determine when a player scores. Place the `Player Goal` sprite on the left side of the screen behind the `Player`. Make sure it covers the whole height of the screen, then do the same on the right side of the screen for the `Bot Goal` sprite.
+
+We're also going to introduce two new variables called `Player Score` and `Bot Score`. Make sure they are checked in the block palette so that you can position the scores on screen for the players to see. Finally, we can add logic to the `Ball` sprite to increment the score when a player scores a goal. We will put it right after the section where we check if the ball is touching a player.
+
+```scratchblocks
+if <<touching (Player v)?> or <touching (Bot v)?>> then
+    point in direction ((direction) * (-1))
+end
+if <touching (Player Goal v)?> then
+    change [Bot Score v] by (1)
+end
+if <touching (Bot Goal v)?> then
+    change [Player Score v] by (1)
+end
+```
+
+Press the green flag to play the game and notice what happens when either player scores a goal. The score goes up by more than 1! That is because the `forever` loop is repeating multiple times while the ball is still touching the goal. We can fix this by resetting the ball to the center of the screen once someone has scored a point.
