@@ -5,8 +5,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv root --no-clear",
-    "clean": "git restore root/build/*"
+    "start": "sirv docs --no-clear",
+    "clean": "git restore docs/build/*"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
