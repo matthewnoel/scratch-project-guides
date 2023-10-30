@@ -5,7 +5,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv docs --no-clear"
+    "start": "sirv docs --no-clear",
+    "clean": "git restore docs/build/*",
+    "licenses": "npx generate-license-file --input package.json --output third-party-licenses.txt --overwrite"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
@@ -21,6 +23,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "generate-license-file": "^2.0.0",
     "markdown-it": "^13.0.1",
     "scratchblocks": "^3.6.1",
     "sirv-cli": "^2.0.0"
