@@ -24,7 +24,7 @@
     "svelte": "^4.2.2"
   },
   "dependencies": {
-    "generate-license-file": "^2.0.0",
+    "generate-license-file": "^3.0.1",
     "markdown-it": "^13.0.1",
     "scratchblocks": "^3.6.1",
     "sirv-cli": "^2.0.0"
