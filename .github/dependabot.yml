@@ -10,5 +10,7 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
+    reviewers:
+      - 'matthewnoel'
     labels:
       - 'npm dependencies'
