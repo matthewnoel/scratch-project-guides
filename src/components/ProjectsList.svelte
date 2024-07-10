@@ -29,7 +29,7 @@
     <h3>Games</h3>
     <ul>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'pong')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'pong')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=pong">Pong 🏓 <i>~ Coming Soon</i></a>
+            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'pong')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'pong')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=pong">Pong 🏓 <i>~ In Progress</i></a>
         </li>
         <li>
             <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'tic-tac-toe')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'tic-tac-toe')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=tic-tac-toe">Tic-Tac-Toe #️⃣ <i>~ Coming Soon</i></a>
