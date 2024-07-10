@@ -15,7 +15,7 @@
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "generate-license-file": "^3.0.0",
+    "generate-license-file": "^3.5.0",
     "markdown-it": "^14.0.0",
     "rollup": "^3.29.4",
     "rollup-plugin-css-only": "^4.3.0",
