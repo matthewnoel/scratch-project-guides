@@ -17,7 +17,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "generate-license-file": "^3.5.1",
     "markdown-it": "^14.1.0",
-    "rollup": "^4.21.1", 
+    "rollup": "^4.21.2", 
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-polyfill-node": "^0.13.0",
