@@ -11,7 +11,7 @@
     "licenses": "npx generate-license-file --input package.json --output third-party-licenses.txt --overwrite"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
