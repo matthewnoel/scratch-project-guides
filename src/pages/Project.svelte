@@ -7,7 +7,7 @@
     import MathQuiz from '../projects/math-quiz.md';
     import FibonacciSequence from '../projects/fibonacci-sequence.md';
     import { projectName } from "../router";
-    $: source = () => {
+    let source = $derived(() => {
         switch ($projectName) {
             case 'hello-world':
                 return HelloWorld;
@@ -22,7 +22,7 @@
             default:
                 return '';
         }
-    }
+    })
 </script>
 
 <div class="l0">

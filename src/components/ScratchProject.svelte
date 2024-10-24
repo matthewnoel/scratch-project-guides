@@ -1,5 +1,5 @@
 <script>
-    export let id;
+    let { id } = $props();
 </script>
 
 <h4>Demo The Project 👇</h4>

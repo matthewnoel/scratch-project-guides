@@ -2,7 +2,13 @@
     import Markdown from "./Markdown.svelte";
     import ScratchBlock from "./ScratchBlock.svelte";
     import ScratchProject from "./ScratchProject.svelte";
-    export let source = '';
+    /**
+     * @typedef {Object} Props
+     * @property {string} [source]
+     */
+
+    /** @type {Props} */
+    let { source = '' } = $props();
 
     const getScratchProjectId = (line) => {
         if (line.startsWith('https://scratch.mit.edu/projects/')) {

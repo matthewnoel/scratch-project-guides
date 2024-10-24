@@ -1,4 +1,6 @@
 <script>
+    import { preventDefault } from 'svelte/legacy';
+
     import { updatePage } from "../router";
 
     const handleInternalProjectLink = (event, page, name) => {
@@ -14,25 +16,25 @@
     <h3>Getting Started</h3>
     <ul>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'hello-world')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'hello-world')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=hello-world">Hello World 👋</a>
+            <a onclick={preventDefault(() => handleInternalProjectLink(null, 'project', 'hello-world'))} onkeydown={(e) => handleInternalProjectLink(e, 'project', 'hello-world')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=hello-world">Hello World 👋</a>
         </li>
     </ul>
     <h3>Educational</h3>
     <ul>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'math-quiz')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'math-quiz')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=math-quiz">Math Quiz 🧮</a>
+            <a onclick={preventDefault(() => handleInternalProjectLink(null, 'project', 'math-quiz'))} onkeydown={(e) => handleInternalProjectLink(e, 'project', 'math-quiz')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=math-quiz">Math Quiz 🧮</a>
         </li>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'fibonacci-sequence')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'fibonacci-sequence')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=fibonacci-sequence">Fibonacci Sequence 🐚</a>
+            <a onclick={preventDefault(() => handleInternalProjectLink(null, 'project', 'fibonacci-sequence'))} onkeydown={(e) => handleInternalProjectLink(e, 'project', 'fibonacci-sequence')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=fibonacci-sequence">Fibonacci Sequence 🐚</a>
         </li>
     </ul>
     <h3>Games</h3>
     <ul>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'pong')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'pong')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=pong">Pong 🏓 <i>~ In Progress</i></a>
+            <a onclick={preventDefault(() => handleInternalProjectLink(null, 'project', 'pong'))} onkeydown={(e) => handleInternalProjectLink(e, 'project', 'pong')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=pong">Pong 🏓 <i>~ In Progress</i></a>
         </li>
         <li>
-            <a on:click|preventDefault={() => handleInternalProjectLink(null, 'project', 'tic-tac-toe')} on:keydown={(e) => handleInternalProjectLink(e, 'project', 'tic-tac-toe')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=tic-tac-toe">Tic-Tac-Toe #️⃣ <i>~ Coming Soon</i></a>
+            <a onclick={preventDefault(() => handleInternalProjectLink(null, 'project', 'tic-tac-toe'))} onkeydown={(e) => handleInternalProjectLink(e, 'project', 'tic-tac-toe')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=project&name=tic-tac-toe">Tic-Tac-Toe #️⃣ <i>~ Coming Soon</i></a>
         </li>
     </ul>
 </div>

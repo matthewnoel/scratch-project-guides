@@ -1,4 +1,6 @@
 <script>
+    import { preventDefault } from 'svelte/legacy';
+
     import About from "./pages/About.svelte";
     import Index from "./pages/Index.svelte";
     import Project from "./pages/Project.svelte";
@@ -14,11 +16,11 @@
 
 <nav>
     <div>
-        <h6><a on:click|preventDefault={() => handleInternalHeaderLink(null, '')} on:keydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">Open Scratch Guides </a>📓</h6>
+        <h6><a onclick={preventDefault(() => handleInternalHeaderLink(null, ''))} onkeydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">Open Scratch Guides </a>📓</h6>
     </div>
     <ul>
-        <li><a on:click|preventDefault={() => handleInternalHeaderLink(null, '')} on:keydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
-        <li><a on:click|preventDefault={() => handleInternalHeaderLink(null, 'about')} on:keydown={(e) => handleInternalHeaderLink(e, 'about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>
+        <li><a onclick={preventDefault(() => handleInternalHeaderLink(null, ''))} onkeydown={(e) => handleInternalHeaderLink(e, '')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=">All Projects</a></li>
+        <li><a onclick={preventDefault(() => handleInternalHeaderLink(null, 'about'))} onkeydown={(e) => handleInternalHeaderLink(e, 'about')} href="https://matthewnoel.github.io/scratch-lesson-plans/?page=about">About</a></li>
         <li><a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-lesson-plans">GitHub</a></li>
     </ul>
 </nav>
