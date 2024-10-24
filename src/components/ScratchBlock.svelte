@@ -1,6 +1,12 @@
 <script>
     import scratchblocks from 'scratchblocks';
-    export let text = '';
+    /**
+     * @typedef {Object} Props
+     * @property {string} [text]
+     */
+
+    /** @type {Props} */
+    let { text = '' } = $props();
     const getSvg = (text) => {
         const doc = scratchblocks.parse(text, {
             languages: ['en'],
@@ -11,7 +17,7 @@
         });
         return view.render().outerHTML;
     };
-    $: svg = getSvg(text);
+    let svg = $derived(getSvg(text));
 </script>
 
 {@html svg}

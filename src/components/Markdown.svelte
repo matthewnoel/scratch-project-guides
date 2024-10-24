@@ -1,11 +1,17 @@
 <script>
     import MarkdownIt from 'markdown-it';
-    export let source = '';
+    /**
+     * @typedef {Object} Props
+     * @property {string} [source]
+     */
+
+    /** @type {Props} */
+    let { source = '' } = $props();
     const getHtml = (source) => {
         const markdownIt = new MarkdownIt();
         return markdownIt.render(source);
     };
-    $: html = getHtml(source);
+    let html = $derived(getHtml(source));
 </script>
 
 <div>
