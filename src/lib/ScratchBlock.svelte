@@ -1,6 +1,4 @@
 <script>
-    // @ts-nocheck
-    import scratchblocks from 'scratchblocks';
     /**
      * @typedef {Object} Props
      * @property {string} [text]
@@ -8,7 +6,10 @@
 
     /** @type {Props} */
     let { text = '' } = $props();
-    const getSvg = (text) => {
+    let svg = $state(null);
+    export async function onMount() {
+        // @ts-ignore
+        const scratchblocks = await import('scratchblocks');
         const doc = scratchblocks.parse(text, {
             languages: ['en'],
         });
@@ -16,9 +17,8 @@
             style: 'scratch3',
             scale: 0.675,
         });
-        return view.render().outerHTML;
-    };
-    let svg = $derived(getSvg(text));
+        svg = view.render().outerHTML;
+    }
 </script>
 
 {@html svg}

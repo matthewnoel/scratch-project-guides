@@ -1,2 +1,76 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    import Index from "$lib/pages/Index.svelte";
+</script>
+
+<nav>
+    <div>
+        <h6><a href="/">Open Scratch Guides </a>📓</h6>
+    </div>
+    <ul>
+        <li><a href="/">All Projects</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-lesson-plans">GitHub</a></li>
+    </ul>
+</nav>
+<main>
+    <Index />
+</main>
+
+<style>
+    main {
+        max-width: 600px;
+        margin: auto;
+        padding: 0px 0.25em;
+        margin-bottom: 1em;
+    }
+
+    nav {
+        color: black;
+        background-color: #ffbf00;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    li, h6 {
+        padding: 1em;
+    }
+
+    li {
+        white-space: nowrap;
+    }
+
+    a, a:visited {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover, a:focus {
+        color: white;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 1000px) {
+        div, ul {
+            margin: auto;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
