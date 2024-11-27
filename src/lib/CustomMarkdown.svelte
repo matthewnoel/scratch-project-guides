@@ -1,9 +1,9 @@
 <script>
 // @ts-nocheck
 
-    import Markdown from "./Markdown.svelte";
-    import ScratchBlock from "./ScratchBlock.svelte";
-    import ScratchProject from "./ScratchProject.svelte";
+    import Markdown from "$lib/Markdown.svelte";
+    import ScratchBlock from "$lib/ScratchBlock.svelte";
+    import ScratchProject from "$lib/ScratchProject.svelte";
     /**
      * @typedef {Object} Props
      * @property {string} [source]
