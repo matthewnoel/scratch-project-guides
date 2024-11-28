@@ -1,7 +1,10 @@
 <script lang="ts">
-	import GitLinks from '$lib/GitLinks.svelte';
+    import GitLinks from '$lib/GitLinks.svelte';
+	import type { Snippet } from 'svelte';
 	import '../app.css';
-	let { children } = $props();
+    import type { LayoutData } from './$types';
+
+	let { data, children }: { data: LayoutData, children: Snippet } = $props();
 </script>
 
 <nav>
@@ -16,7 +19,7 @@
 </nav>
 <main>
 	{@render children()}
-	<GitLinks page={"todo"} />
+	<GitLinks page={data.page} />
 </main>
 
 <style>

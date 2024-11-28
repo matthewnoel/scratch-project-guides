@@ -1,4 +1,6 @@
 <script>
+	import { projects } from "./projects";
+
     let { page } = $props();
 </script>
 
@@ -10,7 +12,7 @@
         {#if page == null}
             <span><a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-lesson-plans">Edit on GitHub</a> 🐙</span>
         {:else}
-            <span><a target="_blank" rel="noreferrer" href={`https://github.com/matthewnoel/scratch-lesson-plans/${page}`}>Edit this page on GitHub</a> 🐙</span>
+            <span><a target="_blank" rel="noreferrer" href={`https://github.com/matthewnoel/scratch-project-guides/blob/main/src/routes${(page === '/' ? '' : page)}/+page.svelte`}>Edit this page on GitHub</a> 🐙</span>
         {/if}
     </div>
 </div>

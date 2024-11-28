@@ -36,12 +36,14 @@ const createModule = () => {
     const folders = getFolders();
     const dictionary = {};
     const array = [];
+    const projects = [];
 
     for (const folder of folders) {
         const group = {folder: folder, projects: []};
         const files = getFiles(folder);
         const names = cleanFileNames(files);
         for (const name of names) {
+            projects.push(name);
             const markdown = fs.readFileSync(path.join(projectsDir, folder, `${name}.md`), 'utf8');
             const title = markdown.split('\n').find(line => line.startsWith('# ')).substring(2); // todo: better title extraction
             dictionary[name] = {
@@ -65,7 +67,7 @@ const createModule = () => {
         return a.folder.localeCompare(b.folder)
     });
 
-    const content = `export const groupedProjects = ${JSON.stringify(array)};\nexport const projectsData = ${JSON.stringify(dictionary)};\n`;
+    const content = `export const groupedProjects = ${JSON.stringify(array)};\nexport const projectsData = ${JSON.stringify(dictionary)};\nexport const projects = ${JSON.stringify(projects)};\n`;
 
     if (fs.existsSync(filePath)) {
         const existingContent = fs.readFileSync(filePath, 'utf8');
