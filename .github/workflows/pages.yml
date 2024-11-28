@@ -43,7 +43,7 @@ jobs:
           # check-latest: # optional
       - name: Install Deps
         run: npm ci
-      - name: Build
+      - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: npm run build
