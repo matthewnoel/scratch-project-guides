@@ -8,6 +8,8 @@ export const load: PageLoad = ({ params }) => {
     }
     return {
         // @ts-ignore
+        title: projectsData[params.slug].title,
+        // @ts-ignore
         markdown: projectsData[params.slug].markdown,
     };
 };

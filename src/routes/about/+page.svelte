@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>About</title>
+</svelte:head>
+
 <h1>About</h1>
 <div class="l0">
     <h3>🚧 Under Construction 👷</h3>

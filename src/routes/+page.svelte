@@ -1,6 +1,11 @@
 <script>
     import { groupedProjects } from "$lib/projects";
 </script>
+
+<svelte:head>
+	<title>Scratch Project Guides</title>
+</svelte:head>
+
 <h1>All Projects</h1>
 <div class="l0">    
     {#each groupedProjects as group}

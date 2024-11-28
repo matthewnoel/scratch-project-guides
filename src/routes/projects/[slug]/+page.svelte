@@ -5,6 +5,10 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<svelte:head>
+	<title>{data.title}</title>
+</svelte:head>
+
 <div class="l0">
     <CustomMarkdown source={data.markdown} />
 </div>
