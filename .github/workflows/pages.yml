@@ -34,6 +34,7 @@ jobs:
         with:
           # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
           node-version: 22
+          cache: 'npm'
           # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
           # node-version-file: # optional
           # Target architecture for Node to use. Examples: x86, x64. Will use system architecture by default.
@@ -43,6 +44,8 @@ jobs:
       - name: Install Deps
         run: npm ci
       - name: Build
+        env:
+          BASE_PATH: '/${{ github.event.repository.name }}'
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
