@@ -12,7 +12,8 @@
 		"lint": "prettier --check . && eslint .",
 		"test:e2e": "playwright test",
 		"test": "npm run test:e2e",
-		"licenses": "npx generate-license-file --input package.json --output third-party-licenses.txt --overwrite"
+		"licenses": "npx generate-license-file --input package.json --output third-party-licenses.txt --overwrite",
+		"generate-projects": "node scripts/generate-projects.js"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.45.3",
