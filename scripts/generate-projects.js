@@ -39,6 +39,13 @@ const createModule = () => {
         };
     }
     const content = `export const projects = ${JSON.stringify(objects)};\n`;
+    if (fs.existsSync(filePath)) {
+        const existingContent = fs.readFileSync(filePath, 'utf8');
+        if (content === existingContent) {
+            console.log('File already up to date');
+            return;
+        }
+    }
 
     fs.writeFile(filePath, content, (err) => {
         if (err) {
