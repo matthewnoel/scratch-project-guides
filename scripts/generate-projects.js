@@ -31,9 +31,11 @@ const createModule = () => {
     const names = cleanFileNames(files);
     const objects = {};
     for (const name of names) {
+        const markdown = fs.readFileSync(path.join(projectsDir, `${name}.md`), 'utf8');
+        const title = markdown.split('\n').find(line => line.startsWith('# ')).substring(2);
         objects[name] = {
-            title: name,
-            markdown: fs.readFileSync(path.join(projectsDir, `${name}.md`), 'utf8')
+            title,
+            markdown,
         };
     }
     const content = `export const projects = ${JSON.stringify(objects)};\n`;
