@@ -4,6 +4,7 @@
 
 <svelte:head>
 	<title>Scratch Project Guides</title>
+    <meta name="description" content="Guides for Scratch projects">
 </svelte:head>
 
 <h1>All Projects</h1>

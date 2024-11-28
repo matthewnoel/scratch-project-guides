@@ -7,6 +7,7 @@
 
 <svelte:head>
 	<title>{data.title}</title>
+	<meta name="description" content={`Guide for a "${data.title}" project in Scratch.`}>
 </svelte:head>
 
 <div class="l0">
