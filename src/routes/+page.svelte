@@ -1,16 +1,18 @@
 <script>
-    import { projects } from "$lib/projects";
+    import { groupedProjects } from "$lib/projects";
 </script>
 <h1>All Projects</h1>
-<div class="l0">
-    <h3>Auto Generated</h3>
-    <ul>
-        {#each Object.entries(projects) as [key, value]}
-            <li>
-                <a href={`/projects/${key}`}>{value.title}</a>
-            </li>
-        {/each}
-    </ul>
+<div class="l0">    
+    {#each groupedProjects as group}
+        <h3>{group.folder}</h3>
+        <ul>
+            {#each group.projects as project}
+                <li>
+                    <a href={`/projects/${project.slug}`}>{project.title}</a>
+                </li>
+            {/each}
+        </ul>
+    {/each}
 </div>
 
 <style>
@@ -20,9 +22,5 @@
 
     a {
         text-decoration: none;
-    }
-
-    i {
-        color: gray;
     }
 </style>
