@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { base } from '$app/paths';
     import GitLinks from '$lib/GitLinks.svelte';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
@@ -9,11 +10,11 @@
 
 <nav>
     <div>
-        <h6><a href="/">Open Scratch Guides </a>📓</h6>
+        <h6><a href="{base}/">Open Scratch Guides </a>📓</h6>
     </div>
     <ul>
-        <li><a href="/">All Projects</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="{base}/">All Projects</a></li>
+        <li><a href="{base}/about">About</a></li>
         <li><a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-lesson-plans">GitHub</a></li>
     </ul>
 </nav>
