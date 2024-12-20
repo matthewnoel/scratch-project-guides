@@ -1,7 +1,5 @@
 <script>
-	import { projects } from "./projects";
-
-    let { page } = $props();
+	let { page } = $props();
 </script>
 
 <div class="outer">
