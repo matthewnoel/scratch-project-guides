@@ -1,4 +1,5 @@
 <script>
+    import { base } from '$app/paths';
     import { groupedProjects } from "$lib/projects";
 </script>
 
@@ -14,7 +15,7 @@
         <ul>
             {#each group.projects as project}
                 <li>
-                    <a href={`/projects/${project.slug}`}>{project.title}</a>
+                    <a href={`${base}/projects/${project.slug}`}>{project.title}</a>
                 </li>
             {/each}
         </ul>
