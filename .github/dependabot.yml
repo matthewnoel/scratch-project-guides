@@ -10,7 +10,7 @@ updates:
     groups:
       all-updates:
         patterns:
-          - "*"
+          - '*'
     schedule:
       interval: 'weekly'
       day: 'monday'

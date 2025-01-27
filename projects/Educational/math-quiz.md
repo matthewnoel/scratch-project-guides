@@ -6,7 +6,7 @@ https://scratch.mit.edu/projects/805521735/
 
 In this project we will create a game where the player is quizzed on their addition facts.
 
-We will start by creating two variables. `FirstNumber` will stand for our first  number and `SecondNumber` will stand for our second number. When our game begins we will set each of them to a random number between 1 and 10.
+We will start by creating two variables. `FirstNumber` will stand for our first number and `SecondNumber` will stand for our second number. When our game begins we will set each of them to a random number between 1 and 10.
 
 ```scratchblocks
 when green flag clicked
@@ -52,6 +52,6 @@ end
 
 Going Further 🚀
 
-* How would this game work adding three numbers?
-* How would you make this game work for subtraction?
-* How would you let the player try again if they were wrong instead of telling them the answer?
+- How would this game work adding three numbers?
+- How would you make this game work for subtraction?
+- How would you let the player try again if they were wrong instead of telling them the answer?
