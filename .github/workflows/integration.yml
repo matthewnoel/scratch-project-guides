@@ -23,12 +23,12 @@ jobs:
           cache: 'npm'
       - name: 🪜 Install dependencies
         run: npm ci
-      - name: 📝 Format project
-        run: npm run format
       - name: 🧑‍⚖️ Generate license file
         run: npm run licenses
       - name: 📽️ Generate project files
         run: npm run generate-projects
+      - name: 📝 Format project
+        run: npm run format
       - name: 💾 Add and commit changes
         uses: EndBug/add-and-commit@v9.1.4
       - name: 🔍 Lint project
