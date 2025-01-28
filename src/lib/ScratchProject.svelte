@@ -7,7 +7,7 @@
 	<iframe
 		title="Project Demo"
 		src={`https://scratch.mit.edu/projects/${id}/embed`}
-		allowtransparency="true"
+		allowtransparency={true}
 		width="485"
 		height="402"
 		frameborder="0"

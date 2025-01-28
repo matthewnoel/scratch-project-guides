@@ -9,7 +9,7 @@
 	let { text = '' } = $props();
 	let svg = $state(null);
 	onMount(async () => {
-		// @ts-ignore
+		// @ts-expect-error because of laziness
 		const module = await import('scratchblocks');
 		const scratchblocks = module.default;
 		const doc = scratchblocks.parse(text, {

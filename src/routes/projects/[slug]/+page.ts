@@ -7,9 +7,9 @@ export const load: PageLoad = ({ params }) => {
 		error(404, 'Not found');
 	}
 	return {
-		// @ts-ignore
+		// @ts-expect-error because of laziness
 		title: projectsData[params.slug].title,
-		// @ts-ignore
+		// @ts-expect-error because of laziness
 		markdown: projectsData[params.slug].markdown
 	};
 };
