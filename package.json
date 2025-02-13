@@ -30,7 +30,7 @@
 		"markdown-it": "^14.1.0",
 		"prettier": "^3.5.0",
 		"prettier-plugin-svelte": "^3.3.3",
-		"prettier-plugin-tailwindcss": "^0.6.10",
+		"prettier-plugin-tailwindcss": "^0.6.11",
 		"scratchblocks": "^3.6.4",
 		"svelte": "^5.19.0",
 		"svelte-check": "^4.1.4",
