@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "npm run generate-projects && vite dev",
 		"build": "npm run generate-projects && vite build",
+		"prepare": "svelte-kit sync",
 		"preview": "npm run generate-projects && vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -18,7 +19,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.50.1",
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.16.0",
+		"@sveltejs/kit": "^2.17.1",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.18.0",
