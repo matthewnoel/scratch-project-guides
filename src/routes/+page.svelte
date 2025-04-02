@@ -10,10 +10,10 @@
 
 <h1>All Projects</h1>
 <div class="l0">
-	{#each groupedProjects as group}
+	{#each groupedProjects as group (group)}
 		<h3>{group.folder}</h3>
 		<ul>
-			{#each group.projects as project}
+			{#each group.projects as project (project)}}
 				<li>
 					<a href={`${base}/projects/${project.slug}`}>{project.title}</a>
 				</li>

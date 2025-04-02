@@ -108,7 +108,7 @@
 	}
 </script>
 
-{#each sections as { type, data }}
+{#each sections as { type, data } (data)}
 	{#if type === 'MARKDOWN'}
 		<Markdown source={data} />
 	{:else if type === 'SCRATCHBLOCK'}
