@@ -17,13 +17,13 @@
 		"generate-projects": "node scripts/generate-projects.js"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.51.1",
+		"@playwright/test": "^1.52.0",
 		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.20.6",
+		"@sveltejs/kit": "^2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tailwindcss/postcss": "^4.1.4",
 		"autoprefixer": "^10.4.21",
-		"eslint": "^9.24.0",
+		"eslint": "^9.25.1",
 		"eslint-config-prettier": "^10.1.2",
 		"eslint-plugin-svelte": "^3.5.1",
 		"generate-license-file": "^4.0.0",
@@ -33,11 +33,11 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"scratchblocks": "^3.6.4",
-		"svelte": "^5.26.3",
+		"svelte": "^5.28.1",
 		"svelte-check": "^4.1.6",
 		"tailwindcss": "^4.0.6",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.30.1",
-		"vite": "^6.2.6"
+		"typescript-eslint": "^8.31.0",
+		"vite": "^6.3.2"
 	}
 }
