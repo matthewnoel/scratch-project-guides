@@ -13,7 +13,7 @@
 	{#each groupedProjects as group (group)}
 		<h3>{group.folder}</h3>
 		<ul>
-			{#each group.projects as project (project)}}
+			{#each group.projects as project (project)}
 				<li>
 					<a href={`${base}/projects/${project.slug}`}>{project.title}</a>
 				</li>
