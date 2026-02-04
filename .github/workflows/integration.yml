@@ -1,3 +1,10 @@
+# ============================================================================
+# THIS FILE IS GENERATED - DO NOT EDIT DIRECTLY
+# ============================================================================
+# To modify this workflow, edit scripts/generate-workflows.js and run:
+#   npm run generate-workflows
+# ============================================================================
+
 name: 🌀 PR Integration Workflow
 
 on:
