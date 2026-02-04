@@ -25,5 +25,5 @@
 4. Run `npm run lint` to check for issues
 5. Run `npm run check` to check for issues
 6. Run `npm run test` to verify tests pass
-7. If you are changing a markdown file then run `npm run generate` because it will generate up-to-date versions of the javascript objects.
+7. If you are changing a markdown file then run `npm run generate-projects` because it will generate up-to-date versions of the javascript objects.
 8. Only consider changes complete when all quality checks pass
