@@ -89,5 +89,9 @@
 			width: 100%;
 			justify-content: center;
 		}
+
+		h6 {
+			font-size: 1.5rem;
+		}
 	}
 </style>

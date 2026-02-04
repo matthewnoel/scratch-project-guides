@@ -43,10 +43,11 @@
 	}
 
 	.inner {
+		font-size: 0.9rem;
 		background-color: white;
 		border: 1px solid rgba(0, 0, 0, 0.25);
-		border-radius: 0.4em;
-		padding: 0.25em 0.5em;
+		border-radius: 1em;
+		padding: 0.25em 1em;
 	}
 
 	@media (max-width: 500px) {
@@ -56,7 +57,6 @@
 	}
 
 	a {
-		font-size: 0.9rem;
 		vertical-align: middle;
 	}
 
