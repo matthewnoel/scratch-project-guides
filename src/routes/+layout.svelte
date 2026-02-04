@@ -16,8 +16,10 @@
 		<li><a href={resolve('/')}>All Projects</a></li>
 		<li><a href={resolve('/about')}>About</a></li>
 		<li>
-			<a target="_blank" rel="noreferrer" href="https://github.com/matthewnoel/scratch-project-guides"
-				>GitHub</a
+			<a
+				target="_blank"
+				rel="noreferrer"
+				href="https://github.com/matthewnoel/scratch-project-guides">GitHub</a
 			>
 		</li>
 	</ul>
