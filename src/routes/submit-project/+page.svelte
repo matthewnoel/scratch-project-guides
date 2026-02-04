@@ -29,6 +29,8 @@ move (10) steps
 	let copyStatus = $state('');
 	let copyTimeout: ReturnType<typeof setTimeout> | null = null;
 
+	// const link =
+	// 	'https://github.com/matthewnoel/scratch-project-guides/issues/new?template=project-submission.yml';
 	const previewSource = $derived(markdown);
 
 	const copyToClipboard = async () => {
