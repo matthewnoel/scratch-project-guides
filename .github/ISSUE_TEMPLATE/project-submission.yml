@@ -1,0 +1,47 @@
+name: 📝 Submit New Project Guide
+description: Submit a new Scratch project guide to be added to the site
+title: '[Project Submission] '
+labels: ['project-submission']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting a new project guide! Please fill out the form below.
+        Your submission will automatically create a pull request for review.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which category does this project belong to?
+      options:
+        - Getting Started
+        - Educational
+        - Games
+    validations:
+      required: true
+
+  - type: input
+    id: project_name
+    attributes:
+      label: Project Name
+      description: The name of your project (will be used for the URL slug)
+      placeholder: e.g., "Space Invaders"
+    validations:
+      required: true
+
+  - type: textarea
+    id: markdown_content
+    attributes:
+      label: Project Guide Content
+      description: Paste your full markdown content here. All formatting will be preserved.
+      placeholder: |
+        # Project Title
+
+        ## Introduction
+        ...
+
+        ## Steps
+        ...
+    validations:
+      required: true
