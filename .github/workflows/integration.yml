@@ -5,15 +5,11 @@ on:
     branches:
       - '**'
       - '!main'
-  workflow_run:
-    workflows: ['📝 Submit New Project Guide']
-    types:
-      - completed
+  pull_request_target:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
-    # Skip if workflow_run failed or was cancelled
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: write
 
@@ -23,8 +19,8 @@ jobs:
       - name: 🏃 Run actions/checkout@v4
         uses: actions/checkout@v4
         with:
-          # For workflow_run events, checkout the branch from the triggering workflow
-          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+          # For pull_request_target, checkout the PR head; for push, use the default ref
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
       - name: 🏃 Run actions/setup-node@v4
         uses: actions/setup-node@v4
         with:
