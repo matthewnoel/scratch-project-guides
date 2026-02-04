@@ -6,9 +6,15 @@ Guides for [Scratch](https://scratch.mit.edu/) projects.
 
 ### Global Dependencies
 
-[Node.js](https://nodejs.org/) - Version `18.x` recommended
+[Node.js](https://nodejs.org/)
 
 ### Building and Running
+
+Set Node version
+
+```
+nvm use
+```
 
 Install project dependencies
 
@@ -25,6 +31,7 @@ npm run dev
 Build production bundle
 
 ```
+npm run generate
 npm run build
 ```
 
