@@ -2,4 +2,4 @@
 
 ## To Do
 
-See [issue 12](https://github.com/matthewnoel/scratch-lesson-plans/issues/12).
+See [issue 12](https://github.com/matthewnoel/scratch-project-guides/issues/12).

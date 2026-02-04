@@ -8,7 +8,7 @@
 			><a
 				target="_blank"
 				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-lesson-plans/issues/new">Give Feedback</a
+				href="https://github.com/matthewnoel/scratch-project-guides/issues/new">Give Feedback</a
 			> ✏️</span
 		>
 	</div>
@@ -18,7 +18,7 @@
 				><a
 					target="_blank"
 					rel="noreferrer"
-					href="https://github.com/matthewnoel/scratch-lesson-plans">Edit on GitHub</a
+					href="https://github.com/matthewnoel/scratch-project-guides">Edit on GitHub</a
 				> 🐙</span
 			>
 		{:else}
