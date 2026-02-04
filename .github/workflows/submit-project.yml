@@ -1,3 +1,10 @@
+# ============================================================================
+# THIS FILE IS GENERATED - DO NOT EDIT DIRECTLY
+# ============================================================================
+# To modify this workflow, edit scripts/generate-workflows.js and run:
+#   npm run generate-workflows
+# ============================================================================
+
 name: 📝 Submit New Project Guide
 
 on:
@@ -8,6 +15,12 @@ jobs:
   create-pr:
     runs-on: ubuntu-latest
     if: contains(github.event.issue.labels.*.name, 'project-submission')
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,7 +49,7 @@ jobs:
             const markdownContent = contentMatch[1].trim();
 
             // Validate category
-            const validCategories = ['Getting Started', 'Educational', 'Games'];
+            const validCategories = ["Educational","Games","Getting Started"];
             if (!validCategories.includes(category)) {
               core.setFailed(`Invalid category: ${category}. Must be one of: ${validCategories.join(', ')}`);
               return;
@@ -74,13 +87,44 @@ jobs:
           # Move the temp content file to the final location
           mv markdown_content.tmp "$FILEPATH"
 
-      - name: Commit and push
+      # ========================================================================
+      # Integration steps - these replicate the PR Integration Workflow
+      # This is necessary because the integration workflow cannot automatically
+      # run on PRs created by this workflow due to GitHub security restrictions
+      # ========================================================================
+
+      - name: 🏃 Run actions/setup-node@v4
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: 🪜 Install dependencies
+        run: npm ci
+      - name: 🧑‍⚖️ Generate license file
+        run: npm run licenses
+      - name: 📽️ Generate project files
+        run: npm run generate-projects
+      - name: 📝 Format project
+        run: npm run format
+
+      - name: 💾 Commit all changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Add new project: ${{ steps.parse.outputs.project_name }}"
           git push origin "$BRANCH_NAME"
+
+      - name: 🔍 Lint project
+        run: npm run lint
+      - name: ✅ Svelte check
+        run: npm run check
+      - name: 🏗️ Build project
+        run: npm run build
+      - name: 🎭 Set up playwright
+        run: npx playwright install
+      - name: 🧪 Run tests
+        run: npm test
 
       - name: Create Pull Request
         env:
