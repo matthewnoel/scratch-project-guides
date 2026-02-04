@@ -92,12 +92,6 @@ move (10) steps
 </section>
 
 <style>
-	:global(main) {
-		max-width: none;
-		padding: 0;
-		margin: 0;
-	}
-
 	.editor {
 		display: flex;
 		flex-direction: column;

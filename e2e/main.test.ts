@@ -78,6 +78,12 @@ test.describe('Navigation', () => {
 			'https://github.com/matthewnoel/scratch-project-guides'
 		);
 	});
+
+	test('Submit a Project link navigates to submit project page', async ({ page }) => {
+		await page.goto('/');
+		await page.locator('nav').getByRole('link', { name: 'Submit a Project' }).click();
+		await expect(page).toHaveURL('/submit-project');
+	});
 });
 
 test.describe('About Page', () => {

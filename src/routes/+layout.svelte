@@ -22,12 +22,17 @@
 				href="https://github.com/matthewnoel/scratch-project-guides">GitHub</a
 			>
 		</li>
+		<li><a href={resolve('/submit-project')}>Submit a Project</a></li>
 	</ul>
 </nav>
-<main>
+{#if data.page === '/submit-project'}
 	{@render children()}
-	<GitLinks page={data.page} />
-</main>
+{:else}
+	<main>
+		{@render children()}
+		<GitLinks page={data.page} />
+	</main>
+{/if}
 
 <style>
 	main {
