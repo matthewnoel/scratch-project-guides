@@ -25,7 +25,7 @@ npm i
 Run the generation script to parse the markdown documents and create javascript objects
 
 ```
-npm run generate
+npm run generate-projects
 ```
 
 Run development server
