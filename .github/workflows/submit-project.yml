@@ -49,7 +49,7 @@ jobs:
             const markdownContent = contentMatch[1].trim();
 
             // Validate category
-            const validCategories = ['Getting Started', 'Educational', 'Games'];
+            const validCategories = ["Educational","Games","Getting Started"];
             if (!validCategories.includes(category)) {
               core.setFailed(`Invalid category: ${category}. Must be one of: ${validCategories.join(', ')}`);
               return;

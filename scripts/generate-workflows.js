@@ -6,6 +6,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const workflowsDir = path.join(__dirname, '../.github/workflows');
+const projectsDir = path.join(__dirname, '../projects');
+
+// Get category names from the projects directory subfolders
+const getCategories = () => {
+	return fs
+		.readdirSync(projectsDir)
+		.filter((file) => fs.statSync(path.join(projectsDir, file)).isDirectory())
+		.sort();
+};
 
 const GENERATED_HEADER = `# ============================================================================
 # THIS FILE IS GENERATED - DO NOT EDIT DIRECTLY
@@ -92,7 +101,8 @@ ${sharedSteps.runTests}
 };
 
 // Generate submit-project.yml with embedded integration steps
-const generateSubmitProject = () => {
+const generateSubmitProject = (categories) => {
+	const categoriesArrayString = JSON.stringify(categories);
 	const content = `${GENERATED_HEADER}name: 📝 Submit New Project Guide
 
 on:
@@ -137,7 +147,7 @@ jobs:
             const markdownContent = contentMatch[1].trim();
 
             // Validate category
-            const validCategories = ['Getting Started', 'Educational', 'Games'];
+            const validCategories = ${categoriesArrayString};
             if (!validCategories.includes(category)) {
               core.setFailed(\`Invalid category: \${category}. Must be one of: \${validCategories.join(', ')}\`);
               return;
@@ -241,8 +251,12 @@ if (!fs.existsSync(workflowsDir)) {
 	fs.mkdirSync(workflowsDir, { recursive: true });
 }
 
+// Get categories from project folders
+const categories = getCategories();
+console.log(`Found categories: ${categories.join(', ')}`);
+
 // Generate both workflows
 writeWorkflow('integration.yml', generateIntegration());
-writeWorkflow('submit-project.yml', generateSubmitProject());
+writeWorkflow('submit-project.yml', generateSubmitProject(categories));
 
 console.log('Workflow generation complete');
