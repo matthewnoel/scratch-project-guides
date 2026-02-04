@@ -1,4 +1,4 @@
-name: Submit New Project
+name: 📝 Submit New Project Guide
 
 on:
   workflow_dispatch:
