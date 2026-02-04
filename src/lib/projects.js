@@ -43,6 +43,17 @@ export const groupedProjects = [
 					'# Tic-Tac-Toe #️⃣\n\n## To Do\n\nSee [issue 12](https://github.com/matthewnoel/scratch-project-guides/issues/12).\n'
 			}
 		]
+	},
+	{
+		folder: 'Test',
+		projects: [
+			{
+				slug: 'hello-world',
+				title: 'Hello World 👋',
+				markdown:
+					'# Hello World 👋\n\n## A classic first program\n\nhttps://scratch.mit.edu/projects/807782232/\n\nScratch programs start when the green flag is clicked. Place this block from the `Events` category to start your program.\n\n```scratchblocks\nwhen green flag clicked\n```\n\nNext add a block from the `Looks` category to make the sprite say "Hello World!".\n\n```scratchblocks\nwhen green flag clicked\nsay [Hello World!]\n```\n\nGreat job! You\'ve written your first program.\n'
+			}
+		]
 	}
 ];
 export const projectsData = {
@@ -72,9 +83,16 @@ export const projectsData = {
 	},
 	'hello-world': {
 		title: 'Hello World 👋',
-		category: 'Getting Started',
+		category: 'Test',
 		markdown:
 			'# Hello World 👋\n\n## A classic first program\n\nhttps://scratch.mit.edu/projects/807782232/\n\nScratch programs start when the green flag is clicked. Place this block from the `Events` category to start your program.\n\n```scratchblocks\nwhen green flag clicked\n```\n\nNext add a block from the `Looks` category to make the sprite say "Hello World!".\n\n```scratchblocks\nwhen green flag clicked\nsay [Hello World!]\n```\n\nGreat job! You\'ve written your first program.\n'
 	}
 };
-export const projects = ['fibonacci-sequence', 'math-quiz', 'pong', 'tic-tac-toe', 'hello-world'];
+export const projects = [
+	'fibonacci-sequence',
+	'math-quiz',
+	'pong',
+	'tic-tac-toe',
+	'hello-world',
+	'hello-world'
+];
