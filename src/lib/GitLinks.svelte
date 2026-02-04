@@ -8,7 +8,7 @@
 			><a
 				target="_blank"
 				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-lesson-plans/issues/new">Give Feedback</a
+				href="https://github.com/matthewnoel/scratch-project-guides/issues/new">Give Feedback</a
 			> ✏️</span
 		>
 	</div>
@@ -18,7 +18,7 @@
 				><a
 					target="_blank"
 					rel="noreferrer"
-					href="https://github.com/matthewnoel/scratch-lesson-plans">Edit on GitHub</a
+					href="https://github.com/matthewnoel/scratch-project-guides">Edit on GitHub</a
 				> 🐙</span
 			>
 		{:else}
@@ -43,10 +43,11 @@
 	}
 
 	.inner {
+		font-size: 0.9rem;
 		background-color: white;
 		border: 1px solid rgba(0, 0, 0, 0.25);
-		border-radius: 0.4em;
-		padding: 0.25em 0.5em;
+		border-radius: 1em;
+		padding: 0.25em 1em;
 	}
 
 	@media (max-width: 500px) {
@@ -56,7 +57,6 @@
 	}
 
 	a {
-		font-size: 0.9rem;
 		vertical-align: middle;
 	}
 

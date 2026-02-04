@@ -10,14 +10,14 @@
 		This site is a work <a
 			target="_blank"
 			rel="noreferrer"
-			href="https://github.com/matthewnoel/scratch-lesson-plans">in progress</a
+			href="https://github.com/matthewnoel/scratch-project-guides/issues">in progress</a
 		>.
 	</p>
 	<p>
 		You can view the <a
 			target="_blank"
 			rel="noreferrer"
-			href="https://github.com/matthewnoel/scratch-lesson-plans/blob/main/third-party-licenses.txt"
+			href="https://github.com/matthewnoel/scratch-project-guides/blob/main/third-party-licenses.txt"
 			>third-party licenses here</a
 		>.
 	</p>

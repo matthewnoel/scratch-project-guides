@@ -40,7 +40,7 @@ export const groupedProjects = [
 				slug: 'tic-tac-toe',
 				title: 'Tic-Tac-Toe #️⃣',
 				markdown:
-					'# Tic-Tac-Toe #️⃣\n\n## To Do\n\nSee [issue 12](https://github.com/matthewnoel/scratch-lesson-plans/issues/12).\n'
+					'# Tic-Tac-Toe #️⃣\n\n## To Do\n\nSee [issue 12](https://github.com/matthewnoel/scratch-project-guides/issues/12).\n'
 			}
 		]
 	}
@@ -68,7 +68,7 @@ export const projectsData = {
 		title: 'Tic-Tac-Toe #️⃣',
 		category: 'Games',
 		markdown:
-			'# Tic-Tac-Toe #️⃣\n\n## To Do\n\nSee [issue 12](https://github.com/matthewnoel/scratch-lesson-plans/issues/12).\n'
+			'# Tic-Tac-Toe #️⃣\n\n## To Do\n\nSee [issue 12](https://github.com/matthewnoel/scratch-project-guides/issues/12).\n'
 	},
 	'hello-world': {
 		title: 'Hello World 👋',
