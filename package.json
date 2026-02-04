@@ -14,7 +14,7 @@
 		"test:e2e": "playwright test",
 		"test": "npm run test:e2e",
 		"licenses": "npx generate-license-file --input package.json --output third-party-licenses.txt --overwrite",
-		"generate-projects": "node scripts/generate-projects.js"
+		"generate-projects": "node scripts/generate-projects.js && npm run format"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.56.1",

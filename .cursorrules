@@ -1,0 +1,29 @@
+# Cursor AI Rules for scratch-project-guides project
+
+## Environment Setup
+- Always run `nvm use` at the start of any terminal session to ensure correct Node.js version
+- This is a static site generated with SvelteKit which hosts project guides for Scratch projects.
+
+## Code Quality Standards
+- Always run formatting, linting, and testing when making changes:
+  - `npm run format` - Format code
+  - `npm run lint` - Lint code  
+  - `npm run check` - Svelte check
+  - `npm run test` - Run tests
+- Fix any linting errors before considering changes complete
+- Ensure all tests pass before finalizing changes
+
+## Project Context
+- This is a project aimed at a school audience for sharing scratch project instructions.
+- It is a static site that parses markdown files in the `projects` directory as the source of truth for the guides on the site.
+- Uses TypeScript throughout
+
+## Development Workflow
+1. Run `nvm use` to set correct Node version
+2. Make code changes
+3. Run `npm run format` to format code
+4. Run `npm run lint` to check for issues
+5. Run `npm run check` to check for issues
+6. Run `npm run test` to verify tests pass
+7. If you are changing a markdown file then run `npm run generate` because it will generate up-to-date versions of the javascript objects.
+8. Only consider changes complete when all quality checks pass
