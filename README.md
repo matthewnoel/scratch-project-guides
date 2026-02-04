@@ -2,7 +2,7 @@
 
 Guides for [Scratch](https://scratch.mit.edu/) projects.
 
-## Contributing
+## Developing
 
 ### Global Dependencies
 
@@ -22,17 +22,34 @@ Install project dependencies
 npm i
 ```
 
+Run the generation script to parse the markdown documents and create javascript objects
+
+```
+npm run generate
+```
+
 Run development server
 
 ```
 npm run dev
 ```
 
-Build production bundle
+### Code Quality
+
+There are various code quality checks you can run with
 
 ```
-npm run generate
-npm run build
+npm run format
+npm run lint
+npm run check
+```
+
+### Testing
+
+The project uses playwright for end-to-end testing. You can run the test suite with
+
+```
+npm run test
 ```
 
 ### Useful Links
