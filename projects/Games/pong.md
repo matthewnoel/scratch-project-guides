@@ -1,6 +1,6 @@
 # Pong 🏓
 
-## Make the classic game
+## Make the classicc game
 
 https://scratch.mit.edu/projects/801064832
 
