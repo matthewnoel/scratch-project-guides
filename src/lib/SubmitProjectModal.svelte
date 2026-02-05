@@ -213,7 +213,6 @@
 						<div class="modal__actions">
 							<Button
 								variant="emphasis"
-								size="small"
 								type="button"
 								onclick={copyToClipboard}
 								disabled={!hasAccount}
