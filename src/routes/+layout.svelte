@@ -19,15 +19,20 @@
 			<a
 				target="_blank"
 				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-project-guides">GitHub</a
+				href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
 			>
 		</li>
+		<li><a href={resolve('/submit-project')}>New Guide</a></li>
 	</ul>
 </nav>
-<main>
+{#if data.page === '/submit-project'}
 	{@render children()}
-	<GitLinks page={data.page} />
-</main>
+{:else}
+	<main>
+		{@render children()}
+		<GitLinks page={data.page} />
+	</main>
+{/if}
 
 <style>
 	main {
@@ -92,6 +97,7 @@
 
 		h6 {
 			font-size: 1.5rem;
+			margin-bottom: -1em;
 		}
 	}
 </style>

@@ -42,70 +42,75 @@
 		return line.startsWith('```scratchblocks');
 	};
 
-	let currentMarkdown = '';
-	let currentScratchBlock = '';
-	const sections = [];
-	const lines = source.split('\n');
-	for (const line of lines) {
-		if (isScratchProjectLink(line)) {
-			[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
-				currentMarkdown,
-				currentScratchBlock
-			);
-			if (currentScratchBlock.length > 0) {
-				if (currentMarkdown.length > 0) {
-					currentMarkdown += `\n${currentScratchBlock}`;
-				} else {
-					currentMarkdown += currentScratchBlock;
+	const buildSections = (input) => {
+		let currentMarkdown = '';
+		let currentScratchBlock = '';
+		const sections = [];
+		const lines = input.split('\n');
+		for (const line of lines) {
+			if (isScratchProjectLink(line)) {
+				[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
+					currentMarkdown,
+					currentScratchBlock
+				);
+				if (currentScratchBlock.length > 0) {
+					if (currentMarkdown.length > 0) {
+						currentMarkdown += `\n${currentScratchBlock}`;
+					} else {
+						currentMarkdown += currentScratchBlock;
+					}
+					currentScratchBlock = '';
 				}
+				if (currentMarkdown.length > 0) {
+					sections.push({
+						type: 'MARKDOWN',
+						data: currentMarkdown
+					});
+					currentMarkdown = '';
+				}
+				sections.push({
+					type: 'SCRATCH_PROJECT',
+					data: getScratchProjectId(line)
+				});
+			} else if (isScratchBlockStart(line)) {
+				[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
+					currentMarkdown,
+					currentScratchBlock
+				);
+				if (currentMarkdown.length > 0) {
+					sections.push({
+						type: 'MARKDOWN',
+						data: currentMarkdown
+					});
+					currentMarkdown = '';
+				}
+				currentScratchBlock += `\n`;
+			} else if (isScratchBlockEnd(line, currentScratchBlock)) {
+				sections.push({
+					type: 'SCRATCHBLOCK',
+					data: currentScratchBlock
+				});
 				currentScratchBlock = '';
+			} else if (currentScratchBlock.length > 0) {
+				currentScratchBlock += `\n${line}`;
+			} else {
+				currentMarkdown += `${line}\n`;
 			}
-			if (currentMarkdown.length > 0) {
-				sections.push({
-					type: 'MARKDOWN',
-					data: currentMarkdown
-				});
-				currentMarkdown = '';
-			}
-			sections.push({
-				type: 'SCRATCH_PROJECT',
-				data: getScratchProjectId(line)
-			});
-		} else if (isScratchBlockStart(line)) {
-			[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
-				currentMarkdown,
-				currentScratchBlock
-			);
-			if (currentMarkdown.length > 0) {
-				sections.push({
-					type: 'MARKDOWN',
-					data: currentMarkdown
-				});
-				currentMarkdown = '';
-			}
-			currentScratchBlock += `\n`;
-		} else if (isScratchBlockEnd(line, currentScratchBlock)) {
-			sections.push({
-				type: 'SCRATCHBLOCK',
-				data: currentScratchBlock
-			});
-			currentScratchBlock = '';
-		} else if (currentScratchBlock.length > 0) {
-			currentScratchBlock += `\n${line}`;
-		} else {
-			currentMarkdown += `${line}\n`;
 		}
-	}
-	[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
-		currentMarkdown,
-		currentScratchBlock
-	);
-	if (currentMarkdown.length > 0) {
-		sections.push({
-			type: 'MARKDOWN',
-			data: currentMarkdown
-		});
-	}
+		[currentMarkdown, currentScratchBlock] = resetCurrentScratchBlock(
+			currentMarkdown,
+			currentScratchBlock
+		);
+		if (currentMarkdown.length > 0) {
+			sections.push({
+				type: 'MARKDOWN',
+				data: currentMarkdown
+			});
+		}
+		return sections;
+	};
+
+	const sections = $derived.by(() => buildSections(source));
 </script>
 
 {#each sections as { type, data } (data)}

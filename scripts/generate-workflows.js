@@ -134,8 +134,8 @@ jobs:
 
             // Parse the issue form fields
             const categoryMatch = body.match(/### Category\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
-            const projectNameMatch = body.match(/### Project Name\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
-            const contentMatch = body.match(/### Project Guide Content\\s*\\n\\n([\\s\\S]+?)$/);
+            const projectNameMatch = body.match(/### Project URL Slug\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
+            const contentMatch = body.match(/### Project Markdown\\s*\\n\\n([\\s\\S]+?)$/);
 
             if (!categoryMatch || !projectNameMatch || !contentMatch) {
               core.setFailed('Could not parse issue body. Please ensure all fields are filled out.');
