@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
 	import CustomMarkdown from '$lib/CustomMarkdown.svelte';
+	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 
 	const defaultMarkdown = `# New Scratch Project
 
@@ -26,38 +26,17 @@ move (10) steps
 `;
 
 	let markdown = $state(defaultMarkdown);
-	let copyStatus = $state('');
-	let copyTimeout: ReturnType<typeof setTimeout> | null = null;
+	let isModalOpen = $state(false);
 
-	// const link =
-	// 	'https://github.com/matthewnoel/scratch-project-guides/issues/new?template=project-submission.yml';
 	const previewSource = $derived(markdown);
 
-	const copyToClipboard = async () => {
-		const text = markdown;
-		try {
-			if (!navigator?.clipboard?.writeText) {
-				throw new Error('Clipboard API unavailable');
-			}
-			await navigator.clipboard.writeText(text);
-			copyStatus = 'Copied!';
-		} catch {
-			copyStatus = 'Copy failed. Please try again.';
-		}
-
-		if (copyTimeout) {
-			clearTimeout(copyTimeout);
-		}
-		copyTimeout = setTimeout(() => {
-			copyStatus = '';
-		}, 2000);
+	const openModal = () => {
+		isModalOpen = true;
 	};
 
-	onDestroy(() => {
-		if (copyTimeout) {
-			clearTimeout(copyTimeout);
-		}
-	});
+	const closeModal = () => {
+		isModalOpen = false;
+	};
 </script>
 
 <section class="editor">
@@ -67,10 +46,7 @@ move (10) steps
 			<p>Draft your guide on the left. Preview the final layout on the right.</p>
 		</div>
 		<div class="editor__actions">
-			<button class="copy-button" type="button" onclick={copyToClipboard}> Copy Markdown </button>
-			{#if copyStatus}
-				<span class="copy-status" aria-live="polite">{copyStatus}</span>
-			{/if}
+			<button class="submit-button" type="button" onclick={openModal}> Submit Project </button>
 		</div>
 	</header>
 
@@ -93,13 +69,15 @@ move (10) steps
 	</div>
 </section>
 
+<SubmitProjectModal open={isModalOpen} {markdown} onClose={closeModal} />
+
 <style>
 	.editor {
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
 		padding: 1.5rem;
-		min-height: calc(100vh - 80px);
+		height: 100%;
 		box-sizing: border-box;
 	}
 
@@ -126,7 +104,7 @@ move (10) steps
 		gap: 0.75rem;
 	}
 
-	.copy-button {
+	.submit-button {
 		border: 0;
 		border-radius: 999px;
 		background: #ffbf00;
@@ -136,14 +114,9 @@ move (10) steps
 		cursor: pointer;
 	}
 
-	.copy-button:hover,
-	.copy-button:focus {
+	.submit-button:hover,
+	.submit-button:focus {
 		background: #ffcf33;
-	}
-
-	.copy-status {
-		font-size: 0.9rem;
-		color: #1a7f37;
 	}
 
 	.editor__panes {
@@ -198,7 +171,7 @@ move (10) steps
 			grid-template-columns: 1fr;
 		}
 
-		.copy-button {
+		.submit-button {
 			width: 100%;
 		}
 
