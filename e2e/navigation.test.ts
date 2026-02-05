@@ -8,7 +8,7 @@ test.describe('Navigation', () => {
 		await expect(nav.getByRole('link', { name: 'Open Scratch Guides' })).toBeVisible();
 		await expect(nav.getByRole('link', { name: 'All Projects' })).toBeVisible();
 		await expect(nav.getByRole('link', { name: 'About' })).toBeVisible();
-		await expect(nav.getByRole('link', { name: 'GitHub' })).toBeVisible();
+		await expect(nav.getByRole('link', { name: 'Source Code' })).toBeVisible();
 	});
 
 	test('logo/brand links to home page', async ({ page }) => {
@@ -31,7 +31,7 @@ test.describe('Navigation', () => {
 
 	test('GitHub link opens in new tab with correct URL', async ({ page }) => {
 		await page.goto('/');
-		const githubLink = page.locator('nav').getByRole('link', { name: 'GitHub' });
+		const githubLink = page.locator('nav').getByRole('link', { name: 'Source Code' });
 		await expect(githubLink).toHaveAttribute('target', '_blank');
 		await expect(githubLink).toHaveAttribute('rel', 'noreferrer');
 		await expect(githubLink).toHaveAttribute(
@@ -42,7 +42,7 @@ test.describe('Navigation', () => {
 
 	test('Submit a Project link navigates to submit project page', async ({ page }) => {
 		await page.goto('/');
-		await page.locator('nav').getByRole('link', { name: 'Submit a Project' }).click();
+		await page.locator('nav').getByRole('link', { name: 'New Guide' }).click();
 		await expect(page).toHaveURL('/submit-project');
 	});
 });

@@ -43,11 +43,11 @@ move (10) steps
 <section class="editor">
 	<header class="editor__header">
 		<div>
-			<h1>Submit a Project</h1>
+			<h1>Submit a Guide</h1>
 			<p>Draft your guide on the left. Preview the final layout on the right.</p>
 		</div>
 		<div class="editor__actions">
-			<Button variant="emphasis" size="large" onclick={openModal}>Submit Project</Button>
+			<Button variant="emphasis" size="large" onclick={openModal}>Submit My Project</Button>
 		</div>
 	</header>
 

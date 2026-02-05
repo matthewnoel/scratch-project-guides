@@ -19,10 +19,10 @@
 			<a
 				target="_blank"
 				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-project-guides">GitHub</a
+				href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
 			>
 		</li>
-		<li><a href={resolve('/submit-project')}>Submit a Project</a></li>
+		<li><a href={resolve('/submit-project')}>New Guide</a></li>
 	</ul>
 </nav>
 {#if data.page === '/submit-project'}
