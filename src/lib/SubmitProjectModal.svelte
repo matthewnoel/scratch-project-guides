@@ -28,6 +28,9 @@
 		return 3;
 	});
 
+	const stepIndicators = ['1️⃣', '2️⃣', '3️⃣'];
+	const getStepIndicator = (step: number) => (currentStep > step ? '✅' : stepIndicators[step - 1]);
+
 	const focusableSelector = [
 		'a[href]',
 		'button:not([disabled])',
@@ -183,8 +186,7 @@
 						aria-current={currentStep === 1 ? 'step' : undefined}
 					>
 						<span class="step__label">
-							<span class="step__indicator" aria-hidden="true">{currentStep === 1 ? '👉' : ''}</span
-							>
+							<span class="step__indicator" aria-hidden="true">{getStepIndicator(1)}</span>
 							Create a GitHub account.
 						</span>
 						<div class="modal__actions">
@@ -207,8 +209,7 @@
 						aria-current={currentStep === 2 ? 'step' : undefined}
 					>
 						<span class="step__label">
-							<span class="step__indicator" aria-hidden="true">{currentStep === 2 ? '👉' : ''}</span
-							>
+							<span class="step__indicator" aria-hidden="true">{getStepIndicator(2)}</span>
 							Copy the markdown to your clipboard.
 						</span>
 						<div class="modal__actions">
@@ -230,8 +231,7 @@
 						aria-current={currentStep === 3 ? 'step' : undefined}
 					>
 						<span class="step__label">
-							<span class="step__indicator" aria-hidden="true">{currentStep === 3 ? '👉' : ''}</span
-							>
+							<span class="step__indicator" aria-hidden="true">{getStepIndicator(3)}</span>
 							Fill out the GitHub form with your markdown.
 						</span>
 						<div class="modal__actions">
@@ -308,10 +308,12 @@
 	}
 
 	.modal__steps {
+		list-style: none;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		padding-left: 1.2rem;
+		padding-left: 0;
+		margin: 0;
 	}
 
 	.step__label {
