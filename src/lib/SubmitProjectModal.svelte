@@ -9,11 +9,23 @@
 
 	let { open, markdown, onClose }: Props = $props();
 	let copyStatus = $state('');
+	let hasAccount = $state(false);
+	let hasCopied = $state(false);
 	let copyTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	let dialogEl = $state<HTMLDivElement | null>(null);
 	let lastActiveElement: HTMLElement | null = null;
 	let wasOpen = false;
+
+	const signupUrl = 'https://github.com/signup';
+	const issueUrl =
+		'https://github.com/matthewnoel/scratch-project-guides/issues/new?template=project-submission.yml';
+
+	const currentStep = $derived.by(() => {
+		if (!hasAccount) return 1;
+		if (!hasCopied) return 2;
+		return 3;
+	});
 
 	const focusableSelector = [
 		'a[href]',
@@ -39,6 +51,8 @@
 		if (open && !wasOpen) {
 			lastActiveElement = document.activeElement as HTMLElement | null;
 			copyStatus = '';
+			hasAccount = false;
+			hasCopied = false;
 			void (async () => {
 				await tick();
 				focusFirst();
@@ -60,8 +74,10 @@
 			}
 			await navigator.clipboard.writeText(markdown);
 			copyStatus = 'Copied!';
+			hasCopied = true;
 		} catch {
 			copyStatus = 'Copy failed. Please try again.';
+			hasCopied = false;
 		}
 
 		if (copyTimeout) {
@@ -157,36 +173,81 @@
 			</header>
 			<div class="modal__body">
 				<p id="submit-modal-description">
-					Follow the steps below to submit your guide to the Scratch Project Guides repo.
+					Complete each step in order to submit your guide to the Scratch Project Guides repo.
 				</p>
 				<ol class="modal__steps">
-					<li>
-						Copy your markdown to the clipboard.
+					<li
+						class:step--disabled={currentStep !== 1}
+						aria-current={currentStep === 1 ? 'step' : undefined}
+					>
+						<span class="step__label">
+							<span class="step__indicator" aria-hidden="true">{currentStep === 1 ? '👉' : ''}</span
+							>
+							Create a GitHub account.
+						</span>
 						<div class="modal__actions">
-							<button class="primary-button" type="button" onclick={copyToClipboard}>
-								Copy markdown
+							<a class="primary-button" href={signupUrl} target="_blank" rel="noreferrer">
+								Sign Up
+							</a>
+							<button
+								class="secondary-button"
+								type="button"
+								onclick={() => {
+									hasAccount = true;
+								}}
+							>
+								I Have One
+							</button>
+						</div>
+					</li>
+					<li
+						class:step--disabled={!hasAccount}
+						aria-current={currentStep === 2 ? 'step' : undefined}
+					>
+						<span class="step__label">
+							<span class="step__indicator" aria-hidden="true">{currentStep === 2 ? '👉' : ''}</span
+							>
+							Copy the markdown to your clipboard.
+						</span>
+						<div class="modal__actions">
+							<button
+								class="primary-button"
+								type="button"
+								onclick={copyToClipboard}
+								disabled={!hasAccount}
+							>
+								Copy
 							</button>
 							{#if copyStatus}
 								<span class="copy-status" aria-live="polite">{copyStatus}</span>
 							{/if}
 						</div>
 					</li>
-					<li>
-						Open the issue template and paste your markdown into the submission form.
-						<a
-							class="issue-link"
-							href="https://github.com/matthewnoel/scratch-project-guides/issues/new?template=project-submission.yml"
-							target="_blank"
-							rel="noreferrer"
-						>
-							Open issue template
-						</a>
+					<li
+						class:step--disabled={!hasCopied}
+						aria-current={currentStep === 3 ? 'step' : undefined}
+					>
+						<span class="step__label">
+							<span class="step__indicator" aria-hidden="true">{currentStep === 3 ? '👉' : ''}</span
+							>
+							Fill out the GitHub form with your markdown.
+						</span>
+						<div class="modal__actions">
+							<a
+								class="primary-button"
+								href={issueUrl}
+								target="_blank"
+								rel="noreferrer"
+								aria-disabled={!hasCopied}
+								tabindex={!hasCopied ? -1 : undefined}
+								class:button--disabled={!hasCopied}
+							>
+								Go
+							</a>
+						</div>
 					</li>
 				</ol>
 			</div>
-			<footer class="modal__footer">
-				<button class="secondary-button" type="button" onclick={() => onClose?.()}> Close </button>
-			</footer>
 		</div>
 	</div>
 {/if}
@@ -250,6 +311,21 @@
 		padding-left: 1.2rem;
 	}
 
+	.step__label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 600;
+	}
+
+	.step__indicator {
+		font-size: 1.05rem;
+	}
+
+	.step--disabled {
+		opacity: 0.55;
+	}
+
 	.modal__actions {
 		display: flex;
 		align-items: center;
@@ -267,6 +343,17 @@
 		cursor: pointer;
 	}
 
+	.primary-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.button--disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
 	.primary-button:hover,
 	.primary-button:focus {
 		background: #ffcf33;
@@ -282,29 +369,9 @@
 		cursor: pointer;
 	}
 
-	.issue-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		margin-top: 0.5rem;
-		color: #0b57d0;
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.issue-link:hover,
-	.issue-link:focus {
-		text-decoration: underline;
-	}
-
 	.copy-status {
 		font-size: 0.9rem;
 		color: #1a7f37;
-	}
-
-	.modal__footer {
-		display: flex;
-		justify-content: flex-end;
 	}
 
 	@media (max-width: 600px) {
