@@ -80,18 +80,18 @@
 	}
 
 	.button--small {
+		padding: 0.2rem 0.6rem;
+		font-size: 1rem;
+	}
+
+	.button--medium {
 		padding: 0.4rem 0.9rem;
 		font-size: 1.25rem;
 	}
 
-	.button--medium {
+	.button--large {
 		padding: 0.55rem 1.1rem;
 		font-size: 1.5rem;
-	}
-
-	.button--large {
-		padding: 0.7rem 1.35rem;
-		font-size: 1.75rem;
 	}
 
 	.button:focus-visible {
