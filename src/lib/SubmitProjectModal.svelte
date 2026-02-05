@@ -173,7 +173,7 @@
 			use:trapFocus
 		>
 			<header class="modal__header">
-				<h1 id="submit-modal-title">Submit your project</h1>
+				<h1 id="submit-modal-title">Submit your project 📨</h1>
 				<button class="icon-button" type="button" onclick={() => onClose?.()} aria-label="Close">
 					×
 				</button>
@@ -234,6 +234,10 @@
 							<span class="step__indicator" aria-hidden="true">{getStepIndicator(3)}</span>
 							Fill out the GitHub form with your markdown.
 						</span>
+						<p class="modal__description">
+							Once you have filled out the form, a pull request will be created and reviewed by the
+							community. Once the pull request is merged, your guide will be published to the site.
+						</p>
 						<div class="modal__actions">
 							<Button
 								variant="emphasis"
@@ -301,6 +305,25 @@
 		line-height: 1;
 		cursor: pointer;
 		color: #333;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 999px;
+		transition:
+			background-color 150ms ease,
+			color 150ms ease;
+	}
+
+	.icon-button:hover,
+	.icon-button:focus-visible {
+		background-color: rgba(15, 15, 15, 0.12);
+		color: #111;
+	}
+
+	.modal__description {
+		font-size: 1.2rem;
 	}
 
 	.modal__body {
