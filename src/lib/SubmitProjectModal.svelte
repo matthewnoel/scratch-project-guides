@@ -167,14 +167,15 @@
 			use:trapFocus
 		>
 			<header class="modal__header">
-				<h2 id="submit-modal-title">Submit your project</h2>
+				<h1 id="submit-modal-title">Submit your project</h1>
 				<button class="icon-button" type="button" onclick={() => onClose?.()} aria-label="Close">
 					×
 				</button>
 			</header>
 			<div class="modal__body">
 				<p id="submit-modal-description">
-					Complete each step in order to submit your guide to the Scratch Project Guides repo.
+					Thank you for considering submitting your project guide! Follow the steps below to get
+					your code merged.
 				</p>
 				<ol class="modal__steps">
 					<li
@@ -252,6 +253,14 @@
 {/if}
 
 <style>
+	#submit-modal-title {
+		font-size: 1.5rem;
+	}
+
+	#submit-modal-description {
+		font-size: 1.2rem;
+	}
+
 	.modal-backdrop {
 		position: fixed;
 		inset: 0;
@@ -280,11 +289,6 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-	}
-
-	.modal__header h2 {
-		margin: 0;
-		font-size: 1.4rem;
 	}
 
 	.icon-button {
