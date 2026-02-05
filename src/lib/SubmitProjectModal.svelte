@@ -12,6 +12,7 @@
 	let copyStatus = $state('');
 	let hasAccount = $state(false);
 	let hasCopied = $state(false);
+	let hasOpenedForm = $state(false);
 	let copyTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	let dialogEl = $state<HTMLDivElement | null>(null);
@@ -25,7 +26,8 @@
 	const currentStep = $derived.by(() => {
 		if (!hasAccount) return 1;
 		if (!hasCopied) return 2;
-		return 3;
+		if (!hasOpenedForm) return 3;
+		return 4;
 	});
 
 	const stepIndicators = ['1️⃣', '2️⃣', '3️⃣'];
@@ -57,6 +59,7 @@
 			copyStatus = '';
 			hasAccount = false;
 			hasCopied = false;
+			hasOpenedForm = false;
 			void (async () => {
 				await tick();
 				focusFirst();
@@ -181,10 +184,7 @@
 					your code merged.
 				</p>
 				<ol class="modal__steps">
-					<li
-						class:step--disabled={currentStep !== 1}
-						aria-current={currentStep === 1 ? 'step' : undefined}
-					>
+					<li aria-current={currentStep === 1 ? 'step' : undefined}>
 						<span class="step__label">
 							<span class="step__indicator" aria-hidden="true">{getStepIndicator(1)}</span>
 							Create a GitHub account.
@@ -241,6 +241,9 @@
 								target="_blank"
 								rel="noreferrer"
 								disabled={!hasCopied}
+								onclick={() => {
+									hasOpenedForm = true;
+								}}
 							>
 								Go
 							</Button>
