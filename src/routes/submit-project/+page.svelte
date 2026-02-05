@@ -47,7 +47,7 @@ move (10) steps
 			<p>Draft your guide on the left. Preview the final layout on the right.</p>
 		</div>
 		<div class="editor__actions">
-			<Button variant="emphasis" onclick={openModal}>Submit Project</Button>
+			<Button variant="emphasis" size="large" onclick={openModal}>Submit Project</Button>
 		</div>
 	</header>
 

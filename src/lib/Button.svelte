@@ -3,9 +3,11 @@
 	import type { Snippet } from 'svelte';
 
 	type Variant = 'emphasis' | 'standard';
+	type Size = 'small' | 'medium' | 'large';
 
 	type Props = {
 		variant?: Variant;
+		size?: Size;
 		href?: string;
 		type?: 'button' | 'submit' | 'reset';
 		disabled?: boolean;
@@ -16,6 +18,7 @@
 
 	let {
 		variant = 'standard',
+		size = 'medium',
 		href,
 		type = 'button',
 		disabled = false,
@@ -26,7 +29,13 @@
 
 	const isLink = $derived.by(() => Boolean(href));
 	const classes = $derived.by(() =>
-		['button', `button--${variant}`, disabled ? 'button--disabled' : '', className]
+		[
+			'button',
+			`button--${variant}`,
+			`button--${size}`,
+			disabled ? 'button--disabled' : '',
+			className
+		]
 			.filter(Boolean)
 			.join(' ')
 	);
@@ -56,6 +65,7 @@
 		justify-content: center;
 		gap: 0.5rem;
 		border-radius: 999px;
+		font: inherit;
 		font-weight: 600;
 		padding: 0.55rem 1.1rem;
 		border: 1px solid transparent;
@@ -67,6 +77,21 @@
 			background 0.15s ease,
 			border-color 0.15s ease,
 			box-shadow 0.15s ease;
+	}
+
+	.button--small {
+		padding: 0.4rem 0.9rem;
+		font-size: 1.25rem;
+	}
+
+	.button--medium {
+		padding: 0.55rem 1.1rem;
+		font-size: 1.5rem;
+	}
+
+	.button--large {
+		padding: 0.7rem 1.35rem;
+		font-size: 1.75rem;
 	}
 
 	.button:focus-visible {
