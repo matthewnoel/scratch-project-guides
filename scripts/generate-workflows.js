@@ -133,9 +133,9 @@ jobs:
             const body = context.payload.issue.body;
 
             // Parse the issue form fields
-            const categoryMatch = body.match(/### Category\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
-            const projectNameMatch = body.match(/### Project URL Slug\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
-            const contentMatch = body.match(/### Project Markdown\\s*\\n\\n([\\s\\S]+?)$/);
+            const categoryMatch = body.match(/### Category 🗃️\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
+            const projectNameMatch = body.match(/### Project URL Slug 🐌\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
+            const contentMatch = body.match(/### Project Markdown 📝\\s*\\n\\n([\\s\\S]+?)$/);
 
             if (!categoryMatch || !projectNameMatch || !contentMatch) {
               core.setFailed('Could not parse issue body. Please ensure all fields are filled out.');
@@ -217,7 +217,7 @@ ${sharedSteps.runTests}
         run: |
           gh pr create \\
             --title "New Project Submission: \${{ steps.parse.outputs.project_name }}" \\
-            --body "**Category:** \${{ steps.parse.outputs.category }}
+            --body "**Category 🗃️:** \${{ steps.parse.outputs.category }}
           **Submitted by:** @\${{ github.event.issue.user.login }}
           **Issue:** #\${{ github.event.issue.number }}
 
@@ -226,6 +226,8 @@ ${sharedSteps.runTests}
           Closes #\${{ github.event.issue.number }}" \\
             --base main \\
             --head "$BRANCH_NAME"
+
+          FYI: @matthewnoel
 `;
 
 	return content;
