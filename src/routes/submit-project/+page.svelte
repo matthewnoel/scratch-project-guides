@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CustomMarkdown from '$lib/CustomMarkdown.svelte';
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
+	import Button from '$lib/Button.svelte';
 
 	const defaultMarkdown = `# New Scratch Project
 
@@ -46,7 +47,7 @@ move (10) steps
 			<p>Draft your guide on the left. Preview the final layout on the right.</p>
 		</div>
 		<div class="editor__actions">
-			<button class="submit-button" type="button" onclick={openModal}> Submit Project </button>
+			<Button variant="emphasis" onclick={openModal}>Submit Project</Button>
 		</div>
 	</header>
 
@@ -104,21 +105,6 @@ move (10) steps
 		gap: 0.75rem;
 	}
 
-	.submit-button {
-		border: 0;
-		border-radius: 999px;
-		background: #ffbf00;
-		color: #111;
-		font-weight: 600;
-		padding: 0.6rem 1.2rem;
-		cursor: pointer;
-	}
-
-	.submit-button:hover,
-	.submit-button:focus {
-		background: #ffcf33;
-	}
-
 	.editor__panes {
 		display: grid;
 		grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.1fr);
@@ -169,10 +155,6 @@ move (10) steps
 
 		.editor__panes {
 			grid-template-columns: 1fr;
-		}
-
-		.submit-button {
-			width: 100%;
 		}
 
 		.editor__actions {

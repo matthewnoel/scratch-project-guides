@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onDestroy, tick } from 'svelte';
+	import Button from '$lib/Button.svelte';
 
 	type Props = {
 		open: boolean;
@@ -186,18 +187,18 @@
 							Create a GitHub account.
 						</span>
 						<div class="modal__actions">
-							<a class="primary-button" href={signupUrl} target="_blank" rel="noreferrer">
+							<Button variant="emphasis" href={signupUrl} target="_blank" rel="noreferrer">
 								Sign Up
-							</a>
-							<button
-								class="secondary-button"
+							</Button>
+							<Button
+								variant="standard"
 								type="button"
 								onclick={() => {
 									hasAccount = true;
 								}}
 							>
 								I Have One
-							</button>
+							</Button>
 						</div>
 					</li>
 					<li
@@ -210,14 +211,14 @@
 							Copy the markdown to your clipboard.
 						</span>
 						<div class="modal__actions">
-							<button
-								class="primary-button"
+							<Button
+								variant="emphasis"
 								type="button"
 								onclick={copyToClipboard}
 								disabled={!hasAccount}
 							>
 								Copy
-							</button>
+							</Button>
 							{#if copyStatus}
 								<span class="copy-status" aria-live="polite">{copyStatus}</span>
 							{/if}
@@ -233,17 +234,15 @@
 							Fill out the GitHub form with your markdown.
 						</span>
 						<div class="modal__actions">
-							<a
-								class="primary-button"
+							<Button
+								variant="emphasis"
 								href={issueUrl}
 								target="_blank"
 								rel="noreferrer"
-								aria-disabled={!hasCopied}
-								tabindex={!hasCopied ? -1 : undefined}
-								class:button--disabled={!hasCopied}
+								disabled={!hasCopied}
 							>
 								Go
-							</a>
+							</Button>
 						</div>
 					</li>
 				</ol>
@@ -331,42 +330,6 @@
 		align-items: center;
 		gap: 0.75rem;
 		margin-top: 0.75rem;
-	}
-
-	.primary-button {
-		border: 0;
-		border-radius: 999px;
-		background: #ffbf00;
-		color: #111;
-		font-weight: 600;
-		padding: 0.55rem 1.1rem;
-		cursor: pointer;
-	}
-
-	.primary-button:disabled {
-		cursor: not-allowed;
-		opacity: 0.6;
-	}
-
-	.button--disabled {
-		cursor: not-allowed;
-		opacity: 0.6;
-		pointer-events: none;
-	}
-
-	.primary-button:hover,
-	.primary-button:focus {
-		background: #ffcf33;
-	}
-
-	.secondary-button {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 999px;
-		background: #fff;
-		color: #111;
-		font-weight: 600;
-		padding: 0.55rem 1.1rem;
-		cursor: pointer;
 	}
 
 	.copy-status {
