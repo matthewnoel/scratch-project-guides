@@ -12,7 +12,7 @@ body:
   - type: dropdown
     id: category
     attributes:
-      label: Category
+      label: Category 🗃️
       description: Which category does this project belong to?
       options:
         - Getting Started
@@ -24,7 +24,7 @@ body:
   - type: input
     id: project_name
     attributes:
-      label: Project URL Slug
+      label: Project URL Slug 🐌
       description: The name of your project. Must be kebab case. It will be used as the URL slug.
       placeholder: e.g. "meridian-59"
     validations:
@@ -33,7 +33,7 @@ body:
   - type: textarea
     id: markdown_content
     attributes:
-      label: Project Markdown
+      label: Project Markdown 📝
       description: Paste your full markdown content here. All formatting will be preserved.
       placeholder: |
         # Project Title 👾
