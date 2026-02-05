@@ -7,6 +7,12 @@ export const groupedProjects = [
 				title: 'Hello World 👋',
 				markdown:
 					'# Hello World 👋\n\n## A classic first program\n\nhttps://scratch.mit.edu/projects/807782232/\n\nScratch programs start when the green flag is clicked. Place this block from the `Events` category to start your program.\n\n```scratchblocks\nwhen green flag clicked\n```\n\nNext add a block from the `Looks` category to make the sprite say "Hello World!".\n\n```scratchblocks\nwhen green flag clicked\nsay [Hello World!]\n```\n\nGreat job! You\'ve written your first program.\n'
+			},
+			{
+				slug: 'placeholder-guide',
+				title: 'New Scratch Project',
+				markdown:
+					'# New Scratch Project\n\nWrite a short description of your project here.\n\n## Materials\n- Scratch (scratch.mit.edu)\n- A computer with a keyboard and mouse\n\n## Steps\n1. Open Scratch and click Create.\n2. Add your first sprite.\n3. Drag blocks to build your project.\n\n## Scratch Project Link\nhttps://scratch.mit.edu/projects/123456789/\n\n## Scratch Blocks\n```scratchblocks\nwhen green flag clicked\nmove (10) steps\n```'
 			}
 		]
 	},
@@ -75,6 +81,19 @@ export const projectsData = {
 		category: 'Getting Started',
 		markdown:
 			'# Hello World 👋\n\n## A classic first program\n\nhttps://scratch.mit.edu/projects/807782232/\n\nScratch programs start when the green flag is clicked. Place this block from the `Events` category to start your program.\n\n```scratchblocks\nwhen green flag clicked\n```\n\nNext add a block from the `Looks` category to make the sprite say "Hello World!".\n\n```scratchblocks\nwhen green flag clicked\nsay [Hello World!]\n```\n\nGreat job! You\'ve written your first program.\n'
+	},
+	'placeholder-guide': {
+		title: 'New Scratch Project',
+		category: 'Getting Started',
+		markdown:
+			'# New Scratch Project\n\nWrite a short description of your project here.\n\n## Materials\n- Scratch (scratch.mit.edu)\n- A computer with a keyboard and mouse\n\n## Steps\n1. Open Scratch and click Create.\n2. Add your first sprite.\n3. Drag blocks to build your project.\n\n## Scratch Project Link\nhttps://scratch.mit.edu/projects/123456789/\n\n## Scratch Blocks\n```scratchblocks\nwhen green flag clicked\nmove (10) steps\n```'
 	}
 };
-export const projects = ['fibonacci-sequence', 'math-quiz', 'pong', 'tic-tac-toe', 'hello-world'];
+export const projects = [
+	'fibonacci-sequence',
+	'math-quiz',
+	'pong',
+	'tic-tac-toe',
+	'hello-world',
+	'placeholder-guide'
+];
