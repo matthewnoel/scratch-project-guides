@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
 	import CustomMarkdown from '$lib/CustomMarkdown.svelte';
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 	import Button from '$lib/Button.svelte';
+	import FileName from '$lib/FileName.svelte';
+
+	type BackupValue = {
+		timestamp: number;
+		markdown: string;
+	};
 
 	const defaultMarkdown = `# New Scratch Project
 
@@ -25,10 +32,12 @@ when green flag clicked
 move (10) steps
 \`\`\`
 `;
+	const keyPrefix = `backup-`;
 
 	let markdown = $state(defaultMarkdown);
 	let isModalOpen = $state(false);
-
+	let fileName = $state('');
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 	const previewSource = $derived(markdown);
 
 	const openModal = () => {
@@ -38,6 +47,77 @@ move (10) steps
 	const closeModal = () => {
 		isModalOpen = false;
 	};
+
+	const saveMarkdownToLocalStorage = () => {
+		if (!fileName) {
+			return;
+		}
+		const timestamp = Date.now();
+		const value: BackupValue = { timestamp, markdown };
+		localStorage.clear();
+		localStorage.setItem(`${keyPrefix}${fileName}`, JSON.stringify(value));
+	};
+
+	const loadMarkdownFromLocalStorage = () => {
+		const length = localStorage.length;
+		if (!length) {
+			return;
+		}
+
+		let latestTimestamp = 0;
+		let latestKey = '';
+
+		for (let i = 0; i < length; i++) {
+			const key = localStorage.key(i);
+			if (!key?.startsWith(keyPrefix)) {
+				continue;
+			}
+			const value = localStorage.getItem(key);
+			if (!value) {
+				continue;
+			}
+			const parsedValue = JSON.parse(value) as BackupValue;
+			if (parsedValue.timestamp > latestTimestamp) {
+				latestTimestamp = parsedValue.timestamp;
+				latestKey = key;
+			}
+		}
+
+		if (!latestKey) {
+			return;
+		}
+		const value = localStorage.getItem(latestKey);
+		if (!value) {
+			return;
+		}
+
+		const parsedValue = JSON.parse(value) as BackupValue;
+
+		fileName = latestKey.replace(keyPrefix, '');
+		markdown = parsedValue.markdown;
+
+		localStorage.clear();
+		localStorage.setItem(latestKey, JSON.stringify(parsedValue));
+	};
+
+	const handleMarkdownInput = () => {
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+		debounceTimer = setTimeout(() => {
+			saveMarkdownToLocalStorage();
+		}, 1000);
+	};
+
+	onMount(() => {
+		loadMarkdownFromLocalStorage();
+	});
+
+	onDestroy(() => {
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+	});
 </script>
 
 <section class="editor">
@@ -51,11 +131,14 @@ move (10) steps
 		</div>
 	</header>
 
+	<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+
 	<div class="editor__panes">
 		<div class="pane pane--input">
 			<div class="pane__title">Markdown</div>
 			<textarea
 				bind:value={markdown}
+				oninput={handleMarkdownInput}
 				spellcheck="true"
 				class="editor__textarea"
 				aria-label="Markdown editor"
@@ -70,7 +153,7 @@ move (10) steps
 	</div>
 </section>
 
-<SubmitProjectModal open={isModalOpen} {markdown} onClose={closeModal} />
+<SubmitProjectModal open={isModalOpen} {markdown} {fileName} onClose={closeModal} />
 
 <style>
 	.editor {
