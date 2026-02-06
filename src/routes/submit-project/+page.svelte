@@ -2,6 +2,7 @@
 	import CustomMarkdown from '$lib/CustomMarkdown.svelte';
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 	import Button from '$lib/Button.svelte';
+	import FileName from '$lib/FileName.svelte';
 
 	const defaultMarkdown = `# New Scratch Project
 
@@ -28,7 +29,7 @@ move (10) steps
 
 	let markdown = $state(defaultMarkdown);
 	let isModalOpen = $state(false);
-
+	let fileName = $state('');
 	const previewSource = $derived(markdown);
 
 	const openModal = () => {
@@ -50,6 +51,8 @@ move (10) steps
 			<Button variant="emphasis" size="large" onclick={openModal}>Submit My Project</Button>
 		</div>
 	</header>
+
+	<FileName {fileName} />
 
 	<div class="editor__panes">
 		<div class="pane pane--input">
