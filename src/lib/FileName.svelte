@@ -4,6 +4,28 @@
 	};
 
 	let { fileName = $bindable() }: Props = $props();
+
+	function toKebabCase(value: string): string {
+		return value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+	}
+
+	function handleInput(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const cursorPosition = target.selectionStart ?? 0;
+		const originalValue = target.value;
+		const kebabCaseValue = toKebabCase(originalValue);
+
+		// Calculate new cursor position based on transformation
+		const beforeCursor = originalValue.substring(0, cursorPosition);
+		const newCursorPosition = toKebabCase(beforeCursor).length;
+
+		fileName = kebabCaseValue;
+
+		// Restore cursor position after Svelte updates the DOM
+		requestAnimationFrame(() => {
+			target.setSelectionRange(newCursorPosition, newCursorPosition);
+		});
+	}
 </script>
 
 <div class="file-name-container">
@@ -14,6 +36,7 @@
 		id="file-name"
 		placeholder="file-name"
 		bind:value={fileName}
+		oninput={handleInput}
 	/>
 	<span>.md</span>
 </div>
