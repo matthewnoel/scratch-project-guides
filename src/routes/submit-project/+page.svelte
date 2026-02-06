@@ -33,7 +33,6 @@ when green flag clicked
 move (10) steps
 \`\`\`
 `;
-	const keyPrefix = `backup-`;
 
 	let markdown = $state(defaultMarkdown);
 	let isModalOpen = $state(false);
@@ -50,13 +49,10 @@ move (10) steps
 	};
 
 	const saveMarkdownToLocalStorage = () => {
-		if (!fileName) {
-			return;
-		}
 		const timestamp = Date.now();
 		const value: BackupValue = { timestamp, markdown };
 		localStorage.clear();
-		localStorage.setItem(`${keyPrefix}${fileName}`, JSON.stringify(value));
+		localStorage.setItem(fileName || 'file-name', JSON.stringify(value));
 	};
 
 	const loadMarkdownFromLocalStorage = () => {
@@ -70,7 +66,7 @@ move (10) steps
 
 		for (let i = 0; i < length; i++) {
 			const key = localStorage.key(i);
-			if (!key?.startsWith(keyPrefix)) {
+			if (!key) {
 				continue;
 			}
 			const value = localStorage.getItem(key);
@@ -94,7 +90,7 @@ move (10) steps
 
 		const parsedValue = JSON.parse(value) as BackupValue;
 
-		fileName = latestKey.replace(keyPrefix, '');
+		fileName = latestKey;
 		markdown = parsedValue.markdown;
 
 		localStorage.clear();
