@@ -88,9 +88,14 @@ move (10) steps
 		if (!value) {
 			return;
 		}
+
 		const parsedValue = JSON.parse(value) as BackupValue;
+
 		fileName = latestKey.replace(keyPrefix, '');
 		markdown = parsedValue.markdown;
+
+		localStorage.clear();
+		localStorage.setItem(latestKey, JSON.stringify(parsedValue));
 	};
 
 	onMount(() => {
