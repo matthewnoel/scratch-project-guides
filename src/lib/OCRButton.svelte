@@ -86,11 +86,19 @@
 
 <button class="ocr-trigger" onclick={openModal} aria-label="Import text from an image">👀</button>
 
+{#snippet closeAction()}
+	<Button variant="standard" type="button" onclick={closeModal} disabled={isOcrRunning}>
+		Close
+	</Button>
+{/snippet}
+
 <Modal
 	open={isModalOpen}
 	labelledBy={modalTitleId}
 	describedBy={modalDescriptionId}
+	showClose
 	onClose={closeModal}
+	actions={[closeAction]}
 >
 	<header>
 		<h4 id={modalTitleId}>Import text from an image</h4>
@@ -119,11 +127,6 @@
 				<span class="ocr-modal__error">{ocrError}</span>
 			{/if}
 		</div>
-	</div>
-	<div class="ocr-modal__actions">
-		<Button variant="standard" type="button" onclick={closeModal} disabled={isOcrRunning}>
-			Close
-		</Button>
 	</div>
 </Modal>
 
@@ -161,11 +164,5 @@
 
 	.ocr-modal__error {
 		color: #b42318;
-	}
-
-	.ocr-modal__actions {
-		display: flex;
-		justify-content: flex-end;
-		margin-top: 0.75rem;
 	}
 </style>

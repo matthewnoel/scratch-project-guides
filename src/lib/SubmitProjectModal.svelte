@@ -80,10 +80,10 @@
 	labelledBy="submit-modal-title"
 	describedBy="submit-modal-description"
 	onClose={closeModal}
+	showClose
 >
-	<header class="modal__header">
+	<header>
 		<h4 id="submit-modal-title">Submit your project 📨</h4>
-		<button class="icon-button" type="button" onclick={closeModal} aria-label="Close"> × </button>
 	</header>
 	<div class="modal__body">
 		<p id="submit-modal-description">
@@ -156,37 +156,6 @@
 <style>
 	#submit-modal-description {
 		font-size: 1.2rem;
-	}
-
-	.modal__header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-	}
-
-	.icon-button {
-		border: 0;
-		background: transparent;
-		font-size: 1.5rem;
-		line-height: 1;
-		cursor: pointer;
-		color: #333;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 999px;
-		transition:
-			background-color 150ms ease,
-			color 150ms ease;
-	}
-
-	.icon-button:hover,
-	.icon-button:focus-visible {
-		background-color: rgba(15, 15, 15, 0.12);
-		color: #111;
 	}
 
 	.modal__description {

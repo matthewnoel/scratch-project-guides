@@ -7,10 +7,22 @@
 		labelledBy?: string;
 		describedBy?: string;
 		onClose?: () => void;
+		showClose?: boolean;
+		actions?: Snippet[];
 		children?: Snippet;
 	};
 
-	let { open, labelledBy, describedBy, onClose, children }: Props = $props();
+	let {
+		open,
+		labelledBy,
+		describedBy,
+		onClose,
+		showClose = false,
+		actions = [],
+		children
+	}: Props = $props();
+
+	const actionList = $derived.by(() => (Array.isArray(actions) ? actions : []));
 
 	let dialogEl = $state<HTMLDivElement | null>(null);
 	let lastActiveElement: HTMLElement | null = null;
@@ -132,7 +144,19 @@
 			bind:this={dialogEl}
 			use:trapFocus
 		>
+			{#if showClose}
+				<button class="close-button" type="button" aria-label="Close modal" onclick={close}>
+					×
+				</button>
+			{/if}
 			{@render children?.()}
+			{#if actionList.length}
+				<div class="actions">
+					{#each actionList as action, index (index)}
+						{@render action?.()}
+					{/each}
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}
@@ -159,5 +183,42 @@
 		gap: 1rem;
 		padding: 1.5rem;
 		outline: none;
+		position: relative;
+	}
+
+	.close-button {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		border: 0;
+		background: transparent;
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+		color: #333;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 999px;
+		transition:
+			background-color 150ms ease,
+			color 150ms ease;
+	}
+
+	.close-button:hover,
+	.close-button:focus-visible {
+		background-color: rgba(15, 15, 15, 0.12);
+		color: #111;
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.75rem;
+		margin-top: 0.75rem;
+		flex-wrap: wrap;
 	}
 </style>

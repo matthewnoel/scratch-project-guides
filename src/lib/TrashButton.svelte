@@ -29,20 +29,23 @@
 
 <button onclick={openConfirm} aria-label="Clear all backups">🗑️</button>
 
+{#snippet confirmActions()}
+	<Button variant="standard" type="button" onclick={closeConfirm}>Cancel</Button>
+	<Button variant="emphasis" type="button" onclick={confirmTrash}>Trash</Button>
+{/snippet}
+
 <Modal
 	open={isConfirmOpen}
 	labelledBy={modalTitleId}
 	describedBy={modalDescriptionId}
+	showClose
 	onClose={closeConfirm}
+	actions={[confirmActions]}
 >
 	<header>
 		<h4 id={modalTitleId}>Clear all backups?</h4>
 	</header>
 	<p id={modalDescriptionId}>This removes your saved draft from this browser.</p>
-	<div class="confirm__actions">
-		<Button variant="standard" type="button" onclick={closeConfirm}>Cancel</Button>
-		<Button variant="emphasis" type="button" onclick={confirmTrash}>Trash</Button>
-	</div>
 </Modal>
 
 <style>
@@ -63,13 +66,5 @@
 	button:hover,
 	button:focus {
 		background-color: #f8f8f8;
-	}
-
-	.confirm__actions {
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		gap: 0.75rem;
-		margin-top: 0.5rem;
 	}
 </style>
