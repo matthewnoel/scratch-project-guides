@@ -10,9 +10,10 @@
 		onClose?: () => void;
 	};
 
-	let { open, markdown, onClose }: Props = $props();
+	let { open, markdown, fileName, onClose }: Props = $props();
 	let copyStatus = $state('');
 	let hasAccount = $state(false);
+	let hasRememberedName = $state(false);
 	let hasCopied = $state(false);
 	let hasOpenedForm = $state(false);
 	let copyTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -24,18 +25,20 @@
 
 	const currentStep = $derived.by(() => {
 		if (!hasAccount) return 1;
-		if (!hasCopied) return 2;
-		if (!hasOpenedForm) return 3;
-		return 4;
+		if (!hasRememberedName) return 2;
+		if (!hasCopied) return 3;
+		if (!hasOpenedForm) return 4;
+		return 5;
 	});
 
-	const stepIndicators = ['1️⃣', '2️⃣', '3️⃣'];
+	const stepIndicators = ['1️⃣', '2️⃣', '3️⃣', '4️⃣'];
 	const getStepIndicator = (step: number) => (currentStep > step ? '✅' : stepIndicators[step - 1]);
 
 	$effect(() => {
 		if (open && !wasOpen) {
 			copyStatus = '';
 			hasAccount = false;
+			hasRememberedName = false;
 			hasCopied = false;
 			hasOpenedForm = false;
 		}
@@ -114,10 +117,39 @@
 			<li class:step--disabled={!hasAccount} aria-current={currentStep === 2 ? 'step' : undefined}>
 				<span class="step__label">
 					<span class="step__indicator" aria-hidden="true">{getStepIndicator(2)}</span>
+					Remember your file name.
+				</span>
+				<p class="modal__description">
+					Your file is named <strong>{fileName}</strong>.
+				</p>
+				<div class="modal__actions">
+					<Button
+						variant="emphasis"
+						type="button"
+						disabled={!hasAccount}
+						onclick={() => {
+							hasRememberedName = true;
+						}}
+					>
+						Remembered
+					</Button>
+				</div>
+			</li>
+			<li
+				class:step--disabled={!hasRememberedName}
+				aria-current={currentStep === 3 ? 'step' : undefined}
+			>
+				<span class="step__label">
+					<span class="step__indicator" aria-hidden="true">{getStepIndicator(3)}</span>
 					Copy the markdown to your clipboard.
 				</span>
 				<div class="modal__actions">
-					<Button variant="emphasis" type="button" onclick={copyToClipboard} disabled={!hasAccount}>
+					<Button
+						variant="emphasis"
+						type="button"
+						onclick={copyToClipboard}
+						disabled={!hasRememberedName}
+					>
 						Copy
 					</Button>
 					{#if copyStatus}
@@ -125,9 +157,9 @@
 					{/if}
 				</div>
 			</li>
-			<li class:step--disabled={!hasCopied} aria-current={currentStep === 3 ? 'step' : undefined}>
+			<li class:step--disabled={!hasCopied} aria-current={currentStep === 4 ? 'step' : undefined}>
 				<span class="step__label">
-					<span class="step__indicator" aria-hidden="true">{getStepIndicator(3)}</span>
+					<span class="step__indicator" aria-hidden="true">{getStepIndicator(4)}</span>
 					Fill out the GitHub form with your markdown.
 				</span>
 				<p class="modal__description">
