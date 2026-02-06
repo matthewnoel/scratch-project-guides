@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import CustomMarkdown from '$lib/CustomMarkdown.svelte';
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 	import Button from '$lib/Button.svelte';
@@ -37,6 +37,7 @@ move (10) steps
 	let markdown = $state(defaultMarkdown);
 	let isModalOpen = $state(false);
 	let fileName = $state('');
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 	const previewSource = $derived(markdown);
 
 	const openModal = () => {
@@ -53,6 +54,7 @@ move (10) steps
 		}
 		const timestamp = Date.now();
 		const value: BackupValue = { timestamp, markdown };
+		localStorage.clear();
 		localStorage.setItem(`${keyPrefix}${fileName}`, JSON.stringify(value));
 	};
 
@@ -98,8 +100,23 @@ move (10) steps
 		localStorage.setItem(latestKey, JSON.stringify(parsedValue));
 	};
 
+	const handleMarkdownInput = () => {
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+		debounceTimer = setTimeout(() => {
+			saveMarkdownToLocalStorage();
+		}, 1000);
+	};
+
 	onMount(() => {
 		loadMarkdownFromLocalStorage();
+	});
+
+	onDestroy(() => {
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
 	});
 </script>
 
@@ -121,6 +138,7 @@ move (10) steps
 			<div class="pane__title">Markdown</div>
 			<textarea
 				bind:value={markdown}
+				oninput={handleMarkdownInput}
 				spellcheck="true"
 				class="editor__textarea"
 				aria-label="Markdown editor"
