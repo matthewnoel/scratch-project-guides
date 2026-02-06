@@ -4,6 +4,7 @@
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 	import Button from '$lib/Button.svelte';
 	import FileName from '$lib/FileName.svelte';
+	import TrashButton from '$lib/TrashButton.svelte';
 
 	type BackupValue = {
 		timestamp: number;
@@ -32,7 +33,6 @@ when green flag clicked
 move (10) steps
 \`\`\`
 `;
-	const keyPrefix = `backup-`;
 
 	let markdown = $state(defaultMarkdown);
 	let isModalOpen = $state(false);
@@ -49,13 +49,10 @@ move (10) steps
 	};
 
 	const saveMarkdownToLocalStorage = () => {
-		if (!fileName) {
-			return;
-		}
 		const timestamp = Date.now();
 		const value: BackupValue = { timestamp, markdown };
 		localStorage.clear();
-		localStorage.setItem(`${keyPrefix}${fileName}`, JSON.stringify(value));
+		localStorage.setItem(fileName || 'file-name', JSON.stringify(value));
 	};
 
 	const loadMarkdownFromLocalStorage = () => {
@@ -69,7 +66,7 @@ move (10) steps
 
 		for (let i = 0; i < length; i++) {
 			const key = localStorage.key(i);
-			if (!key?.startsWith(keyPrefix)) {
+			if (!key) {
 				continue;
 			}
 			const value = localStorage.getItem(key);
@@ -93,7 +90,7 @@ move (10) steps
 
 		const parsedValue = JSON.parse(value) as BackupValue;
 
-		fileName = latestKey.replace(keyPrefix, '');
+		fileName = latestKey;
 		markdown = parsedValue.markdown;
 
 		localStorage.clear();
@@ -131,7 +128,17 @@ move (10) steps
 		</div>
 	</header>
 
-	<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+	<div class="file-row">
+		<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+		{#if fileName || markdown !== defaultMarkdown}
+			<TrashButton
+				onTrashed={() => {
+					markdown = defaultMarkdown;
+					fileName = '';
+				}}
+			/>
+		{/if}
+	</div>
 
 	<div class="editor__panes">
 		<div class="pane pane--input">
@@ -186,6 +193,12 @@ move (10) steps
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
+	}
+
+	.file-row {
+		display: flex;
+		align-items: stretch;
+		gap: 1.5rem;
 	}
 
 	.editor__panes {
