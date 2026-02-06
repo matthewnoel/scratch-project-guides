@@ -14,6 +14,8 @@
 	let ocrStatus = $state('');
 	let ocrError = $state('');
 	let ocrFileName = $state('');
+	let isDragActive = $state(false);
+	let fileInput: HTMLInputElement | null = null;
 
 	const modalTitleId = 'ocr-modal-title';
 	const modalDescriptionId = 'ocr-modal-description';
@@ -23,6 +25,7 @@
 		ocrStatus = '';
 		ocrError = '';
 		ocrFileName = '';
+		isDragActive = false;
 	};
 
 	const openModal = () => {
@@ -34,13 +37,14 @@
 		isModalOpen = false;
 	};
 
-	const handleOcrFileChange = async (event: Event) => {
-		const input = event.currentTarget as HTMLInputElement;
-		if (!input.files?.length) {
+	const runOcrWithFile = async (file: File) => {
+		if (!file.type.startsWith('image/')) {
+			ocrError = 'Please upload an image file.';
+			ocrStatus = '';
+			ocrProgress = 0;
 			return;
 		}
 
-		const file = input.files[0];
 		ocrFileName = file.name;
 		ocrError = '';
 		ocrStatus = 'Starting OCR...';
@@ -75,7 +79,66 @@
 			ocrStatus = '';
 		} finally {
 			isOcrRunning = false;
-			input.value = '';
+			if (fileInput) {
+				fileInput.value = '';
+			}
+		}
+	};
+
+	const handleOcrFileChange = async (event: Event) => {
+		const input = event.currentTarget as HTMLInputElement;
+		if (!input.files?.length) {
+			return;
+		}
+
+		await runOcrWithFile(input.files[0]);
+	};
+
+	const handleDrop = async (event: DragEvent) => {
+		event.preventDefault();
+		if (isOcrRunning) {
+			return;
+		}
+
+		isDragActive = false;
+		const file = event.dataTransfer?.files?.[0];
+		if (!file) {
+			return;
+		}
+
+		await runOcrWithFile(file);
+	};
+
+	const handleDragOver = (event: DragEvent) => {
+		event.preventDefault();
+		if (!isOcrRunning) {
+			isDragActive = true;
+		}
+	};
+
+	const handleDragLeave = (event: DragEvent) => {
+		event.preventDefault();
+		if (
+			event.currentTarget instanceof HTMLElement &&
+			event.relatedTarget instanceof Node &&
+			event.currentTarget.contains(event.relatedTarget)
+		) {
+			return;
+		}
+
+		isDragActive = false;
+	};
+
+	const handleDragEnter = (event: DragEvent) => {
+		event.preventDefault();
+		if (!isOcrRunning) {
+			isDragActive = true;
+		}
+	};
+
+	const triggerFilePicker = () => {
+		if (!isOcrRunning) {
+			fileInput?.click();
 		}
 	};
 </script>
@@ -96,12 +159,35 @@
 	</p>
 	<div class="ocr-modal__controls">
 		<input
+			bind:this={fileInput}
 			type="file"
 			accept="image/*"
 			onchange={handleOcrFileChange}
 			disabled={isOcrRunning}
 			aria-label="Upload an image for OCR"
+			class="ocr-modal__file-input"
 		/>
+		<div
+			class="ocr-modal__dropzone"
+			class:is-dragging={isDragActive}
+			role="button"
+			tabindex={isOcrRunning ? -1 : 0}
+			aria-disabled={isOcrRunning}
+			aria-label="Click or drop an image to upload"
+			onclick={triggerFilePicker}
+			onkeydown={(event) => {
+				if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault();
+					triggerFilePicker();
+				}
+			}}
+			ondragenter={handleDragEnter}
+			ondragover={handleDragOver}
+			ondragleave={handleDragLeave}
+			ondrop={handleDrop}
+		>
+			<span>Click or drag an image here</span>
+		</div>
 		<div class="ocr-modal__status" aria-live="polite">
 			{#if isOcrRunning}
 				<span>Processing... {ocrProgress}%</span>
@@ -147,6 +233,50 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		margin-top: 0.75rem;
+	}
+
+	.ocr-modal__file-input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
+	}
+
+	.ocr-modal__dropzone {
+		border: 2px dashed rgba(0, 0, 0, 0.2);
+		border-radius: 12px;
+		padding: 1rem;
+		text-align: center;
+		font-size: 0.95rem;
+		color: #444;
+		background: #fafafa;
+		cursor: pointer;
+		transition:
+			border-color 0.18s,
+			background-color 0.18s,
+			box-shadow 0.18s;
+	}
+
+	.ocr-modal__dropzone:hover,
+	.ocr-modal__dropzone:focus-visible {
+		border-color: rgba(0, 0, 0, 0.4);
+		background: #f3f3f3;
+		outline: none;
+	}
+
+	.ocr-modal__dropzone.is-dragging {
+		border-color: #3b82f6;
+		background: #eff6ff;
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+	}
+
+	.ocr-modal__dropzone[aria-disabled='true'] {
+		cursor: not-allowed;
+		opacity: 0.6;
 	}
 
 	.ocr-modal__status {
