@@ -149,9 +149,8 @@ move (10) steps
 				}}
 			/>
 		{/if}
+		<OCRButton onRead={appendOcrText} />
 	</div>
-
-	<OCRButton onRead={appendOcrText} />
 
 	<div class="editor__panes">
 		<div class="pane pane--input">

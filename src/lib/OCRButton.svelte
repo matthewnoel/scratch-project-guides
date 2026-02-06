@@ -1,15 +1,38 @@
 <script lang="ts">
+	import Button from '$lib/Button.svelte';
+	import Modal from '$lib/Modal.svelte';
+
 	type Props = {
 		onRead: (text: string) => void;
 	};
 
 	let { onRead }: Props = $props();
 
+	let isModalOpen = $state(false);
 	let isOcrRunning = $state(false);
 	let ocrProgress = $state(0);
 	let ocrStatus = $state('');
 	let ocrError = $state('');
 	let ocrFileName = $state('');
+
+	const modalTitleId = 'ocr-modal-title';
+	const modalDescriptionId = 'ocr-modal-description';
+
+	const resetOcrState = () => {
+		ocrProgress = 0;
+		ocrStatus = '';
+		ocrError = '';
+		ocrFileName = '';
+	};
+
+	const openModal = () => {
+		resetOcrState();
+		isModalOpen = true;
+	};
+
+	const closeModal = () => {
+		isModalOpen = false;
+	};
 
 	const handleOcrFileChange = async (event: Event) => {
 		const input = event.currentTarget as HTMLInputElement;
@@ -45,6 +68,7 @@
 				onRead(detectedText);
 				ocrStatus = 'OCR complete.';
 				ocrProgress = 100;
+				closeModal();
 			}
 		} catch (error) {
 			ocrError = error instanceof Error ? error.message : 'OCR failed.';
@@ -56,14 +80,21 @@
 	};
 </script>
 
-<div class="ocr-row">
-	<div>
-		<div class="ocr-row__title">Import text from an image</div>
-		<div class="ocr-row__subtitle">
-			Upload a screenshot or photo and we will append the detected text to your markdown.
-		</div>
-	</div>
-	<div class="ocr-row__controls">
+<button class="ocr-trigger" onclick={openModal} aria-label="Import text from an image">👀</button>
+
+<Modal
+	open={isModalOpen}
+	labelledBy={modalTitleId}
+	describedBy={modalDescriptionId}
+	onClose={closeModal}
+>
+	<header>
+		<h4 id={modalTitleId}>Import text from an image</h4>
+	</header>
+	<p id={modalDescriptionId}>
+		Upload a screenshot or photo and we will append the detected text to your markdown.
+	</p>
+	<div class="ocr-modal__controls">
 		<input
 			type="file"
 			accept="image/*"
@@ -71,7 +102,7 @@
 			disabled={isOcrRunning}
 			aria-label="Upload an image for OCR"
 		/>
-		<div class="ocr-row__status" aria-live="polite">
+		<div class="ocr-modal__status" aria-live="polite">
 			{#if isOcrRunning}
 				<span>Processing... {ocrProgress}%</span>
 			{:else if ocrStatus}
@@ -80,58 +111,56 @@
 				<span>Last file: {ocrFileName}</span>
 			{/if}
 			{#if ocrError}
-				<span class="ocr-row__error">{ocrError}</span>
+				<span class="ocr-modal__error">{ocrError}</span>
 			{/if}
 		</div>
 	</div>
-</div>
+	<div class="ocr-modal__actions">
+		<Button variant="standard" type="button" onclick={closeModal} disabled={isOcrRunning}>
+			Close
+		</Button>
+	</div>
+</Modal>
 
 <style>
-	.ocr-row {
+	.ocr-trigger {
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 12px;
+		background: white;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		padding: 0 1.25rem;
+		font-size: 1.5rem;
+		cursor: pointer;
+		transition: background-color 0.18s;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		padding: 1rem 1.25rem;
-		border: 1px solid rgba(0, 0, 0, 0.08);
-		border-radius: 12px;
-		background: #fdfdfd;
+		justify-content: center;
 	}
 
-	.ocr-row__title {
-		font-weight: 600;
-		margin-bottom: 0.25rem;
+	.ocr-trigger:hover,
+	.ocr-trigger:focus {
+		background-color: #f8f8f8;
 	}
 
-	.ocr-row__subtitle {
-		color: #555;
-		max-width: 480px;
-	}
-
-	.ocr-row__controls {
+	.ocr-modal__controls {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
-		gap: 0.4rem;
+		gap: 0.5rem;
+		margin-top: 0.75rem;
 	}
 
-	.ocr-row__status {
+	.ocr-modal__status {
 		font-size: 0.85rem;
 		color: #555;
 	}
 
-	.ocr-row__error {
+	.ocr-modal__error {
 		color: #b42318;
 	}
 
-	@media (max-width: 960px) {
-		.ocr-row {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		.ocr-row__controls {
-			align-items: flex-start;
-		}
+	.ocr-modal__actions {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 0.75rem;
 	}
 </style>
