@@ -113,7 +113,7 @@
 	const sections = $derived.by(() => buildSections(source));
 </script>
 
-{#each sections as { type, data } (data)}
+{#each sections as { type, data }, index (`${type}-${index}`)}
 	{#if type === 'MARKDOWN'}
 		<Markdown source={data} />
 	{:else if type === 'SCRATCHBLOCK'}
