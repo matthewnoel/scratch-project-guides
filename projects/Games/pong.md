@@ -1,5 +1,21 @@
 # Pong 🏓
 
+.
+
+.
+
+.
+
+⚠️ **This Project Is Incomplete** ⚠️
+
+See [issue 11](https://github.com/matthewnoel/scratch-project-guides/issues/11).
+
+.
+
+.
+
+.
+
 ## Make the classic game
 
 https://scratch.mit.edu/projects/801064832
