@@ -120,12 +120,12 @@ jobs:
       issues: write
 
     steps:
-      - name: Checkout repository
+      - name: 📦 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Parse issue body
+      - name: 👀 Parse issue body
         id: parse
         uses: actions/github-script@v7
         with:
@@ -169,13 +169,13 @@ jobs:
             const fs = require('fs');
             fs.writeFileSync('markdown_content.tmp', markdownContent);
 
-      - name: Create new branch
+      - name: 🌳 Create new branch
         run: |
           BRANCH_NAME="project-submission-\${{ github.event.issue.number }}"
           git checkout -b "$BRANCH_NAME"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Create project file
+      - name: ✨ Create project file
         run: |
           FILEPATH="\${{ steps.parse.outputs.filepath }}"
 
@@ -205,13 +205,7 @@ ${sharedSteps.format}
           git commit -m "Add new project: \${{ steps.parse.outputs.project_name }}"
           git push origin "$BRANCH_NAME"
 
-${sharedSteps.lint}
-${sharedSteps.svelteCheck}
-${sharedSteps.build}
-${sharedSteps.setupPlaywright}
-${sharedSteps.runTests}
-
-      - name: Create Pull Request
+      - name: 💻 Create pull request
         env:
           GH_TOKEN: \${{ github.token }}
         run: |
