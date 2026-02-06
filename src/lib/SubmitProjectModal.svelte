@@ -5,6 +5,7 @@
 	type Props = {
 		open: boolean;
 		markdown: string;
+		fileName: string;
 		onClose?: () => void;
 	};
 
@@ -249,7 +250,7 @@
 									hasOpenedForm = true;
 								}}
 							>
-								Go
+								Go to Form
 							</Button>
 						</div>
 					</li>
@@ -324,6 +325,7 @@
 
 	.modal__description {
 		font-size: 1.2rem;
+		margin-left: 2rem;
 	}
 
 	.modal__body {
@@ -360,8 +362,10 @@
 	.modal__actions {
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 		gap: 0.75rem;
 		margin-top: 0.75rem;
+		margin-left: 2rem;
 	}
 
 	.copy-status {

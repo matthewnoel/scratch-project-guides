@@ -134,7 +134,7 @@ jobs:
 
             // Parse the issue form fields
             const categoryMatch = body.match(/### Category 🗃️\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
-            const projectNameMatch = body.match(/### Project URL Slug 🐌\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
+            const projectNameMatch = body.match(/### File Name 💾\\s*\\n\\n(.+?)(?=\\n\\n###|\\n*$)/s);
             const contentMatch = body.match(/### Project Markdown 📝\\s*\\n\\n([\\s\\S]+?)$/);
 
             if (!categoryMatch || !projectNameMatch || !contentMatch) {

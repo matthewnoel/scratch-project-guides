@@ -73,7 +73,7 @@ move (10) steps
 	</div>
 </section>
 
-<SubmitProjectModal open={isModalOpen} {markdown} onClose={closeModal} />
+<SubmitProjectModal open={isModalOpen} {markdown} {fileName} onClose={closeModal} />
 
 <style>
 	.editor {
