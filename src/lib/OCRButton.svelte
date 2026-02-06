@@ -3,6 +3,7 @@
 	import EditorIconButton from '$lib/EditorIconButton.svelte';
 	import FileInput from '$lib/FileInput.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import OCRProcessor from '$lib/OCRProcessor.svelte';
 
 	type Props = {
 		onRead: (text: string) => void;
@@ -12,20 +13,16 @@
 
 	let isModalOpen = $state(false);
 	let isOcrRunning = $state(false);
-	let ocrProgress = $state(0);
-	let ocrStatus = $state('');
-	let ocrError = $state('');
-	let ocrFileName = $state('');
 	let fileResetSignal = $state(0);
+	let ocrImageFile = $state<File | null>(null);
+	let currentStep = $state<'select' | 'process'>('select');
 
 	const modalTitleId = 'ocr-modal-title';
 	const modalDescriptionId = 'ocr-modal-description';
 
 	const resetOcrState = () => {
-		ocrProgress = 0;
-		ocrStatus = '';
-		ocrError = '';
-		ocrFileName = '';
+		ocrImageFile = null;
+		currentStep = 'select';
 		fileResetSignal += 1;
 	};
 
@@ -38,50 +35,18 @@
 		isModalOpen = false;
 	};
 
-	const runOcrWithFile = async (file: File) => {
-		if (!file.type.startsWith('image/')) {
-			ocrError = 'Please upload an image file.';
-			ocrStatus = '';
-			ocrProgress = 0;
-			return;
-		}
+	const runOcrWithFile = (file: File) => {
+		ocrImageFile = file;
+		currentStep = 'process';
+	};
 
-		ocrFileName = file.name;
-		ocrError = '';
-		ocrStatus = 'Starting OCR...';
-		ocrProgress = 0;
-		isOcrRunning = true;
+	const handleOcrRead = (text: string) => {
+		onRead(text);
+		closeModal();
+	};
 
-		try {
-			const { recognize } = await import('tesseract.js');
-			const result = await recognize(file, 'eng', {
-				logger: (message: { status?: string; progress?: number }) => {
-					if (typeof message.progress === 'number') {
-						ocrProgress = Math.round(message.progress * 100);
-					}
-					if (message.status) {
-						ocrStatus = message.status;
-					}
-				}
-			});
-
-			const detectedText = result.data.text ?? '';
-			if (!detectedText.trim()) {
-				ocrError = 'No text was detected in the image.';
-				ocrStatus = '';
-			} else {
-				onRead(detectedText);
-				ocrStatus = 'OCR complete.';
-				ocrProgress = 100;
-				closeModal();
-			}
-		} catch (error) {
-			ocrError = error instanceof Error ? error.message : 'OCR failed.';
-			ocrStatus = '';
-		} finally {
-			isOcrRunning = false;
-			fileResetSignal += 1;
-		}
+	const handleOcrComplete = () => {
+		fileResetSignal += 1;
 	};
 </script>
 
@@ -108,26 +73,30 @@
 		Upload a screenshot or photo and we will append the detected text to your markdown.
 	</p>
 	<div class="ocr-modal__controls">
-		<FileInput
-			accept="image/*"
-			disabled={isOcrRunning}
-			onFileSelect={runOcrWithFile}
-			ariaLabel="Upload an image for OCR"
-			dropzoneLabel="Click or drag an image here"
-			resetSignal={fileResetSignal}
-		/>
-		<div class="ocr-modal__status" aria-live="polite">
-			{#if isOcrRunning}
-				<span>Processing... {ocrProgress}%</span>
-			{:else if ocrStatus}
-				<span>{ocrStatus}</span>
-			{:else if ocrFileName}
-				<span>Last file: {ocrFileName}</span>
+		{#if currentStep === 'select'}
+			<FileInput
+				accept="image/*"
+				disabled={isOcrRunning}
+				onFileSelect={runOcrWithFile}
+				ariaLabel="Upload an image for OCR"
+				dropzoneLabel="Click or drag an image here"
+				resetSignal={fileResetSignal}
+			/>
+		{:else}
+			<OCRProcessor
+				image={ocrImageFile}
+				onRead={handleOcrRead}
+				onComplete={handleOcrComplete}
+				maxRetries={1}
+				retryDelayMs={500}
+				bind:isRunning={isOcrRunning}
+			/>
+			{#if !isOcrRunning}
+				<Button variant="standard" type="button" onclick={resetOcrState}>
+					Choose another image
+				</Button>
 			{/if}
-			{#if ocrError}
-				<span class="ocr-modal__error">{ocrError}</span>
-			{/if}
-		</div>
+		{/if}
 	</div>
 </Modal>
 
@@ -137,14 +106,5 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		margin-top: 0.75rem;
-	}
-
-	.ocr-modal__status {
-		font-size: 0.85rem;
-		color: #555;
-	}
-
-	.ocr-modal__error {
-		color: #b42318;
 	}
 </style>
