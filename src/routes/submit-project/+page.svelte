@@ -4,6 +4,7 @@
 	import SubmitProjectModal from '$lib/SubmitProjectModal.svelte';
 	import Button from '$lib/Button.svelte';
 	import FileName from '$lib/FileName.svelte';
+	import TrashButton from '$lib/TrashButton.svelte';
 
 	type BackupValue = {
 		timestamp: number;
@@ -131,7 +132,17 @@ move (10) steps
 		</div>
 	</header>
 
-	<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+	<div class="file-row">
+		<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+		{#if fileName || markdown !== defaultMarkdown}
+			<TrashButton
+				onTrashed={() => {
+					markdown = defaultMarkdown;
+					fileName = '';
+				}}
+			/>
+		{/if}
+	</div>
 
 	<div class="editor__panes">
 		<div class="pane pane--input">
@@ -186,6 +197,12 @@ move (10) steps
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
+	}
+
+	.file-row {
+		display: flex;
+		align-items: stretch;
+		gap: 1.5rem;
 	}
 
 	.editor__panes {
