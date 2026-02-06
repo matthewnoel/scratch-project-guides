@@ -4,6 +4,7 @@
 	import FileInput from '$lib/FileInput.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import OCRProcessor from '$lib/OCRProcessor.svelte';
+	import NLPProcessor from '$lib/NLPProcessor.svelte';
 
 	type Props = {
 		onRead: (text: string) => void;
@@ -13,15 +14,18 @@
 
 	let isModalOpen = $state(false);
 	let isOcrRunning = $state(false);
+	let isNlpRunning = $state(false);
 	let fileResetSignal = $state(0);
 	let ocrImageFile = $state<File | null>(null);
-	let currentStep = $state<'select' | 'process'>('select');
+	let ocrText = $state('');
+	let currentStep = $state<'select' | 'ocr' | 'nlp'>('select');
 
 	const modalTitleId = 'ocr-modal-title';
 	const modalDescriptionId = 'ocr-modal-description';
 
 	const resetOcrState = () => {
 		ocrImageFile = null;
+		ocrText = '';
 		currentStep = 'select';
 		fileResetSignal += 1;
 	};
@@ -37,10 +41,15 @@
 
 	const runOcrWithFile = (file: File) => {
 		ocrImageFile = file;
-		currentStep = 'process';
+		currentStep = 'ocr';
 	};
 
 	const handleOcrRead = (text: string) => {
+		ocrText = text;
+		currentStep = 'nlp';
+	};
+
+	const handleNlpComplete = (text: string) => {
 		onRead(text);
 		closeModal();
 	};
@@ -53,7 +62,12 @@
 <EditorIconButton ariaLabel="Import text from an image" icon="👀" onClick={openModal} />
 
 {#snippet closeAction()}
-	<Button variant="standard" type="button" onclick={closeModal} disabled={isOcrRunning}>
+	<Button
+		variant="standard"
+		type="button"
+		onclick={closeModal}
+		disabled={isOcrRunning || isNlpRunning}
+	>
 		Close
 	</Button>
 {/snippet}
@@ -82,7 +96,7 @@
 				dropzoneLabel="Click or drag an image here"
 				resetSignal={fileResetSignal}
 			/>
-		{:else}
+		{:else if currentStep === 'ocr'}
 			<OCRProcessor
 				image={ocrImageFile}
 				onRead={handleOcrRead}
@@ -95,6 +109,11 @@
 				<Button variant="standard" type="button" onclick={resetOcrState}>
 					Choose another image
 				</Button>
+			{/if}
+		{:else}
+			<NLPProcessor text={ocrText} onComplete={handleNlpComplete} bind:isRunning={isNlpRunning} />
+			{#if !isNlpRunning}
+				<Button variant="standard" type="button" onclick={resetOcrState}>Start over</Button>
 			{/if}
 		{/if}
 	</div>
