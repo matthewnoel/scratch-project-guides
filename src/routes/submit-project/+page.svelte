@@ -5,6 +5,7 @@
 	import Button from '$lib/Button.svelte';
 	import FileName from '$lib/FileName.svelte';
 	import TrashButton from '$lib/TrashButton.svelte';
+	import OCRButton from '$lib/OCRButton.svelte';
 
 	type BackupValue = {
 		timestamp: number;
@@ -106,6 +107,16 @@ move (10) steps
 		}, 1000);
 	};
 
+	const appendOcrText = (text: string) => {
+		const trimmedText = text.trim();
+		if (!trimmedText) {
+			return;
+		}
+		const prefix = markdown.endsWith('\n') ? '' : '\n';
+		markdown = `${markdown}${prefix}\n${trimmedText}\n`;
+		saveMarkdownToLocalStorage();
+	};
+
 	onMount(() => {
 		loadMarkdownFromLocalStorage();
 	});
@@ -139,6 +150,8 @@ move (10) steps
 			/>
 		{/if}
 	</div>
+
+	<OCRButton onRead={appendOcrText} />
 
 	<div class="editor__panes">
 		<div class="pane pane--input">
