@@ -1,9 +1,14 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
+
 	type Props = {
-		fileName: string;
+		fileName?: string;
+		onChangeComplete?: () => void;
 	};
 
-	let { fileName = $bindable() }: Props = $props();
+	let { fileName = $bindable(''), onChangeComplete }: Props = $props();
+
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 	function toKebabCase(value: string): string {
 		return value.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -25,7 +30,23 @@
 		requestAnimationFrame(() => {
 			target.setSelectionRange(newCursorPosition, newCursorPosition);
 		});
+
+		// Debounce the onChangeComplete callback
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+		if (onChangeComplete) {
+			debounceTimer = setTimeout(() => {
+				onChangeComplete();
+			}, 1000);
+		}
 	}
+
+	onDestroy(() => {
+		if (debounceTimer) {
+			clearTimeout(debounceTimer);
+		}
+	});
 </script>
 
 <div class="file-name-container">

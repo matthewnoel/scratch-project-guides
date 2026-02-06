@@ -39,6 +39,10 @@ move (10) steps
 	const closeModal = () => {
 		isModalOpen = false;
 	};
+
+	const saveMarkdownToLocalStorage = () => {
+		console.log('saveMarkdownToLocalStorage', fileName);
+	};
 </script>
 
 <section class="editor">
@@ -52,7 +56,7 @@ move (10) steps
 		</div>
 	</header>
 
-	<FileName {fileName} />
+	<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
 
 	<div class="editor__panes">
 		<div class="pane pane--input">
