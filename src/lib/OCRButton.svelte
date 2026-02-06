@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/Button.svelte';
+	import EditorIconButton from '$lib/EditorIconButton.svelte';
 	import FileInput from '$lib/FileInput.svelte';
 	import Modal from '$lib/Modal.svelte';
 
@@ -84,7 +85,7 @@
 	};
 </script>
 
-<button class="ocr-trigger" onclick={openModal} aria-label="Import text from an image">👀</button>
+<EditorIconButton ariaLabel="Import text from an image" icon="👀" onClick={openModal} />
 
 {#snippet closeAction()}
 	<Button variant="standard" type="button" onclick={closeModal} disabled={isOcrRunning}>
@@ -131,25 +132,6 @@
 </Modal>
 
 <style>
-	.ocr-trigger {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
-		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-		padding: 0 1.25rem;
-		font-size: 1.5rem;
-		cursor: pointer;
-		transition: background-color 0.18s;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.ocr-trigger:hover,
-	.ocr-trigger:focus {
-		background-color: #f8f8f8;
-	}
-
 	.ocr-modal__controls {
 		display: flex;
 		flex-direction: column;

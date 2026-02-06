@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/Button.svelte';
+	import EditorIconButton from '$lib/EditorIconButton.svelte';
 	import Modal from '$lib/Modal.svelte';
 
 	type Props = {
@@ -27,7 +28,7 @@
 	};
 </script>
 
-<button onclick={openConfirm} aria-label="Clear all backups">🗑️</button>
+<EditorIconButton ariaLabel="Clear all backups" icon="🗑️" onClick={openConfirm} />
 
 {#snippet confirmActions()}
 	<Button variant="standard" type="button" onclick={closeConfirm}>Cancel</Button>
@@ -47,24 +48,3 @@
 	</header>
 	<p id={modalDescriptionId}>This removes your saved draft from this browser.</p>
 </Modal>
-
-<style>
-	button {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
-		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-		padding: 0 1.25rem;
-		font-size: 1.5rem;
-		cursor: pointer;
-		transition: background-color 0.18s;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	button:hover,
-	button:focus {
-		background-color: #f8f8f8;
-	}
-</style>
