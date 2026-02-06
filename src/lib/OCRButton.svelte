@@ -81,10 +81,10 @@
 	actions={[closeAction]}
 >
 	<header>
-		<h4 id={modalTitleId}>Import text from an image</h4>
+		<h4 id={modalTitleId}>Add code from screenshot 📸</h4>
 	</header>
 	<p id={modalDescriptionId}>
-		Upload a screenshot or photo and we will append the detected text to your markdown.
+		Screenshot a section of your Scratch and we'll try to write the code block for you.
 	</p>
 	<div class="ocr-modal__controls">
 		{#if currentStep === 'select'}
