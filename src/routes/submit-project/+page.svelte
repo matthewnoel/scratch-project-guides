@@ -113,7 +113,7 @@ move (10) steps
 			return;
 		}
 		const prefix = markdown.endsWith('\n') ? '' : '\n';
-		markdown = `${markdown}${prefix}\n${trimmedText}\n`;
+		markdown = `${markdown}${prefix}\n\`\`\`scratchblocks\n${trimmedText}\n\`\`\`\n`;
 		saveMarkdownToLocalStorage();
 	};
 
