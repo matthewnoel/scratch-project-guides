@@ -51,8 +51,14 @@
 	}
 
 	@media (max-width: 500px) {
+		.outer {
+			margin-top: -0.5em;
+		}
+
 		.inner {
-			margin: auto;
+			width: 100%;
+			margin-bottom: 0.5em;
+			text-align: center;
 		}
 	}
 

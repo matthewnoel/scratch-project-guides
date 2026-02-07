@@ -82,7 +82,7 @@
 		text-decoration: underline;
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: 1200px) {
 		div,
 		ul {
 			margin: auto;
