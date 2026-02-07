@@ -1,16 +1,26 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import Button from '$lib/Button.svelte';
+	import FileName from '$lib/FileName.svelte';
 	import Modal from '$lib/Modal.svelte';
 
 	type Props = {
 		open: boolean;
 		markdown: string;
 		fileName: string;
-		onClose?: () => void;
+		saveMarkdownToLocalStorage: () => void;
+		onClose: () => void;
 	};
 
-	let { open, markdown, fileName, onClose }: Props = $props();
+	let {
+		open,
+		markdown,
+		fileName = $bindable(),
+		saveMarkdownToLocalStorage,
+		onClose
+	}: Props = $props();
+
+	const hasValidFileName = $derived(!!fileName && fileName !== 'file-name');
 	let copyStatus = $state('');
 	let hasAccount = $state(false);
 	let hasRememberedName = $state(false);
@@ -108,21 +118,21 @@
 			<li class:disabled-step={!hasAccount} aria-current={currentStep === 2 ? 'step' : undefined}>
 				<span class="label">
 					<span class="step" aria-hidden="true">{getStepIndicator(2)}</span>
-					Remember your file name.
+					{hasValidFileName ? 'Remember your file name.' : 'Choose a file name.'}
 				</span>
-				<p class="description">
-					Your file is named <strong>{fileName}</strong>.
-				</p>
+				<div class="file-name-wrapper">
+					<FileName bind:fileName onChangeComplete={saveMarkdownToLocalStorage} />
+				</div>
 				<div class="actions">
 					<Button
 						variant="emphasis"
 						type="button"
-						disabled={!hasAccount}
+						disabled={!hasAccount || !hasValidFileName}
 						onclick={() => {
 							hasRememberedName = true;
 						}}
 					>
-						Remembered
+						Got It
 					</Button>
 				</div>
 			</li>
@@ -183,6 +193,11 @@
 
 	.description {
 		font-size: 1.2rem;
+		margin-left: 2rem;
+	}
+
+	.file-name-wrapper {
+		margin-top: 0.5rem;
 		margin-left: 2rem;
 	}
 

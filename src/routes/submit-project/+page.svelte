@@ -171,7 +171,13 @@ move (10) steps
 	</div>
 </section>
 
-<SubmitProjectModal open={isModalOpen} {markdown} {fileName} onClose={closeModal} />
+<SubmitProjectModal
+	open={isModalOpen}
+	{markdown}
+	bind:fileName
+	onClose={closeModal}
+	{saveMarkdownToLocalStorage}
+/>
 
 <style>
 	.editor {
