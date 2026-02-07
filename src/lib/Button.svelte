@@ -29,13 +29,7 @@
 
 	const isLink = $derived.by(() => Boolean(href));
 	const classes = $derived.by(() =>
-		[
-			'button',
-			`button--${variant}`,
-			`button--${size}`,
-			disabled ? 'button--disabled' : '',
-			className
-		]
+		['button', `button-${variant}`, `button-${size}`, disabled ? 'button-disabled' : '', className]
 			.filter(Boolean)
 			.join(' ')
 	);
@@ -79,17 +73,17 @@
 			box-shadow 0.15s ease;
 	}
 
-	.button--small {
+	.button-small {
 		padding: 0.2rem 0.6rem;
 		font-size: 1rem;
 	}
 
-	.button--medium {
+	.button-medium {
 		padding: 0.4rem 0.9rem;
 		font-size: 1.25rem;
 	}
 
-	.button--large {
+	.button-large {
 		padding: 0.55rem 1.1rem;
 		font-size: 1.5rem;
 	}
@@ -99,29 +93,29 @@
 		outline-offset: 2px;
 	}
 
-	.button--emphasis {
+	.button-emphasis {
 		background: #ffbf00;
 		color: #111;
 	}
 
-	.button--emphasis:hover,
-	.button--emphasis:focus {
+	.button-emphasis:hover,
+	.button-emphasis:focus {
 		background: #ffcf33;
 	}
 
-	.button--standard {
+	.button-standard {
 		border-color: rgba(0, 0, 0, 0.12);
 		background: #fff;
 		color: #111;
 	}
 
-	.button--standard:hover,
-	.button--standard:focus {
+	.button-standard:hover,
+	.button-standard:focus {
 		border-color: rgba(0, 0, 0, 0.2);
 		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 	}
 
-	.button--disabled {
+	.button-disabled {
 		cursor: not-allowed;
 		opacity: 0.6;
 		pointer-events: none;
