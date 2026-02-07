@@ -78,16 +78,7 @@
 	};
 </script>
 
-<Modal
-	{open}
-	labelledBy="submit-modal-title"
-	describedBy="submit-modal-description"
-	onClose={closeModal}
-	showClose
->
-	<header>
-		<h4 id="submit-modal-title">Submit your project 📨</h4>
-	</header>
+<Modal {open} title="Submit your project" emoji="📨" onClose={closeModal} showClose>
 	<div class="body">
 		<p id="submit-modal-description">
 			Thank you for considering submitting your project guide! Follow the steps below to get your

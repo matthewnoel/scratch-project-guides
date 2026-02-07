@@ -1,26 +1,24 @@
+<script lang="ts" module>
+	let modalIdCounter = 0;
+</script>
+
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { tick } from 'svelte';
 
 	type Props = {
 		open: boolean;
-		labelledBy?: string;
-		describedBy?: string;
+		title: string;
+		emoji: string;
 		onClose?: () => void;
 		showClose?: boolean;
 		actions?: Snippet[];
 		children?: Snippet;
 	};
 
-	let {
-		open,
-		labelledBy,
-		describedBy,
-		onClose,
-		showClose = false,
-		actions = [],
-		children
-	}: Props = $props();
+	let { open, title, emoji, onClose, showClose = false, actions = [], children }: Props = $props();
+
+	const internalTitleId = `modal-title-${modalIdCounter++}`;
 
 	const actionList = $derived.by(() => (Array.isArray(actions) ? actions : []));
 
@@ -138,8 +136,7 @@
 			class="modal"
 			role="dialog"
 			aria-modal="true"
-			aria-labelledby={labelledBy}
-			aria-describedby={describedBy}
+			aria-labelledby={internalTitleId}
 			tabindex="-1"
 			bind:this={dialogEl}
 			use:trapFocus
@@ -148,6 +145,11 @@
 				<button class="close-button" type="button" aria-label="Close modal" onclick={close}>
 					×
 				</button>
+			{/if}
+			{#if title}
+				<header>
+					<h1 id={internalTitleId} class="modal-title">{title} {emoji}</h1>
+				</header>
 			{/if}
 			{@render children?.()}
 			{#if actionList.length}
@@ -162,6 +164,10 @@
 {/if}
 
 <style>
+	h1 {
+		font-size: 1.5rem;
+	}
+
 	.modal-backdrop {
 		position: fixed;
 		inset: 0;
@@ -184,6 +190,10 @@
 		padding: 1.5rem;
 		outline: none;
 		position: relative;
+	}
+
+	.modal-title {
+		margin: 0;
 	}
 
 	.close-button {

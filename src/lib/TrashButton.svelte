@@ -10,7 +10,6 @@
 	let { onTrashed }: Props = $props();
 	let isConfirmOpen = $state(false);
 
-	const modalTitleId = 'trash-modal-title';
 	const modalDescriptionId = 'trash-modal-description';
 
 	const openConfirm = () => {
@@ -37,14 +36,11 @@
 
 <Modal
 	open={isConfirmOpen}
-	labelledBy={modalTitleId}
-	describedBy={modalDescriptionId}
+	title="Clear all backups?"
+	emoji="🗑️"
 	showClose
 	onClose={closeConfirm}
 	actions={[confirmActions]}
 >
-	<header>
-		<h4 id={modalTitleId}>Clear all backups?</h4>
-	</header>
 	<p id={modalDescriptionId}>This removes your saved draft from this browser.</p>
 </Modal>

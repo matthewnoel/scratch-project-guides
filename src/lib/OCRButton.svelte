@@ -20,7 +20,6 @@
 	let ocrText = $state('');
 	let currentStep = $state<'select' | 'ocr' | 'post-processor'>('select');
 
-	const modalTitleId = 'ocr-modal-title';
 	const modalDescriptionId = 'ocr-modal-description';
 
 	const resetOcrState = () => {
@@ -74,19 +73,16 @@
 
 <Modal
 	open={isModalOpen}
-	labelledBy={modalTitleId}
-	describedBy={modalDescriptionId}
+	title="Add code from screenshot"
+	emoji="📸"
 	showClose
 	onClose={closeModal}
 	actions={[closeAction]}
 >
-	<header>
-		<h4 id={modalTitleId}>Add code from screenshot 📸</h4>
-	</header>
 	<p id={modalDescriptionId}>
 		Screenshot a section of your Scratch and we'll try to write the code block for you.
 	</p>
-	<div class="ocr-modal__controls">
+	<div class="container">
 		{#if currentStep === 'select'}
 			<FileInput
 				accept="image/*"
@@ -124,7 +120,7 @@
 </Modal>
 
 <style>
-	.ocr-modal__controls {
+	.container {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
