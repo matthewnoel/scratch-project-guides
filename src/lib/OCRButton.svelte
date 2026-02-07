@@ -4,7 +4,7 @@
 	import FileInput from '$lib/FileInput.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import OCRProcessor from '$lib/OCRProcessor.svelte';
-	import NLPProcessor from '$lib/NLPProcessor.svelte';
+	import OCRPostProcessor from '$lib/OCRPostProcessor.svelte';
 
 	type Props = {
 		onRead: (text: string) => void;
@@ -14,11 +14,11 @@
 
 	let isModalOpen = $state(false);
 	let isOcrRunning = $state(false);
-	let isNlpRunning = $state(false);
+	let isPostProcessorRunning = $state(false);
 	let fileResetSignal = $state(0);
 	let ocrImageFile = $state<File | null>(null);
 	let ocrText = $state('');
-	let currentStep = $state<'select' | 'ocr' | 'nlp'>('select');
+	let currentStep = $state<'select' | 'ocr' | 'post-processor'>('select');
 
 	const modalTitleId = 'ocr-modal-title';
 	const modalDescriptionId = 'ocr-modal-description';
@@ -46,10 +46,10 @@
 
 	const handleOcrRead = (text: string) => {
 		ocrText = text;
-		currentStep = 'nlp';
+		currentStep = 'post-processor';
 	};
 
-	const handleNlpComplete = (text: string) => {
+	const handlePostProcessingComplete = (text: string) => {
 		onRead(text);
 		closeModal();
 	};
@@ -66,7 +66,7 @@
 		variant="standard"
 		type="button"
 		onclick={closeModal}
-		disabled={isOcrRunning || isNlpRunning}
+		disabled={isOcrRunning || isPostProcessorRunning}
 	>
 		Close
 	</Button>
@@ -111,8 +111,12 @@
 				</Button>
 			{/if}
 		{:else}
-			<NLPProcessor text={ocrText} onComplete={handleNlpComplete} bind:isRunning={isNlpRunning} />
-			{#if !isNlpRunning}
+			<OCRPostProcessor
+				text={ocrText}
+				onComplete={handlePostProcessingComplete}
+				bind:isRunning={isPostProcessorRunning}
+			/>
+			{#if !isPostProcessorRunning}
 				<Button variant="standard" type="button" onclick={resetOcrState}>Start over</Button>
 			{/if}
 		{/if}
