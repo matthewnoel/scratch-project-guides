@@ -88,18 +88,18 @@
 	<header>
 		<h4 id="submit-modal-title">Submit your project 📨</h4>
 	</header>
-	<div class="modal__body">
+	<div class="body">
 		<p id="submit-modal-description">
 			Thank you for considering submitting your project guide! Follow the steps below to get your
 			code merged.
 		</p>
-		<ol class="modal__steps">
+		<ol class="steps">
 			<li aria-current={currentStep === 1 ? 'step' : undefined}>
-				<span class="step__label">
-					<span class="step__indicator" aria-hidden="true">{getStepIndicator(1)}</span>
+				<span class="label">
+					<span class="step" aria-hidden="true">{getStepIndicator(1)}</span>
 					Create a GitHub account.
 				</span>
-				<div class="modal__actions">
+				<div class="actions">
 					<Button variant="emphasis" href={signupUrl} target="_blank" rel="noreferrer">
 						Sign Up
 					</Button>
@@ -114,15 +114,15 @@
 					</Button>
 				</div>
 			</li>
-			<li class:step--disabled={!hasAccount} aria-current={currentStep === 2 ? 'step' : undefined}>
-				<span class="step__label">
-					<span class="step__indicator" aria-hidden="true">{getStepIndicator(2)}</span>
+			<li class:disabled-step={!hasAccount} aria-current={currentStep === 2 ? 'step' : undefined}>
+				<span class="label">
+					<span class="step" aria-hidden="true">{getStepIndicator(2)}</span>
 					Remember your file name.
 				</span>
-				<p class="modal__description">
+				<p class="description">
 					Your file is named <strong>{fileName}</strong>.
 				</p>
-				<div class="modal__actions">
+				<div class="actions">
 					<Button
 						variant="emphasis"
 						type="button"
@@ -136,14 +136,14 @@
 				</div>
 			</li>
 			<li
-				class:step--disabled={!hasRememberedName}
+				class:disabled-step={!hasRememberedName}
 				aria-current={currentStep === 3 ? 'step' : undefined}
 			>
-				<span class="step__label">
-					<span class="step__indicator" aria-hidden="true">{getStepIndicator(3)}</span>
+				<span class="label">
+					<span class="step" aria-hidden="true">{getStepIndicator(3)}</span>
 					Copy the markdown to your clipboard.
 				</span>
-				<div class="modal__actions">
+				<div class="actions">
 					<Button
 						variant="emphasis"
 						type="button"
@@ -157,16 +157,16 @@
 					{/if}
 				</div>
 			</li>
-			<li class:step--disabled={!hasCopied} aria-current={currentStep === 4 ? 'step' : undefined}>
-				<span class="step__label">
-					<span class="step__indicator" aria-hidden="true">{getStepIndicator(4)}</span>
+			<li class:disabled-step={!hasCopied} aria-current={currentStep === 4 ? 'step' : undefined}>
+				<span class="label">
+					<span class="step" aria-hidden="true">{getStepIndicator(4)}</span>
 					Fill out the GitHub form with your markdown.
 				</span>
-				<p class="modal__description">
+				<p class="description">
 					Once you have filled out the form, a pull request will be created and reviewed by the
 					community. Once the pull request is merged, your guide will be published to the site.
 				</p>
-				<div class="modal__actions">
+				<div class="actions">
 					<Button
 						variant="emphasis"
 						href={issueUrl}
@@ -190,19 +190,19 @@
 		font-size: 1.2rem;
 	}
 
-	.modal__description {
+	.description {
 		font-size: 1.2rem;
 		margin-left: 2rem;
 	}
 
-	.modal__body {
+	.body {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 		color: #333;
 	}
 
-	.modal__steps {
+	.steps {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
@@ -211,22 +211,22 @@
 		margin: 0;
 	}
 
-	.step__label {
+	.label {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
 		font-weight: 600;
 	}
 
-	.step__indicator {
+	.step {
 		font-size: 1.05rem;
 	}
 
-	.step--disabled {
+	.disabled-step {
 		opacity: 0.55;
 	}
 
-	.modal__actions {
+	.actions {
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -238,12 +238,5 @@
 	.copy-status {
 		font-size: 0.9rem;
 		color: #1a7f37;
-	}
-
-	@media (max-width: 600px) {
-		.modal__actions {
-			flex-direction: column;
-			align-items: flex-start;
-		}
 	}
 </style>

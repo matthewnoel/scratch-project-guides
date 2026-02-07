@@ -256,7 +256,7 @@ move (10) steps
 		padding: 1rem 1.25rem 2rem;
 	}
 
-	@media (max-width: 960px) {
+	@media (max-width: 1200px) {
 		.editor {
 			padding: 1rem;
 		}
