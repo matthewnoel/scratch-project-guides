@@ -133,7 +133,7 @@
 	});
 </script>
 
-<div class="ocr-status" aria-live="polite">
+<div class="processing-status" aria-live="polite">
 	{#if isRunning}
 		<span>Processing... {progress}%</span>
 	{:else if status}
@@ -142,17 +142,6 @@
 		<span>Last file: {fileName}</span>
 	{/if}
 	{#if error}
-		<span class="ocr-status__error">{error}</span>
+		<span class="processing-error">{error}</span>
 	{/if}
 </div>
-
-<style>
-	.ocr-status {
-		font-size: 0.85rem;
-		color: #555;
-	}
-
-	.ocr-status__error {
-		color: #b42318;
-	}
-</style>

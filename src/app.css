@@ -88,3 +88,12 @@ a:hover,
 a:focus {
 	color: #ffbf00;
 }
+
+.processing-status {
+	font-size: 0.85rem;
+	color: #555;
+}
+
+.processing-error {
+	color: #b42318;
+}
