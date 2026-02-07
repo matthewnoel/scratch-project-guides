@@ -14,7 +14,7 @@
 		status = $bindable(''),
 		error = $bindable(''),
 		isRunning = $bindable(false),
-		delayMs = 1000
+		delayMs = 10
 	}: Props = $props();
 
 	let timeoutId: ReturnType<typeof setTimeout> | null = null;
