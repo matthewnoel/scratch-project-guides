@@ -230,7 +230,7 @@ move (10) steps
 		flex-direction: column;
 		min-height: 0;
 		border: var(--border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-medium);
 		background: white;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;

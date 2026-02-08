@@ -8,7 +8,9 @@
 	--color-grey-text: #444;
 	--color-grey-background: #f8f8f8;
 	--border: 1px solid rgba(0, 0, 0, 0.2);
-	--radius: 12px;
+	--radius-small: 8px;
+	--radius-medium: 12px;
+	--radius-large: 16px;
 }
 
 * {

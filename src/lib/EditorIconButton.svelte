@@ -16,7 +16,7 @@
 <style>
 	button {
 		border: var(--border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-medium);
 		background: white;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		padding: 0 1.25rem;

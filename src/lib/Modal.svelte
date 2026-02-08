@@ -182,7 +182,7 @@
 	.modal {
 		width: min(560px, 100%);
 		background: white;
-		border-radius: 16px;
+		border-radius: var(--radius-large);
 		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 		display: flex;
 		flex-direction: column;

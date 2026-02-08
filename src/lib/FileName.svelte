@@ -65,7 +65,7 @@
 <style>
 	.file-name-container {
 		border: var(--border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-medium);
 		background: white;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;
@@ -85,7 +85,7 @@
 	input[type='text'] {
 		outline: none;
 		border: 2px solid #e0e0e0;
-		border-radius: 8px;
+		border-radius: var(--radius-small);
 		padding: 0.5rem 0.75rem;
 		font-size: 1rem;
 		background: white;

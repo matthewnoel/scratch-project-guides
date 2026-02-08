@@ -129,7 +129,7 @@
 
 	.dropzone {
 		border: 2px dashed rgba(0, 0, 0, 0.2);
-		border-radius: var(--radius);
+		border-radius: var(--radius-medium);
 		padding: 1rem;
 		text-align: center;
 		font-size: 0.95rem;

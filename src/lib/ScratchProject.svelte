@@ -27,7 +27,7 @@
 		width: fit-content;
 		margin: auto;
 		border: var(--border);
-		border-radius: 0.25em;
+		border-radius: var(--radius-medium);
 		padding: 0.25em;
 	}
 

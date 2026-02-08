@@ -46,7 +46,7 @@
 		font-size: 0.9rem;
 		background-color: white;
 		border: var(--border);
-		border-radius: 1em;
+		border-radius: var(--radius-small);
 		padding: 0.25em 1em;
 	}
 
