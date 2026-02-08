@@ -94,7 +94,7 @@
 	}
 
 	.button-emphasis {
-		background: #ffbf00;
+		background: var(--color-primary);
 		color: #111;
 	}
 

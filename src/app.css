@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--color-primary: #ffbf00;
+}
+
 * {
 	margin: 0;
 }
@@ -86,7 +90,7 @@ a:visited {
 
 a:hover,
 a:focus {
-	color: #ffbf00;
+	color: var(--color-primary);
 }
 
 .processing-status {

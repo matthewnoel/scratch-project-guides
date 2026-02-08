@@ -44,7 +44,7 @@
 
 	nav {
 		color: black;
-		background-color: #ffbf00;
+		background-color: var(--color-primary);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 		display: flex;
 		flex-direction: row;

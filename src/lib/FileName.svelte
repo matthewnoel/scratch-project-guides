@@ -98,7 +98,7 @@
 	}
 
 	input[type='text']:focus {
-		border-color: #ffbf00;
+		border-color: var(--color-primary);
 		box-shadow: 0 0 0 2px #ece6ff;
 		background: #fff;
 	}
