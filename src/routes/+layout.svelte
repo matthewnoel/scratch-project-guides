@@ -45,7 +45,7 @@
 	nav {
 		color: black;
 		background-color: var(--color-primary);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+		border-bottom: var(--border);
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
