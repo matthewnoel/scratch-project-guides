@@ -55,6 +55,7 @@
 		type="text"
 		name="file-name"
 		id="file-name"
+		aria-label="Project file name"
 		placeholder="file-name"
 		bind:value={fileName}
 		oninput={handleInput}
