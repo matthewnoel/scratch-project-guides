@@ -76,7 +76,7 @@
 	}
 
 	span {
-		color: var(--color-grey-text);
+		color: black;
 		font-size: 1rem;
 		font-weight: 600;
 	}
