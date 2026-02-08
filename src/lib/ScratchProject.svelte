@@ -26,8 +26,8 @@
 	div {
 		width: fit-content;
 		margin: auto;
-		border: 1px solid rgba(0, 0, 0, 0.25);
-		border-radius: 0.25em;
+		border: var(--border);
+		border-radius: var(--radius-medium);
 		padding: 0.25em;
 	}
 

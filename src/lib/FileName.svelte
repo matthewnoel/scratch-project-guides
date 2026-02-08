@@ -64,10 +64,9 @@
 
 <style>
 	.file-name-container {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
+		border: var(--border);
+		border-radius: var(--radius-medium);
 		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;
 		padding: 1rem;
 		display: flex;
@@ -77,7 +76,7 @@
 	}
 
 	span {
-		color: #444;
+		color: var(--color-grey-text);
 		font-size: 1rem;
 		font-weight: 600;
 	}
@@ -85,26 +84,26 @@
 	input[type='text'] {
 		outline: none;
 		border: 2px solid #e0e0e0;
-		border-radius: 8px;
+		border-radius: var(--radius-small);
 		padding: 0.5rem 0.75rem;
 		font-size: 1rem;
-		background: #fafbfc;
+		background: white;
 		box-shadow: none;
 		transition:
 			border-color 0.18s,
 			box-shadow 0.18s;
-		color: #222;
+		color: black;
 		appearance: none;
 	}
 
 	input[type='text']:focus {
-		border-color: #ffbf00;
+		border-color: var(--color-primary);
 		box-shadow: 0 0 0 2px #ece6ff;
-		background: #fff;
+		background: white;
 	}
 
 	input[type='text']::placeholder {
-		color: #bbb;
+		color: var(--color-grey-text);
 		opacity: 1;
 		font-weight: 400;
 	}

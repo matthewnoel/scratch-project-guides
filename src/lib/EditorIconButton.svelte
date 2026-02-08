@@ -15,10 +15,9 @@
 
 <style>
 	button {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
+		border: var(--border);
+		border-radius: var(--radius-medium);
 		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		padding: 0 1.25rem;
 		font-size: 1.5rem;
 		cursor: pointer;
@@ -30,6 +29,6 @@
 
 	button:hover,
 	button:focus {
-		background-color: #f8f8f8;
+		background-color: white;
 	}
 </style>

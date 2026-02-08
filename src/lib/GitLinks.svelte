@@ -45,8 +45,8 @@
 	.inner {
 		font-size: 0.9rem;
 		background-color: white;
-		border: 1px solid rgba(0, 0, 0, 0.25);
-		border-radius: 1em;
+		border: var(--border);
+		border-radius: var(--radius-small);
 		padding: 0.25em 1em;
 	}
 
@@ -59,6 +59,7 @@
 			width: 100%;
 			margin-bottom: 0.5em;
 			text-align: center;
+			border-radius: var(--radius-medium);
 		}
 	}
 

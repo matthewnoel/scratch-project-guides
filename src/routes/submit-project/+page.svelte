@@ -203,7 +203,7 @@ move (10) steps
 
 	.header p {
 		margin: 0;
-		color: #444;
+		color: var(--color-grey-text);
 	}
 
 	.actions {
@@ -229,17 +229,16 @@ move (10) steps
 		display: flex;
 		flex-direction: column;
 		min-height: 0;
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
+		border: var(--border);
+		border-radius: var(--radius-medium);
 		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;
 	}
 
 	.pane-title {
 		padding: 0.75rem 1rem;
 		font-weight: 600;
-		background: #f8f8f8;
+		background: var(--color-grey-background);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	}
 

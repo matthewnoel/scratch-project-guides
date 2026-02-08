@@ -129,12 +129,12 @@
 
 	.dropzone {
 		border: 2px dashed rgba(0, 0, 0, 0.2);
-		border-radius: 12px;
+		border-radius: var(--radius-medium);
 		padding: 1rem;
 		text-align: center;
 		font-size: 0.95rem;
-		color: #444;
-		background: #fafafa;
+		color: var(--color-grey-text);
+		background: var(--color-grey-background);
 		cursor: pointer;
 		transition:
 			border-color 0.18s,
@@ -145,12 +145,12 @@
 	.dropzone:hover,
 	.dropzone:focus-visible {
 		border-color: rgba(0, 0, 0, 0.4);
-		background: #f3f3f3;
+		background: white;
 		outline: none;
 	}
 
 	.dropzone.is-dragging {
-		border-color: #ffbf00;
+		border-color: var(--color-primary);
 		background: rgba(255, 191, 0, 0.15);
 		box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.15);
 	}

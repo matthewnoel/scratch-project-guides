@@ -205,7 +205,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		color: #333;
+		color: var(--color-grey-text);
 	}
 
 	.steps {
@@ -242,7 +242,7 @@
 	}
 
 	.copy-status {
-		font-size: 0.9rem;
-		color: #1a7f37;
+		font-size: 1rem;
+		color: var(--color-primary);
 	}
 </style>
