@@ -59,6 +59,7 @@
 			width: 100%;
 			margin-bottom: 0.5em;
 			text-align: center;
+			border-radius: var(--radius-medium);
 		}
 	}
 

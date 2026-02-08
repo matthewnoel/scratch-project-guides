@@ -11,6 +11,7 @@
 	--radius-small: 8px;
 	--radius-medium: 12px;
 	--radius-large: 16px;
+	--shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 * {

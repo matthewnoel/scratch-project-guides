@@ -67,7 +67,6 @@
 		border: var(--border);
 		border-radius: var(--radius-medium);
 		background: white;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;
 		padding: 1rem;
 		display: flex;
