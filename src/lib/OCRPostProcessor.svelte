@@ -35,10 +35,13 @@ say [Done!]
 		['`(var)`', 'a variable or reporter block', '`(x position)`']
 		// TODO
 	];
-	const MARKDOWN_SYNTAX_BREAKDOWN = [
-		`Here's a breakdown of the scratchblocks markdown syntax:`,
-		SCRATCHBLOCKS_MARKDOWN_SYNTAX.join('\n')
-	].join('\n');
+	const MARKDOWN_SYNTAX_BREAKDOWN = (() => {
+		const [header, ...rows] = SCRATCHBLOCKS_MARKDOWN_SYNTAX;
+		const separator = header.map(() => '---');
+		const formatRow = (row: string[]) => `| ${row.join(' | ')} |`;
+		const table = [formatRow(header), formatRow(separator), ...rows.map(formatRow)].join('\n');
+		return `Here's a breakdown of the scratchblocks markdown syntax:\n${table}`;
+	})();
 	const SYSTEM_PROMPT = [
 		'Your task is to faithfully transform this raw OCR result from a Scratch code screenshot into valid Scratchblocks markdown.',
 		'You will recieve ONE LINE at a time.',
@@ -48,6 +51,8 @@ say [Done!]
 		'`when clicked` => `when green flag clicked`, `J` => `end`.',
 		'Remember to output the entire line as valid scratchblocks flavored markdown.'
 	].join('\n');
+
+	console.log(SYSTEM_PROMPT);
 
 	// Module-level engine cache shared across component instances.
 	// Uses dynamic import to avoid SSR issues with browser-only WebGPU APIs.
