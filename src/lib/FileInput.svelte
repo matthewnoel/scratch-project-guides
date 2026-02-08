@@ -143,12 +143,7 @@
 	}
 
 	.dropzone:hover,
-	.dropzone:focus-visible {
-		border-color: rgba(0, 0, 0, 0.4);
-		background: white;
-		outline: none;
-	}
-
+	.dropzone:focus-visible,
 	.dropzone.is-dragging {
 		border-color: var(--color-primary);
 		background: rgba(255, 191, 0, 0.15);
