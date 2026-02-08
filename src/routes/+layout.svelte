@@ -8,6 +8,7 @@
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 </script>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <nav>
 	<div>
 		<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
@@ -26,15 +27,37 @@
 	</ul>
 </nav>
 {#if data.page === '/submit-project'}
-	{@render children()}
+	<main id="main-content">
+		{@render children()}
+	</main>
 {:else}
-	<main>
+	<main id="main-content">
 		{@render children()}
 		<GitLinks page={data.page} />
 	</main>
 {/if}
 
 <style>
+	.skip-link {
+		position: absolute;
+		left: -9999px;
+		top: 0;
+		z-index: 100;
+		margin: 1em;
+		padding: 0.5em 1em;
+		background-color: white;
+		border: var(--border);
+		border-radius: var(--radius-medium);
+		box-shadow: var(--shadow-primary);
+		color: black !important;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+	.skip-link:focus {
+		left: 0;
+	}
+
 	main {
 		max-width: 600px;
 		margin: auto;
