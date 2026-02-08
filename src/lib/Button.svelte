@@ -105,7 +105,7 @@
 
 	.button-standard {
 		border-color: rgba(0, 0, 0, 0.12);
-		background: #fff;
+		background: white;
 		color: #111;
 	}
 

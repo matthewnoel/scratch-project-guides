@@ -77,7 +77,7 @@
 	}
 
 	span {
-		color: #444;
+		color: var(--color-grey-text);
 		font-size: 1rem;
 		font-weight: 600;
 	}
@@ -100,7 +100,7 @@
 	input[type='text']:focus {
 		border-color: var(--color-primary);
 		box-shadow: 0 0 0 2px #ece6ff;
-		background: #fff;
+		background: white;
 	}
 
 	input[type='text']::placeholder {

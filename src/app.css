@@ -4,6 +4,8 @@
 
 :root {
 	--color-primary: #ffbf00;
+	--color-error: #b42318;
+	--color-grey-text: #444;
 }
 
 * {
@@ -95,9 +97,9 @@ a:focus {
 
 .processing-status {
 	font-size: 0.85rem;
-	color: #555;
+	color: var(--color-grey-text);
 }
 
 .processing-error {
-	color: #b42318;
+	color: var(--color-error);
 }

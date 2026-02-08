@@ -181,7 +181,7 @@
 
 	.modal {
 		width: min(560px, 100%);
-		background: #fff;
+		background: white;
 		border-radius: 16px;
 		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 		display: flex;
@@ -205,7 +205,7 @@
 		font-size: 1.5rem;
 		line-height: 1;
 		cursor: pointer;
-		color: #333;
+		color: var(--color-grey-text);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
