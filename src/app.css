@@ -3,15 +3,18 @@
 @tailwind utilities;
 
 :root {
-	--color-primary: #ffbf00;
-	--color-error: #b42318;
-	--color-grey-text: #555;
-	--color-grey-background: #f8f8f8;
+	--color-primary: rgb(255, 191, 0);
+	--color-error: rgb(180, 35, 24);
+	--color-grey-text: rgb(85, 85, 85);
+	--color-grey-background: rgb(248, 248, 248);
+
 	--border: 1px solid rgba(0, 0, 0, 0.2);
+
 	--radius-small: 8px;
 	--radius-medium: 12px;
 	--radius-large: 16px;
-	--shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+	--shadow-primary: 0 0 0 3px rgba(255, 191, 0, 0.15);
 }
 
 * {

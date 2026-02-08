@@ -83,7 +83,7 @@
 
 	input[type='text'] {
 		outline: none;
-		border: 2px solid #e0e0e0;
+		border: var(--border);
 		border-radius: var(--radius-small);
 		padding: 0.5rem 0.75rem;
 		font-size: 1rem;
@@ -98,7 +98,7 @@
 
 	input[type='text']:focus {
 		border-color: var(--color-primary);
-		box-shadow: 0 0 0 2px #ece6ff;
+		box-shadow: var(--shadow-primary);
 		background: white;
 	}
 

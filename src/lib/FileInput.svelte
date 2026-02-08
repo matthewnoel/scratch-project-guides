@@ -147,7 +147,7 @@
 	.dropzone.is-dragging {
 		border-color: var(--color-primary);
 		background: rgba(255, 191, 0, 0.15);
-		box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.15);
+		box-shadow: var(--shadow-primary);
 	}
 
 	.dropzone[aria-disabled='true'] {
