@@ -115,7 +115,12 @@
 					</Button>
 				</div>
 			</li>
-			<li class:disabled-step={!hasAccount} aria-current={currentStep === 2 ? 'step' : undefined}>
+			<!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
+			<li
+				class:disabled-step={!hasAccount}
+				aria-disabled={!hasAccount}
+				aria-current={currentStep === 2 ? 'step' : undefined}
+			>
 				<span class="label">
 					<span class="step" aria-hidden="true">{getStepIndicator(2)}</span>
 					{hasValidFileName ? 'Remember your file name.' : 'Choose a file name.'}
@@ -136,8 +141,10 @@
 					</Button>
 				</div>
 			</li>
+			<!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
 			<li
 				class:disabled-step={!hasRememberedName}
+				aria-disabled={!hasRememberedName}
 				aria-current={currentStep === 3 ? 'step' : undefined}
 			>
 				<span class="label">
@@ -158,7 +165,12 @@
 					{/if}
 				</div>
 			</li>
-			<li class:disabled-step={!hasCopied} aria-current={currentStep === 4 ? 'step' : undefined}>
+			<!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
+			<li
+				class:disabled-step={!hasCopied}
+				aria-disabled={!hasCopied}
+				aria-current={currentStep === 4 ? 'step' : undefined}
+			>
 				<span class="label">
 					<span class="step" aria-hidden="true">{getStepIndicator(4)}</span>
 					Fill out the GitHub form with your markdown.

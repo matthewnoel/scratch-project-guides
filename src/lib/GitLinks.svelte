@@ -2,7 +2,7 @@
 	let { page } = $props();
 </script>
 
-<div class="outer">
+<nav class="outer" aria-label="External links">
 	<div class="inner">
 		<span
 			><a
@@ -32,7 +32,7 @@
 			>
 		{/if}
 	</div>
-</div>
+</nav>
 
 <style>
 	.outer {

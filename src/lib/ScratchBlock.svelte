@@ -16,6 +16,14 @@
 	let scratchblocksModule: ScratchblocksModule | null = null;
 	let renderToken = 0;
 
+	let ariaLabel = $derived(
+		'Scratch blocks: ' +
+			text
+				.split('\n')
+				.filter((line) => line.trim())
+				.join('; ')
+	);
+
 	const renderScratchblocks = async (source: string) => {
 		if (!source.trim()) {
 			svg = '';
@@ -49,4 +57,6 @@
 	});
 </script>
 
-{@html svg}
+<div role="img" aria-label={ariaLabel}>
+	{@html svg}
+</div>

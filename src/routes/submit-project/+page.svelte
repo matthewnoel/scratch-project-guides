@@ -239,7 +239,7 @@ move (10) steps
 		padding: 0.75rem 1rem;
 		font-weight: 600;
 		background: var(--color-grey-background);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		border-bottom: var(--border);
 	}
 
 	textarea {

@@ -8,33 +8,58 @@
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 </script>
 
-<nav>
-	<div>
-		<h6><a href={resolve('/')}>Open Scratch Guides </a>📓</h6>
-	</div>
-	<ul>
-		<li><a href={resolve('/')}>All Projects</a></li>
-		<li><a href={resolve('/about')}>About</a></li>
-		<li>
-			<a
-				target="_blank"
-				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
-			>
-		</li>
-		<li><a href={resolve('/submit-project')}>New Guide</a></li>
-	</ul>
-</nav>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header>
+	<nav aria-label="Main">
+		<div>
+			<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
+		</div>
+		<ul>
+			<li><a href={resolve('/')}>All Projects</a></li>
+			<li><a href={resolve('/about')}>About</a></li>
+			<li>
+				<a
+					target="_blank"
+					rel="noreferrer"
+					href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
+				>
+			</li>
+			<li><a href={resolve('/submit-project')}>New Guide</a></li>
+		</ul>
+	</nav>
+</header>
 {#if data.page === '/submit-project'}
-	{@render children()}
+	<main id="main-content" class="full-width">
+		{@render children()}
+	</main>
 {:else}
-	<main>
+	<main id="main-content">
 		{@render children()}
 		<GitLinks page={data.page} />
 	</main>
 {/if}
 
 <style>
+	.skip-link {
+		position: absolute;
+		left: -9999px;
+		top: 0;
+		z-index: 100;
+		margin: 1em;
+		padding: 0.5em 1em;
+		background-color: white;
+		border: var(--border);
+		border-radius: var(--radius-medium);
+		box-shadow: var(--shadow-primary);
+		color: black !important;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+	.skip-link:focus {
+		left: 0;
+	}
+
 	main {
 		max-width: 600px;
 		margin: auto;
@@ -42,10 +67,20 @@
 		margin-bottom: 1em;
 	}
 
-	nav {
+	main.full-width {
+		max-width: none;
+		padding: 0;
+		margin: 0;
+		margin-bottom: 0;
+	}
+
+	header {
 		color: black;
 		background-color: var(--color-primary);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	}
+
+	nav {
+		border-bottom: var(--border);
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -61,8 +96,13 @@
 	}
 
 	li,
-	h6 {
+	.site-title {
 		padding: 1em;
+	}
+
+	.site-title {
+		font-size: 2rem;
+		font-weight: bold;
 	}
 
 	li {
@@ -95,7 +135,11 @@
 			justify-content: center;
 		}
 
-		h6 {
+		header {
+			padding-top: 1em;
+		}
+
+		.site-title {
 			font-size: 1.5rem;
 			margin-bottom: -1em;
 		}

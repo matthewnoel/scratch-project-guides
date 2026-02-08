@@ -4,8 +4,8 @@
 </svelte:head>
 
 <h1>About</h1>
-<div class="l0">
-	<h3>🚧 Under Construction 👷</h3>
+<section class="level-1">
+	<h2>🚧 Under Construction 👷</h2>
 	<p>
 		This site is a work <a
 			target="_blank"
@@ -21,4 +21,11 @@
 			>third-party licenses here</a
 		>.
 	</p>
-</div>
+</section>
+
+<style>
+	h2 {
+		font-style: normal;
+		color: inherit;
+	}
+</style>

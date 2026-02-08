@@ -9,7 +9,7 @@ test.describe('About Page', () => {
 
 	test('displays under construction message', async ({ page }) => {
 		await page.goto('/about');
-		await expect(page.locator('h3')).toHaveText('🚧 Under Construction 👷');
+		await expect(page.locator('h2')).toHaveText('🚧 Under Construction 👷');
 	});
 
 	test('has link to GitHub issues', async ({ page }) => {

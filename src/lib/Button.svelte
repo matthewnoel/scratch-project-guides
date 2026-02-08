@@ -100,7 +100,7 @@
 
 	.button-emphasis:hover,
 	.button-emphasis:focus {
-		background: #ffcf33;
+		background: rgb(255, 207, 51);
 	}
 
 	.button-standard {
