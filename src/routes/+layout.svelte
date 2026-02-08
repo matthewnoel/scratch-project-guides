@@ -29,7 +29,7 @@
 	</nav>
 </header>
 {#if data.page === '/submit-project'}
-	<main id="main-content">
+	<main id="main-content" class="full-width">
 		{@render children()}
 	</main>
 {:else}
@@ -65,6 +65,13 @@
 		margin: auto;
 		padding: 0px 0.25em;
 		margin-bottom: 1em;
+	}
+
+	main.full-width {
+		max-width: none;
+		padding: 0;
+		margin: 0;
+		margin-bottom: 0;
 	}
 
 	header {
