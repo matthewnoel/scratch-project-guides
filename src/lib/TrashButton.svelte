@@ -2,6 +2,7 @@
 	import Button from '$lib/Button.svelte';
 	import EditorIconButton from '$lib/EditorIconButton.svelte';
 	import Modal from '$lib/Modal.svelte';
+	const emoji = '🗑️';
 
 	type Props = {
 		onTrashed: () => void;
@@ -27,7 +28,7 @@
 	};
 </script>
 
-<EditorIconButton ariaLabel="Clear all backups" icon="🗑️" onClick={openConfirm} />
+<EditorIconButton ariaLabel="Clear all backups" icon={emoji} onClick={openConfirm} />
 
 {#snippet confirmActions()}
 	<Button variant="standard" type="button" onclick={closeConfirm}>Cancel</Button>
@@ -37,7 +38,7 @@
 <Modal
 	open={isConfirmOpen}
 	title="Clear all backups?"
-	emoji="🗑️"
+	{emoji}
 	showClose
 	onClose={closeConfirm}
 	actions={[confirmActions]}

@@ -12,6 +12,7 @@
 
 	let { onRead }: Props = $props();
 
+	const emoji = '📸';
 	let isModalOpen = $state(false);
 	let isOcrRunning = $state(false);
 	let isPostProcessorRunning = $state(false);
@@ -58,7 +59,7 @@
 	};
 </script>
 
-<EditorIconButton ariaLabel="Import text from an image" icon="👀" onClick={openModal} />
+<EditorIconButton ariaLabel="Import text from an image" icon={emoji} onClick={openModal} />
 
 {#snippet closeAction()}
 	<Button
@@ -74,7 +75,7 @@
 <Modal
 	open={isModalOpen}
 	title="Add code from screenshot"
-	emoji="📸"
+	{emoji}
 	showClose
 	onClose={closeModal}
 	actions={[closeAction]}
