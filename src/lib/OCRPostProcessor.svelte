@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { preloadEngine, setEngineProgressCallback } from '$lib/ocrPreloader';
+
 	type Props = {
 		text: string;
 		onComplete: (text: string) => void;
@@ -17,7 +19,6 @@
 
 	let runId = 0;
 
-	const MODEL_ID = 'SmolLM2-1.7B-Instruct-q4f16_1-MLC';
 	const SCRATCHBLOCKS_MARKDOWN_SYNTAX = [
 		['Code', 'Use', 'Example'],
 		['`block name`', 'a block', '`erase all`'],
@@ -53,30 +54,6 @@ say [Done!]
 	].join('\n');
 
 	console.log(SYSTEM_PROMPT);
-
-	// Module-level engine cache shared across component instances.
-	// Uses dynamic import to avoid SSR issues with browser-only WebGPU APIs.
-	let enginePromise: Promise<import('@mlc-ai/web-llm').MLCEngine> | null = null;
-
-	const getEngine = (currentRunId: number): Promise<import('@mlc-ai/web-llm').MLCEngine> => {
-		if (!enginePromise) {
-			enginePromise = (async () => {
-				const { CreateMLCEngine } = await import('@mlc-ai/web-llm');
-				return CreateMLCEngine(MODEL_ID, {
-					initProgressCallback: (report) => {
-						if (currentRunId !== runId) return;
-						status = report.text;
-					}
-				});
-			})().catch((err) => {
-				// Reset so a future attempt can retry instead of returning
-				// the same rejected promise forever.
-				enginePromise = null;
-				throw err;
-			});
-		}
-		return enginePromise;
-	};
 
 	/**
 	 * Strip markdown code fences the model may wrap around its output.
@@ -124,11 +101,18 @@ say [Done!]
 		isRunning = true;
 
 		try {
-			if (typeof navigator === 'undefined' || !('gpu' in navigator)) {
-				throw new Error('WebGPU is not supported in this browser.');
-			}
+			// Register a progress callback so engine-init progress (which may
+			// have started during preload) is forwarded to this component's UI.
+			setEngineProgressCallback((progressText) => {
+				if (currentRunId !== runId) return;
+				status = progressText;
+			});
 
-			const engine = await getEngine(currentRunId);
+			const engine = await preloadEngine();
+
+			// Unregister once the engine is ready.
+			setEngineProgressCallback(null);
+
 			if (currentRunId !== runId) return;
 
 			const lines = value.split('\n');
