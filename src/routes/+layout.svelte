@@ -9,7 +9,7 @@
 </script>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<nav>
+<nav aria-label="Main">
 	<div>
 		<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
 	</div>

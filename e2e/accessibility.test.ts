@@ -21,10 +21,10 @@ test.describe('Responsive Layout', () => {
 	test('navigation wraps on mobile viewport', async ({ page }) => {
 		await page.setViewportSize({ width: 375, height: 667 });
 		await page.goto('/');
-		const nav = page.locator('nav');
+		const nav = page.getByRole('navigation', { name: 'Main' });
 		await expect(nav).toBeVisible();
 		// Navigation should still be functional on mobile
-		await expect(page.locator('nav').getByRole('link', { name: 'All Projects' })).toBeVisible();
-		await expect(page.locator('nav').getByRole('link', { name: 'About' })).toBeVisible();
+		await expect(nav.getByRole('link', { name: 'All Projects' })).toBeVisible();
+		await expect(nav.getByRole('link', { name: 'About' })).toBeVisible();
 	});
 });
