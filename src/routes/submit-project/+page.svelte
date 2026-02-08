@@ -239,7 +239,7 @@ move (10) steps
 	.pane-title {
 		padding: 0.75rem 1rem;
 		font-weight: 600;
-		background: #f8f8f8;
+		background: var(--color-grey-background);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	}
 

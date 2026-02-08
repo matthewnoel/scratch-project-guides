@@ -134,7 +134,7 @@
 		text-align: center;
 		font-size: 0.95rem;
 		color: var(--color-grey-text);
-		background: #fafafa;
+		background: var(--color-grey-background);
 		cursor: pointer;
 		transition:
 			border-color 0.18s,
@@ -145,7 +145,7 @@
 	.dropzone:hover,
 	.dropzone:focus-visible {
 		border-color: rgba(0, 0, 0, 0.4);
-		background: #f3f3f3;
+		background: white;
 		outline: none;
 	}
 

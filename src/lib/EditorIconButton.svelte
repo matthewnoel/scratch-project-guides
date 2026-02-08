@@ -30,6 +30,6 @@
 
 	button:hover,
 	button:focus {
-		background-color: #f8f8f8;
+		background-color: white;
 	}
 </style>

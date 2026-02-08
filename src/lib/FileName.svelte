@@ -88,7 +88,7 @@
 		border-radius: 8px;
 		padding: 0.5rem 0.75rem;
 		font-size: 1rem;
-		background: #fafbfc;
+		background: white;
 		box-shadow: none;
 		transition:
 			border-color 0.18s,
