@@ -11,7 +11,7 @@
 <h1>All Projects</h1>
 <div class="l0">
 	{#each groupedProjects as group (group)}
-		<h3>{group.folder}</h3>
+		<h2>{group.folder}</h2>
 		<ul>
 			{#each group.projects as project (project)}
 				<li>
@@ -25,6 +25,11 @@
 <style>
 	h1 {
 		text-decoration: underline;
+	}
+
+	h2 {
+		font-style: normal;
+		color: inherit;
 	}
 
 	a {

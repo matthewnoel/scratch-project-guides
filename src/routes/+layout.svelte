@@ -10,7 +10,7 @@
 
 <nav>
 	<div>
-		<h6><a href={resolve('/')}>Open Scratch Guides </a>📓</h6>
+		<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
 	</div>
 	<ul>
 		<li><a href={resolve('/')}>All Projects</a></li>
@@ -61,8 +61,13 @@
 	}
 
 	li,
-	h6 {
+	.site-title {
 		padding: 1em;
+	}
+
+	.site-title {
+		font-size: 2rem;
+		font-weight: bold;
 	}
 
 	li {
@@ -95,7 +100,7 @@
 			justify-content: center;
 		}
 
-		h6 {
+		.site-title {
 			font-size: 1.5rem;
 			margin-bottom: -1em;
 		}

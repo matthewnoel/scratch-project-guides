@@ -2,8 +2,8 @@
 	let { id } = $props();
 </script>
 
-<h4>Demo The Project 👇</h4>
-<div>
+<figure>
+	<figcaption>Demo The Project 👇</figcaption>
 	<iframe
 		title="Project Demo"
 		src={`https://scratch.mit.edu/projects/${id}/embed`}
@@ -17,13 +17,17 @@
 	<a href={`https://scratch.mit.edu/projects/${id}`} target="_blank" rel="noreferrer"
 		>View on scratch.mit.edu
 	</a>
-</div>
+</figure>
 
 <style>
-	h4 {
+	figcaption {
 		text-align: center;
+		font-size: 1.6rem;
+		font-weight: bold;
+		margin: 0.2em 0px;
 	}
-	div {
+
+	figure {
 		width: fit-content;
 		margin: auto;
 		border: var(--border);

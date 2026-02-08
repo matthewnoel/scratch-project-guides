@@ -9,7 +9,7 @@ test.describe('Home Page', () => {
 
 	test('displays all project groups', async ({ page }) => {
 		await page.goto('/');
-		const groups = page.locator('h3');
+		const groups = page.locator('h2');
 		await expect(groups).toHaveCount(3);
 		await expect(groups.nth(0)).toHaveText('Getting Started');
 		await expect(groups.nth(1)).toHaveText('Educational');

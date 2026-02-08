@@ -10,7 +10,7 @@ test.describe('Project Pages', () => {
 
 		test('displays project description', async ({ page }) => {
 			await page.goto('/projects/hello-world');
-			await expect(page.locator('h2')).toHaveText('A classic first program');
+			await expect(page.locator('h2').first()).toHaveText('A classic first program');
 		});
 
 		test('displays scratchblocks code', async ({ page }) => {
