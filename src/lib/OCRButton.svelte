@@ -3,6 +3,7 @@
 	import EditorIconButton from '$lib/EditorIconButton.svelte';
 	import FileInput from '$lib/FileInput.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import { preloadAll } from '$lib/ocrPreloader';
 	import OCRProcessor from '$lib/OCRProcessor.svelte';
 	import OCRPostProcessor from '$lib/OCRPostProcessor.svelte';
 
@@ -31,6 +32,7 @@
 	};
 
 	const openModal = () => {
+		preloadAll();
 		resetOcrState();
 		isModalOpen = true;
 	};

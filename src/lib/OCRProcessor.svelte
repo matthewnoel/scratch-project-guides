@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { preloadTesseract } from '$lib/ocrPreloader';
+
 	type Props = {
 		image: File | null;
 		onRead: (text: string) => void;
@@ -66,7 +68,7 @@
 		try {
 			for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
 				try {
-					const { recognize } = await import('tesseract.js');
+					const { recognize } = await preloadTesseract();
 					const result = await recognize(file, 'eng', {
 						logger: (message: { status?: string; progress?: number }) => {
 							if (currentRunId !== runId) {
