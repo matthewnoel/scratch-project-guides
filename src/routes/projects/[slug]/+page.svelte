@@ -10,6 +10,6 @@
 	<meta name="description" content={`Guide for a "${data.title}" project in Scratch.`} />
 </svelte:head>
 
-<div class="l0">
+<article class="level-1">
 	<CustomMarkdown source={data.markdown} />
-</div>
+</article>

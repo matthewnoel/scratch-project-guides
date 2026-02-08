@@ -4,7 +4,7 @@
 </svelte:head>
 
 <h1>About</h1>
-<div class="l0">
+<section class="level-1">
 	<h2>🚧 Under Construction 👷</h2>
 	<p>
 		This site is a work <a
@@ -21,7 +21,7 @@
 			>third-party licenses here</a
 		>.
 	</p>
-</div>
+</section>
 
 <style>
 	h2 {

@@ -9,23 +9,25 @@
 </script>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<nav aria-label="Main">
-	<div>
-		<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
-	</div>
-	<ul>
-		<li><a href={resolve('/')}>All Projects</a></li>
-		<li><a href={resolve('/about')}>About</a></li>
-		<li>
-			<a
-				target="_blank"
-				rel="noreferrer"
-				href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
-			>
-		</li>
-		<li><a href={resolve('/submit-project')}>New Guide</a></li>
-	</ul>
-</nav>
+<header>
+	<nav aria-label="Main">
+		<div>
+			<span class="site-title"><a href={resolve('/')}>Open Scratch Guides </a>📓</span>
+		</div>
+		<ul>
+			<li><a href={resolve('/')}>All Projects</a></li>
+			<li><a href={resolve('/about')}>About</a></li>
+			<li>
+				<a
+					target="_blank"
+					rel="noreferrer"
+					href="https://github.com/matthewnoel/scratch-project-guides">Source Code</a
+				>
+			</li>
+			<li><a href={resolve('/submit-project')}>New Guide</a></li>
+		</ul>
+	</nav>
+</header>
 {#if data.page === '/submit-project'}
 	<main id="main-content">
 		{@render children()}
@@ -65,9 +67,12 @@
 		margin-bottom: 1em;
 	}
 
-	nav {
+	header {
 		color: black;
 		background-color: var(--color-primary);
+	}
+
+	nav {
 		border-bottom: var(--border);
 		display: flex;
 		flex-direction: row;
@@ -121,6 +126,10 @@
 			padding: 0;
 			width: 100%;
 			justify-content: center;
+		}
+
+		header {
+			padding-top: 1em;
 		}
 
 		.site-title {

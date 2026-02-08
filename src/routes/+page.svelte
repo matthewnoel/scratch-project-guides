@@ -9,7 +9,7 @@
 </svelte:head>
 
 <h1>All Projects</h1>
-<div class="l0">
+<section class="level-1">
 	{#each groupedProjects as group (group)}
 		<h2>{group.folder}</h2>
 		<ul>
@@ -20,7 +20,7 @@
 			{/each}
 		</ul>
 	{/each}
-</div>
+</section>
 
 <style>
 	h1 {

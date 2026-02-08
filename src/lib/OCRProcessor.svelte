@@ -133,7 +133,7 @@
 	});
 </script>
 
-<div class="processing-status" aria-live="polite">
+<div class="processing-status" role="status" aria-live="polite">
 	{#if isRunning}
 		<span>Processing... {progress}%</span>
 	{:else if status}

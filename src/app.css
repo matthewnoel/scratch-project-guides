@@ -86,10 +86,10 @@ code {
 	white-space: nowrap;
 }
 
-.l0 {
+.level-1 {
 	background-color: white;
 	border: var(--border);
-	border-radius: 0.8em;
+	border-radius: var(--radius-large);
 	margin: 1em 0px;
 	padding: 1em;
 }
