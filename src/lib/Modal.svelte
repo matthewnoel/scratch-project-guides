@@ -205,7 +205,7 @@
 		font-size: 1.5rem;
 		line-height: 1;
 		cursor: pointer;
-		color: var(--color-grey-text);
+		color: black;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -220,7 +220,6 @@
 	.close-button:hover,
 	.close-button:focus-visible {
 		background-color: rgba(15, 15, 15, 0.12);
-		color: #111;
 	}
 
 	.actions {

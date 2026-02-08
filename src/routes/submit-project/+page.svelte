@@ -203,7 +203,7 @@ move (10) steps
 
 	.header p {
 		margin: 0;
-		color: #444;
+		color: var(--color-grey-text);
 	}
 
 	.actions {

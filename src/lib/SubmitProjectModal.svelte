@@ -205,7 +205,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		color: #333;
+		color: var(--color-grey-text);
 	}
 
 	.steps {

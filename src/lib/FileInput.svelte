@@ -133,7 +133,7 @@
 		padding: 1rem;
 		text-align: center;
 		font-size: 0.95rem;
-		color: #444;
+		color: var(--color-grey-text);
 		background: #fafafa;
 		cursor: pointer;
 		transition:

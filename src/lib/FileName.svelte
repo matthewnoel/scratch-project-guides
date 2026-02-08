@@ -93,7 +93,7 @@
 		transition:
 			border-color 0.18s,
 			box-shadow 0.18s;
-		color: #222;
+		color: black;
 		appearance: none;
 	}
 
