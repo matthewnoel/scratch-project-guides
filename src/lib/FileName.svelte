@@ -104,7 +104,7 @@
 	}
 
 	input[type='text']::placeholder {
-		color: #bbb;
+		color: var(--color-grey-text);
 		opacity: 1;
 		font-weight: 400;
 	}

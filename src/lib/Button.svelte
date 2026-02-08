@@ -64,7 +64,7 @@
 		padding: 0.55rem 1.1rem;
 		border: 1px solid transparent;
 		background: transparent;
-		color: #111;
+		color: black;
 		text-decoration: none;
 		cursor: pointer;
 		transition:
@@ -95,7 +95,7 @@
 
 	.button-emphasis {
 		background: var(--color-primary);
-		color: #111;
+		color: black;
 	}
 
 	.button-emphasis:hover,
@@ -106,7 +106,7 @@
 	.button-standard {
 		border-color: rgba(0, 0, 0, 0.12);
 		background: white;
-		color: #111;
+		color: black;
 	}
 
 	.button-standard:hover,
