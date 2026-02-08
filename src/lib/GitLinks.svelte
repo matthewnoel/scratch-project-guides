@@ -45,7 +45,7 @@
 	.inner {
 		font-size: 0.9rem;
 		background-color: white;
-		border: 1px solid rgba(0, 0, 0, 0.25);
+		border: var(--border);
 		border-radius: 1em;
 		padding: 0.25em 1em;
 	}

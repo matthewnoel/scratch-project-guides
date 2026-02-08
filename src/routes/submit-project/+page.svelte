@@ -229,8 +229,8 @@ move (10) steps
 		display: flex;
 		flex-direction: column;
 		min-height: 0;
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		border-radius: 12px;
+		border: var(--border);
+		border-radius: var(--radius);
 		background: white;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 		overflow: hidden;

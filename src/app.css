@@ -7,6 +7,8 @@
 	--color-error: #b42318;
 	--color-grey-text: #444;
 	--color-grey-background: #f8f8f8;
+	--border: 1px solid rgba(0, 0, 0, 0.2);
+	--radius: 12px;
 }
 
 * {
@@ -72,7 +74,7 @@ p {
 code {
 	font-family: 'Courier New', Courier, monospace;
 	background-color: rgb(245, 245, 255);
-	border: 1px solid rgba(0, 0, 0, 0.25);
+	border: var(--border);
 	border-radius: 0.25em;
 	padding: 0.125em 0.25em;
 	white-space: nowrap;
@@ -80,7 +82,7 @@ code {
 
 .l0 {
 	background-color: white;
-	border: 1px solid rgba(0, 0, 0, 0.25);
+	border: var(--border);
 	border-radius: 0.8em;
 	margin: 1em 0px;
 	padding: 1em;
