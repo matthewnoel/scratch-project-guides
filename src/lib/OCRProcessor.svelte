@@ -46,6 +46,172 @@
 		return new Error('OCR failed.');
 	};
 
+	const SCRATCH_USER_WORDS = [
+		'when',
+		'clicked',
+		'flag',
+		'green',
+		'key',
+		'pressed',
+		'backdrop',
+		'switches',
+		'sprite',
+		'clone',
+		'loudness',
+		'timer',
+		'video',
+		'motion',
+		'message',
+		'received',
+		'broadcast',
+		'start',
+		'stop',
+		'sounds',
+		'scripts',
+		'scene',
+		'move',
+		'steps',
+		'turn',
+		'right',
+		'left',
+		'degrees',
+		'clockwise',
+		'counterclockwise',
+		'goto',
+		'go',
+		'random',
+		'position',
+		'glide',
+		'secs',
+		'point',
+		'direction',
+		'towards',
+		'mouse',
+		'pointer',
+		'change',
+		'set',
+		'rotation',
+		'style',
+		'all',
+		'around',
+		"don't",
+		'rotate',
+		'left-right',
+		'only',
+		'costume',
+		'next',
+		'switch',
+		'size',
+		'show',
+		'hide',
+		'front',
+		'back',
+		'forward',
+		'backward',
+		'layers',
+		'layer',
+		'say',
+		'for',
+		'think',
+		'hello',
+		'effect',
+		'color',
+		'fisheye',
+		'whirl',
+		'pixelate',
+		'mosaic',
+		'brightness',
+		'ghost',
+		'clear',
+		'graphic',
+		'effects',
+		'play',
+		'sound',
+		'until',
+		'done',
+		'volume',
+		'by',
+		'to',
+		'tempo',
+		'forever',
+		'repeat',
+		'if',
+		'then',
+		'else',
+		'wait',
+		'and',
+		'or',
+		'not',
+		'touching',
+		'edge',
+		'is',
+		'on',
+		'down',
+		'distance',
+		'answer',
+		'username',
+		'year',
+		'month',
+		'date',
+		'day',
+		'of',
+		'week',
+		'days',
+		'since',
+		'2000',
+		'hour',
+		'minute',
+		'second',
+		'reset',
+		'loud',
+		'stage',
+		'transparency',
+		'off',
+		'my',
+		'variable',
+		'list',
+		'length',
+		'contains',
+		'item',
+		'add',
+		'delete',
+		'insert',
+		'at',
+		'replace',
+		'with',
+		'make',
+		'create',
+		'myself',
+		'as',
+		'this',
+		'ask',
+		'pen',
+		'up',
+		'stamp',
+		'erase',
+		'saturation',
+		'current',
+		'minutes',
+		'seconds',
+		'join',
+		'letter',
+		'mod',
+		'round',
+		'sqrt',
+		'abs',
+		'floor',
+		'ceiling',
+		'cos',
+		'sin',
+		'tan',
+		'asin',
+		'acos',
+		'atan',
+		'ln',
+		'log',
+		'e'
+	].join('\n');
+
 	const runOcr = async (file: File, currentRunId: number) => {
 		if (!file.type.startsWith('image/')) {
 			const invalidError = new Error('Please upload an image file.');
@@ -64,55 +230,68 @@
 		isRunning = true;
 
 		try {
-			for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
-				try {
-					const { recognize } = await import('tesseract.js');
-					const result = await recognize(file, 'eng', {
-						logger: (message: { status?: string; progress?: number }) => {
-							if (currentRunId !== runId) {
-								return;
-							}
-							if (typeof message.progress === 'number') {
-								progress = Math.round(message.progress * 100);
-							}
-							if (message.status) {
-								status = message.status;
-							}
-						}
-					});
-
+			const { createWorker, PSM } = await import('tesseract.js');
+			const worker = await createWorker('eng', undefined, {
+				logger: (message: { status?: string; progress?: number }) => {
 					if (currentRunId !== runId) {
 						return;
 					}
-
-					const detectedText = result.data.text ?? '';
-					if (!detectedText.trim()) {
-						throw new Error('No text was detected in the image.');
+					if (typeof message.progress === 'number') {
+						progress = Math.round(message.progress * 100);
 					}
-
-					onRead(detectedText);
-					status = 'OCR complete.';
-					progress = 100;
-					return;
-				} catch (err) {
-					if (currentRunId !== runId) {
-						return;
+					if (message.status) {
+						status = message.status;
 					}
-
-					const formattedError = formatError(err);
-					if (attempt < maxRetries) {
-						error = '';
-						status = `Retrying OCR... (${attempt + 1}/${maxRetries})`;
-						if (retryDelayMs > 0) {
-							await sleep(retryDelayMs);
-						}
-						continue;
-					}
-
-					error = formattedError.message;
-					status = '';
-					onError?.(formattedError);
 				}
+			});
+
+			try {
+				await worker.writeText('eng.user-words', SCRATCH_USER_WORDS);
+				await worker.reinitialize('eng', undefined, 'user_words_suffix user-words');
+				await worker.setParameters({
+					tessedit_pageseg_mode: PSM.SINGLE_BLOCK,
+					tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyz0123456789 ()[]{}<>%-'
+				});
+
+				for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+					try {
+						const result = await worker.recognize(file);
+
+						if (currentRunId !== runId) {
+							return;
+						}
+
+						const detectedText = result.data.text ?? '';
+						if (!detectedText.trim()) {
+							throw new Error('No text was detected in the image.');
+						}
+
+						onRead(detectedText);
+						status = 'OCR complete.';
+						progress = 100;
+						return;
+					} catch (err) {
+						if (currentRunId !== runId) {
+							return;
+						}
+
+						const formattedError = formatError(err);
+						if (attempt < maxRetries) {
+							error = '';
+							status = `Retrying OCR... (${attempt + 1}/${maxRetries})`;
+							if (retryDelayMs > 0) {
+								await sleep(retryDelayMs);
+							}
+							continue;
+						}
+
+						error = formattedError.message;
+						status = '';
+						onError?.(formattedError);
+					}
+				}
+			} finally {
+				await worker.terminate();
 			}
 		} finally {
 			if (currentRunId === runId) {
