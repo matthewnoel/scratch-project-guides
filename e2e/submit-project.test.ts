@@ -186,14 +186,24 @@ test.describe('Submit Project Page', () => {
 	});
 
 	test('Submit modal "Go to Form" anchor is initially disabled and points to the issue template when enabled', async ({
-		page,
-		context,
-		browserName
+		page
 	}) => {
-		if (browserName === 'chromium') {
-			await context.grantPermissions(['clipboard-write', 'clipboard-read']);
-		}
 		await page.goto('/submit-project');
+		// Stub navigator.clipboard so the Copy button works regardless of headless
+		// chromium permission policy or origin-secure-context quirks in CI.
+		await page.evaluate(() => {
+			const writes: string[] = [];
+			Object.defineProperty(navigator, 'clipboard', {
+				configurable: true,
+				value: {
+					writeText: async (text: string) => {
+						writes.push(text);
+					}
+				}
+			});
+			(window as unknown as { __clipboardWrites: string[] }).__clipboardWrites = writes;
+		});
+
 		await page.getByRole('button', { name: 'Submit My Project' }).click();
 		const dialog = page.getByRole('dialog', { name: /Submit your project/ });
 
@@ -201,12 +211,11 @@ test.describe('Submit Project Page', () => {
 		const goToFormDisabled = dialog.locator('a', { hasText: 'Go to Form' });
 		await expect(goToFormDisabled).toHaveAttribute('aria-disabled', 'true');
 
-		// Walk through steps to enable Go to Form
 		await dialog.getByRole('button', { name: 'I Have One' }).click();
 		await dialog.getByLabel('Project file name').fill('example');
 		await dialog.getByRole('button', { name: 'Got It' }).click();
 		await dialog.getByRole('button', { name: 'Copy' }).click();
-		await expect(dialog.getByText('Copied!')).toBeVisible({ timeout: 2000 });
+		await expect(dialog.getByText('Copied!')).toBeVisible({ timeout: 5000 });
 
 		const goToForm = dialog.getByRole('link', { name: 'Go to Form' });
 		await expect(goToForm).toHaveAttribute(

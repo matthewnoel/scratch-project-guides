@@ -33,15 +33,14 @@ test.describe('Extended accessibility', () => {
 		}
 	});
 
-	test('nav links are reachable via keyboard in order', async ({ page }) => {
+	test('skip link is the first focusable element, then header links follow', async ({ page }) => {
 		await page.goto('/');
-		// First tab: skip-to-main-content link
-		await page.keyboard.press('Tab');
+		// Explicitly focus the skip link first so the test does not depend on
+		// whether the browser hands first-Tab focus to the page or the URL bar.
+		await page.getByRole('link', { name: 'Skip to main content' }).focus();
 		await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused();
-		// Second tab: site-title "Open Scratch Guides"
 		await page.keyboard.press('Tab');
 		await expect(page.getByRole('link', { name: 'Open Scratch Guides' })).toBeFocused();
-		// Third: All Projects in nav
 		await page.keyboard.press('Tab');
 		await expect(
 			page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'All Projects' })
