@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import GitLinks from '$lib/GitLinks.svelte';
+	import PwaUpdater from '$lib/PwaUpdater.svelte';
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import type { LayoutData } from './$types';
@@ -8,6 +9,7 @@
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 </script>
 
+<PwaUpdater />
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header>
 	<nav aria-label="Main">
